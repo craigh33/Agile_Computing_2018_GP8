@@ -20,7 +20,7 @@ public class GUI {
     *
     * Returns nothing
     */
-    void run() {
+    void loginScreen() {
        JFrame f = new JFrame();//creates new frame
        
        JButton b = new JButton("click");//Creates new Button
@@ -33,6 +33,24 @@ public class GUI {
        f.setVisible(true);//makes it visible
        }
     
+     /*
+    * @param 
+    *
+    * @return 
+    *
+    * @authot Craig
+    */
+    void mainScreen(){
+        
+    }
+    
+     /*
+    * @param
+    *
+    * @return 
+    *
+    * @authot Craig
+    */
     void list(){
         
     }
