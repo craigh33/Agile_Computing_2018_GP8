@@ -36,5 +36,4 @@ public class GUI {
     void list(){
         
     }
-    }
 }
