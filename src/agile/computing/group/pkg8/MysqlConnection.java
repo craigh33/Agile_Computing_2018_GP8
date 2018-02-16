@@ -18,6 +18,7 @@ public class MysqlConnection {
 
     Connection con;
     String url, username, password;
+    boolean connected;
     
     /**
      * 
@@ -31,8 +32,8 @@ public class MysqlConnection {
      * @throws InstantiationException
      * @throws IllegalAccessException 
      */
-    public boolean connect(String host, String db, String username, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        boolean connected = false;
+    public boolean open(String host, String db, String username, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        connected = false;
 
         url = "jdbc:mysql://" + host + "/" + db;
         this.username = username;
@@ -42,6 +43,15 @@ public class MysqlConnection {
         if (testStatement.execute("SELECT 1")) {
             connected = true;
         }
+        return connected;
+    }
+    
+    public boolean close() throws SQLException{
+        if(connected){
+            con.close();
+            connected = false;
+        }
+        
         return connected;
     }
 }

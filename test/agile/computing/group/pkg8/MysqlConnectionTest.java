@@ -19,6 +19,10 @@ import static org.junit.Assert.*;
 public class MysqlConnectionTest {
 
     MysqlConnection connection;
+    String host = "sql2.freesqldatabase.com";
+    String db = "sql2220155";
+    String username = "sql2220155";
+    String password = "nC8!uE3*";
 
     public MysqlConnectionTest() {
     }
@@ -44,15 +48,21 @@ public class MysqlConnectionTest {
      * Test of connect method, of class Connexion.
      */
     @Test
-    public void testConnect() throws Exception {        
-        String host = "sql2.freesqldatabase.com";
-        String db = "sql2220155";
-        String username = "sql2220155";
-        String password = "nC8!uE3*";
-        connection.connect(host, db, username, password);
+    public void testConnect() throws Exception {
         boolean expResult = true;
-        boolean result = connection.connect(host, db, username, password);
+        boolean result = connection.open(host, db, username, password);
         assertEquals("Connexion failed", expResult, result);
+    }
+
+    /**
+     * Test of disconnect method, of class MysqlConnection.
+     */
+    @Test
+    public void testDisconnect() throws Exception {
+        connection.open(host, db, username, password);
+        boolean expResult = false;
+        boolean result = connection.close();
+        assertEquals("Failed to close the connection", expResult, result);
     }
 
 }
