@@ -40,6 +40,28 @@ public class NodeTest {
     @After
     public void tearDown() {
     }
+    
+    /**
+     * Test of returnProjectName method, of class Node.
+     */
+    @Test
+    public void testReturnProjectName() {
+        System.out.println("returnRProjectName");
+        String expResult = null;
+        String result = test.returnProjectName();
+        assertEquals("Project Name not returned",expResult, result);
+    }
+    
+    /**
+     * Test of returnProjectID method, of class Node.
+     */
+    @Test
+    public void testProjectID() {
+        System.out.println("returnProjectID");
+        int expResult = 0;
+        int result = test.returnProjectID();
+        assertEquals("Project ID not returned",expResult, result);
+    }
 
     /**
      * Test of returnResearcher method, of class Node.
@@ -145,6 +167,28 @@ public class NodeTest {
         System.out.println("returnDeanSIg");
         boolean result = test.returnDeanSig();
         assertFalse("Dean Signature was not returned",result);
+    }
+    
+    /**
+     * Test of editProjectName method, of class Node.
+     */
+    @Test
+    public void testEditProjectName() {
+        System.out.println("editProjectName");
+        String expResult = "";
+        String result = test.editProjectName(expResult);
+        assertEquals("Project Name not edited",expResult, result);
+    }
+    
+    /**
+     * Test of editProjectID method, of class Node.
+     */
+    @Test
+    public void testEditProjectID() {
+        System.out.println("editProjectID");
+        int expResult = 1;
+        int result = test.editProjectID(expResult);
+        assertEquals("Project ID not edited",expResult, result);
     }
     
     /**
