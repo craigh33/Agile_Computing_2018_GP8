@@ -5,7 +5,6 @@
  */
 package agile.computing.group.pkg8;
 
-import agile.computing.group.pkg8.Upload;
 import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;

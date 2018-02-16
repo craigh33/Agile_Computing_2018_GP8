@@ -11,6 +11,8 @@ package agile.computing.group.pkg8;
  */
 public class Node {
     
+    private int projectID;
+    private String projectName;
     private String researcher;
     private int day;
     private int month;
@@ -28,6 +30,8 @@ public class Node {
      * @author Craig
      */
     void Node(){
+        this.projectName = null;
+        this.projectID = 0;
         this.researcher = null;
         this.day = 0;
         this.month = 0;
@@ -40,6 +44,24 @@ public class Node {
         this.deanSig = false;
     }
 
+    /**
+     *
+     * @return var - returns the projects name
+     */
+    public String returnProjectName(){
+        String var = projectName;
+        return var;       
+    }
+    
+     /**
+     *
+     * @return var - returns the projects ID number
+     */
+    public int returnProjectID(){
+        int var = projectID;
+        return var;       
+    }
+    
     /**
      *
      * @return var - returns the projects researchers name
@@ -130,6 +152,26 @@ public class Node {
         return var;
     }
 
+    /**
+     *
+     * @param edit - What the new project name is
+     * @return edit - What the new projectname is
+     */
+    public String editProjectName(String edit){
+        projectName = edit;
+        return edit;       
+    }
+    
+    /**
+     *
+     * @param edit - What the new Project ID is
+     * @return edit - The project ID
+     */
+    public int editProjectID(int edit){
+        projectID = edit;
+        return edit;       
+    }
+    
     /**
      *
      * @param edit - What the researchers name will be changed to
