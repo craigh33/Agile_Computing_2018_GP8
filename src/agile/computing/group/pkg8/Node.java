@@ -22,11 +22,11 @@ public class Node {
     private boolean depDeanSig;
     private boolean deanSig;
     
-    /*
-    * Constructor for Class Node
-    *
-    * @author Craig
-    */
+    /**
+     * Constructor for Node Class
+     * 
+     * @author Craig
+     */
     void Node(){
         this.researcher = null;
         this.day = 0;
@@ -39,214 +39,194 @@ public class Node {
         this.depDeanSig = false;
         this.deanSig = false;
     }
-    
-    /*
-    * @return String - Researchers Name
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - returns the projects researchers name
+     */
     public String returnResearcher(){
-        return researcher;       
+        String var = researcher;
+        return var;       
     }
-    
-    /*
-    * @return String - Document Download link
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - returns the file download link
+     */
     public String returnDownload_URL(){
-        return download_URL;
+        String var = download_URL;
+        return var;
     }
-    
-    /*
-    * @return String - Comments for Project
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - returns any comments about the project
+     */
     public String returnComments(){
-        return comments;
+        String var = comments;
+        return var;
     }
-    
-     /*
-    * @return int - Day of Creation
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - the day of the project creation
+     */
     public int returnDay(){
-        return day;
+        int var = day;
+        return var;
     }
-    
-     /*
-    * @return int - Month of Creation
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - the month of the project creation
+     */
     public int returnMonth(){
-        return month;
+        int var = month;
+        return var;
     }
-    
-     /*
-    * @return int - Year of Creation
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - the year of the project creation
+     */
     public int returnYear(){
-        return year;
+        int var = year;
+        return var;
     }
     
-     /*
-    * @return Boolean -if project has been signed off by Researcher
-    *
-    * @author Craig
-    */
+    /**
+     *
+     * @return var - if it has been signed or not by the Reaearcher
+     */
     public boolean returnResearcherSig(){
-        return researcherSig;
+        Boolean var = researcherSig;;
+        return var;
     }
-    
-     /*
-    * @return Boolean - if project has been signed off by RIS
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - if it has been signed or not by the RIS
+     */
     public boolean returnRISSig(){
-        return risSig;
+        Boolean var = risSig;
+        return var;
     }
-    
-     /*
-    * @return Boolean - if project has been signed off by Deputy Dean
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - if it has been signed or not by the Deputy Dean
+     */
     public boolean returnDepDeanSig(){
-        return depDeanSig;
+        Boolean var = depDeanSig;
+        return var;
     }
-    
-     /*
-    * @return Boolean - if project has been signed off by Dean
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @return var - if it has been signed or not by the Dean
+     */
     public boolean returnDeanSig(){
-        return deanSig;
+        Boolean var = deanSig;
+        return var;
     }
-    
-     /*
-    * @param String - new Researchers Name
-    *
-    * @return Researchers Name
-    *
-    * @authot Craig
-    */
+
+    /**
+     *
+     * @param edit - What the researchers name will be changed to
+     * @return edit - What the new researcher name is
+     */
     public String editResearcher(String edit){
         researcher = edit;
-        return researcher;       
+        return edit;       
     }
-    
-     /*
-    * @param String - new download url
-    *
-    * @return Download URL
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - What the download link will be changed to
+     * @return edit - What the new download link is
+     */
     public String editDownload_URL(String edit){
         download_URL = edit;
-        return download_URL;
+        return edit;
     }
-    
-     /*
-    * @param String - new Comments
-    *
-    * @return String - Comments
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - What the comments will be changed to
+     * @return edit - What the new comments will be
+     */
     public String editComments(String edit){
         comments = edit;
-        return comments;
+        return edit;
     }
-    
-     /*
-    * @param int - new day of creation
-    *
-    * @return int - Day of creation
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - What day the project was created
+     * @return edit - What the creation day is
+     */
     public int editDay(int edit){
         day = edit;
-        return day;
+        return edit;
     }
-    
-     /*
-    * @param int - new Month of creation
-    *
-    * @return int - Month of creation
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - What month the project was created
+     * @return edit - What the creation month is
+     */
     public int editMonth(int edit){
         month = edit;
-        return month;
+        return edit;
     }
-    
-     /*
-    * @param int - new Year of creation
-    *
-    * @return int - Year of creation
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - What year the project was created
+     * @return edit - What the creation year is
+     */
     public int editYear(int edit){
         year = edit;
-        return year;
+        return edit;
     }
-    
-     /*
-    * @param Boolean - edit if researcher has signed project
-    *
-    * @return Boolean - If researcher has signed doc
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - if the document has been signed or not by the researcher
+     * @return edit - if it now has been signed or not by researcher
+     */
     public boolean editResearcherSig(boolean edit){
         researcherSig = edit;
-        return researcherSig;
+        return edit;
     }
-    
-     /*
-    * @param Boolean - edit if RIS has signed project
-    *
-    * @return Boolean - If RIS has signed doc
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - if the document has been signed or not by the RIS
+     * @return edit - if it now has been signed or not by RIS
+     */
     public boolean editRISSig(boolean edit){
         risSig = edit;
-        return risSig;
+        return edit;
     }
-    
-     /*
-    * @param Boolean - edit if Deputy Dean has signed project
-    *
-    * @return Boolean - If Deputy Dean has signed doc
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - if the document has been signed or not by the Deputy Dean
+     * @return edit - if it now has been signed or not by Deputy Dean
+     */
     public boolean editDepDeanSig(boolean edit){
         depDeanSig = edit;
-        return depDeanSig;
+        return edit;
     }
-    
-     /*
-    * @param Boolean - edit if Dean has signed project
-    *
-    * @return Boolean - If Dean has signed doc
-    *
-    * @author Craig
-    */
+
+    /**
+     *
+     * @param edit - if the document has been signed or not by the Dean
+     * @return edit - if it now has been signed or not by the Dean
+     */
     public boolean editDeanSig(boolean edit){
         deanSig = edit;
-        return deanSig;
+        return edit;
     }
 }
