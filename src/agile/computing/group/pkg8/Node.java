@@ -197,7 +197,7 @@ public class Node {
     *
     * @author Craig
     */
-    public float editYear(int edit){
+    public int editYear(int edit){
         year = edit;
         return year;
     }
