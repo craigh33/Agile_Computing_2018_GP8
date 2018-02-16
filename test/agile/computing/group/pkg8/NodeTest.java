@@ -95,4 +95,15 @@ public class NodeTest {
         int result = test.returnMonth();
         assertEquals("Month was not returned",expResult, result);
     }
+    
+    /**
+     * Test of returnYear method, of class Node.
+     */
+    @Test
+    public void testReturnYear() {
+        System.out.println("returnYear");
+        int expResult = 0;
+        int result = test.returnYear();
+        assertEquals("Year was not returned",expResult, result);
+    }
 }
