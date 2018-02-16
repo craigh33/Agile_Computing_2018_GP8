@@ -106,4 +106,152 @@ public class NodeTest {
         int result = test.returnYear();
         assertEquals("Year was not returned",expResult, result);
     }
+    
+    /*
+    * Test of returnResearcherSig method
+    */
+    @Test
+    public void testReturnResearcherSig() {
+        System.out.println("returnResearcherSig");
+        boolean result = test.returnResearcherSig();
+        assertFalse("Researcher Signature was not returned",result);
+    }
+    
+     /*
+    * Test of returnRISSig method
+    */
+    @Test
+    public void testReturnRISSig() {
+        System.out.println("returnRISSIg");
+        boolean result = test.returnRISSig();
+        assertFalse("RIS Signature was not returned",result);
+    }
+    
+     /*
+    * Test of returnRISSig method
+    */
+    @Test
+    public void testDepDeanSig() {
+        System.out.println("returnDepDeanSig");
+        boolean result = test.returnDepDeanSig();
+        assertFalse("DepDean Signature was not returned",result);
+    }
+    
+     /*
+    * Test of returnRISSig method
+    */
+    @Test
+    public void testReturnDeanSig() {
+        System.out.println("returnDeanSIg");
+        boolean result = test.returnDeanSig();
+        assertFalse("Dean Signature was not returned",result);
+    }
+    
+    /**
+     * Test of editResearcher method, of class Node.
+     */
+    @Test
+    public void testEditResearcher() {
+        System.out.println("editResearcher");
+        String expResult = "";
+        String result = test.editResearcher(expResult);
+        assertEquals("Researcher not edited",expResult, result);
+    }
+    
+    /**
+     * Test of editDownload_URL method, of class Node.
+     */
+    @Test
+    public void testEditDownload_URL() {
+        System.out.println("editDownload_URL");
+        String expResult = "";
+        String result = test.editDownload_URL(expResult);
+        assertEquals("Download URL not edited",expResult, result);
+    }
+    
+    /**
+     * Test of editComments method, of class Node.
+     */
+    @Test
+    public void testEditComments() {
+        System.out.println("editComments");
+        String expResult = "";
+        String result = test.editComments(expResult);
+        assertEquals("Comments not Edited",expResult, result);
+    }
+    
+    /**
+     * Test of editDay method, of class Node.
+     */
+    @Test
+    public void testEditDay() {
+        System.out.println("editDay");
+        int expResult = 1;
+        int result = test.editDay(expResult);
+        assertEquals("Day not Edited",expResult, result);
+    }
+    
+    /**
+     * Test of editMonth method, of class Node.
+     */
+    @Test
+    public void testEditMonth() {
+        System.out.println("editMonth");
+        int expResult = 1;
+        int result = test.editMonth(expResult);
+        assertEquals("Month not Edited",expResult, result);
+    }
+    
+    /**
+     * Test of editYear method, of class Node.
+     */
+    @Test
+    public void testEditYear() {
+        System.out.println("editYear");
+        int expResult = 1;
+        int result = test.editYear(expResult);
+        assertEquals("Month not Edited",expResult, result);
+    }
+    
+    /*
+    * Test of editResearcherSig method
+    */
+    @Test
+    public void testEditResearcherSig() {
+        System.out.println("editResearcherSig");
+        boolean result = test.editResearcherSig(true);
+        assertTrue("Researcher Signature was not edited",result);
+    }
+    
+    /*
+    * Test of editRISSig method
+    */
+    @Test
+    public void testEditRISSig() {
+        System.out.println("editRISSig");
+        boolean result = test.editRISSig(true);
+        assertTrue("RIS Signature was not edited",result);
+    }
+    
+    /*
+    * Test of editDepDeanSig method
+    */
+    @Test
+    public void testEditDepDeanRISSig() {
+        System.out.println("editDepDeanSig");
+        boolean result = test.editDepDeanSig(true);
+        assertTrue("DepDean Signature was not edited",result);
+    }
+    
+    /*
+    * Test of editDepDeanSig method
+    */
+    @Test
+    public void testEditDeanRISSig() {
+        System.out.println("editDeanSig");
+        boolean result = test.editDeanSig(true);
+        assertTrue("Dean Signature was not edited",result);
+    }
+    
+    
 }
