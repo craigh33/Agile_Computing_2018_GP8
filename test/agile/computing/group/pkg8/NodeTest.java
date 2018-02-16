@@ -17,7 +17,9 @@ import static org.junit.Assert.*;
  * @author craig
  */
 public class NodeTest {
-   Node test;
+    
+    Node test;
+   
     
     public NodeTest() {
     }
@@ -40,38 +42,57 @@ public class NodeTest {
     }
 
     /**
-     * Test of Node method, of class Node.
-     */
-    @Test
-    public void testNode() {
-        System.out.println("Node");
-        test.Node();
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of returnResearcher method, of class Node.
      */
     @Test
     public void testReturnResearcher() {
         System.out.println("returnResearcher");
-        String expResult = "";
+        String expResult = null;
         String result = test.returnResearcher();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        assertEquals("Researcher not returned",expResult, result);
     }
-
-    /**
+    
+     /**
      * Test of returnDownload_URL method, of class Node.
      */
     @Test
     public void testReturnDownload_URL() {
         System.out.println("returnDownload_URL");
-        String expResult = "";
+        String expResult = null;
         String result = test.returnDownload_URL();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("URL not returned",expResult, result);
     }
     
+     /**
+     * Test of returnComments method, of class Node.
+     */
+    @Test
+    public void testReturnComments() {
+        System.out.println("returnComments");
+        String expResult = null;
+        String result = test.returnResearcher();
+        assertEquals("Comments not returned",expResult, result);
+    }
+    
+     /**
+     * Test of returnDay method, of class Node.
+     */
+    @Test
+    public void testReturnDay() {
+        System.out.println("returnDay");
+        int expResult = 0;
+        int result = test.returnDay();
+        assertEquals("Day was not returned",expResult, result);
+         }
+
+    /**
+     * Test of returnMonth method, of class Node.
+     */
+    @Test
+    public void testReturnMonth() {
+        System.out.println("returnMonth");
+        int expResult = 0;
+        int result = test.returnMonth();
+        assertEquals("Month was not returned",expResult, result);
+    }
 }
