@@ -12,9 +12,9 @@ package agile.computing.group.pkg8;
 public class Node {
     
     private String researcher;
-    private float day;
-    private float month;
-    private float year;
+    private int day;
+    private int month;
+    private int year;
     private String download_URL;
     private String comments;
     private boolean risSig;
@@ -25,7 +25,7 @@ public class Node {
     /*
     * Constructor for Class Node
     *
-    * @authot Craig
+    * @author Craig
     */
     void Node(){
         this.researcher = null;
@@ -43,7 +43,7 @@ public class Node {
     /*
     * @return String - Researchers Name
     *
-    * @authot Craig
+    * @author Craig
     */
     public String returnResearcher(){
         return researcher;       
@@ -52,7 +52,7 @@ public class Node {
     /*
     * @return String - Document Download link
     *
-    * @authot Craig
+    * @author Craig
     */
     public String returnDownload_URL(){
         return download_URL;
@@ -61,43 +61,43 @@ public class Node {
     /*
     * @return String - Comments for Project
     *
-    * @authot Craig
+    * @author Craig
     */
     public String returnComments(){
         return comments;
     }
     
      /*
-    * @return Float - Day of Creation
+    * @return int - Day of Creation
     *
-    * @authot Craig
+    * @author Craig
     */
-    public float returnDay(){
+    public int returnDay(){
         return day;
     }
     
      /*
-    * @return Float - Month of Creation
+    * @return int - Month of Creation
     *
-    * @authot Craig
+    * @author Craig
     */
-    public float returnMonth(){
+    public int returnMonth(){
         return month;
     }
     
      /*
-    * @return Float - Year of Creation
+    * @return int - Year of Creation
     *
-    * @authot Craig
+    * @author Craig
     */
-    public float returnYear(){
+    public int returnYear(){
         return year;
     }
     
      /*
     * @return Boolean -if project has been signed off by Researcher
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean returnResearcherSig(){
         return researcherSig;
@@ -106,7 +106,7 @@ public class Node {
      /*
     * @return Boolean - if project has been signed off by RIS
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean returnRISSig(){
         return risSig;
@@ -115,7 +115,7 @@ public class Node {
      /*
     * @return Boolean - if project has been signed off by Deputy Dean
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean returnDepDeanSig(){
         return depDeanSig;
@@ -124,7 +124,7 @@ public class Node {
      /*
     * @return Boolean - if project has been signed off by Dean
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean returnDeanSig(){
         return deanSig;
@@ -147,7 +147,7 @@ public class Node {
     *
     * @return Download URL
     *
-    * @authot Craig
+    * @author Craig
     */
     public String editDownload_URL(String edit){
         download_URL = edit;
@@ -159,7 +159,7 @@ public class Node {
     *
     * @return String - Comments
     *
-    * @authot Craig
+    * @author Craig
     */
     public String editComments(String edit){
         comments = edit;
@@ -167,37 +167,37 @@ public class Node {
     }
     
      /*
-    * @param float - new day of creation
+    * @param int - new day of creation
     *
-    * @return float - Day of creation
+    * @return int - Day of creation
     *
-    * @authot Craig
+    * @author Craig
     */
-    public float editDay(float edit){
+    public int editDay(int edit){
         day = edit;
         return day;
     }
     
      /*
-    * @param float - new Month of creation
+    * @param int - new Month of creation
     *
-    * @return float - Month of creation
+    * @return int - Month of creation
     *
-    * @authot Craig
+    * @author Craig
     */
-    public float editMonth(float edit){
+    public int editMonth(int edit){
         month = edit;
         return month;
     }
     
      /*
-    * @param float - new Year of creation
+    * @param int - new Year of creation
     *
-    * @return float - Year of creation
+    * @return int - Year of creation
     *
-    * @authot Craig
+    * @author Craig
     */
-    public float editYear(float edit){
+    public float editYear(int edit){
         year = edit;
         return year;
     }
@@ -207,7 +207,7 @@ public class Node {
     *
     * @return Boolean - If researcher has signed doc
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean editResearcherSig(boolean edit){
         researcherSig = edit;
@@ -219,7 +219,7 @@ public class Node {
     *
     * @return Boolean - If RIS has signed doc
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean editRISSig(boolean edit){
         risSig = edit;
@@ -231,7 +231,7 @@ public class Node {
     *
     * @return Boolean - If Deputy Dean has signed doc
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean editDepDeanSig(boolean edit){
         depDeanSig = edit;
@@ -243,7 +243,7 @@ public class Node {
     *
     * @return Boolean - If Dean has signed doc
     *
-    * @authot Craig
+    * @author Craig
     */
     public boolean editDeanSig(boolean edit){
         deanSig = edit;
