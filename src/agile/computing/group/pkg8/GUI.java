@@ -6,31 +6,40 @@
 package agile.computing.group.pkg8;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.ItemEvent;
+import javax.swing.TransferHandler;
 
 /**
  *
  * @author craig
  */
 public class GUI {
-
-    /*
-    * @author Craig
-    *
-    * Class To run Interface
-    *
-    * Returns nothing
-    */
+    
+    JFrame login = new JFrame();
+    JFrame main = new JFrame();
+    JFrame edit = new JFrame();
+    
     void loginScreen() {
-       JFrame f = new JFrame();//creates new frame
        
-       JButton b = new JButton("click");//Creates new Button
+       JButton b = new JButton("login");//Creates new Button
        b.setBounds(130,100,100,40);//Sets size of button
        
-       f.add(b);//Adds button to Frame
+       login.add(b);//Adds button to Frame
        
-       f.setSize(400,500);//size of frame
-       f.setLayout(null);//no layout manager
-       f.setVisible(true);//makes it visible
+       login.setSize(400,500);//size of frame
+       login.setLayout(null);//no layout manager
+       login.setVisible(true);//makes it visible
+       
+       b.setMnemonic(KeyEvent.VK_A);
+      b.setTransferHandler(new TransferHandler("text"));
+      b.addActionListener((ActionEvent event) -> 
+        {
+            login.setVisible(false);//makes it visible
+            mainScreen();
+        }
+        );
        }
     
      /*
@@ -41,17 +50,31 @@ public class GUI {
     * @authot Craig
     */
     void mainScreen(){
-        
+      main.setSize(400,500);//size of frame
+      main.setLayout(null);//no layout manager
+      main.setVisible(true);//makes it visible
+      
+      JButton b = new JButton("Edit");//Creates new Button
+      main.add(b);
+      
+      b.setBounds(130,100,100,40);//Sets size of button
+      b.setMnemonic(KeyEvent.VK_A);
+      b.setTransferHandler(new TransferHandler("text"));
+      b.addActionListener((ActionEvent event) -> 
+        {
+            main.setVisible(false);//makes it visible
+            editScreen();
+        }
+        );
     }
     
-     /*
-    * @param
-    *
-    * @return 
-    *
-    * @authot Craig
-    */
-    void list(){
+    /**
+     * 
+     */
+    void editScreen(){
+        edit.setSize(400,500);//size of frame
+        edit.setLayout(null);//no layout manager
+        edit.setVisible(true);//makes it visible
         
     }
 }
