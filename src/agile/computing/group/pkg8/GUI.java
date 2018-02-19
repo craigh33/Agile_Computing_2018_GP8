@@ -15,13 +15,11 @@ import java.awt.*;
  */
 public class GUI {
     
-    JFrame login = new JFrame();
-    JFrame main = new JFrame();
-    JFrame edit = new JFrame();
     Node test = new Node();
     
     void loginScreen() {
        
+       JFrame login = new JFrame();
        JButton b = new JButton("login");//Creates new Button
        b.setBounds(130,100,100,40);//Sets size of button
        
@@ -49,6 +47,7 @@ public class GUI {
     * @authot Craig
     */
     void mainScreen(){
+      JFrame main = new JFrame();
       main.setSize(400,500);//size of frame
       main.setLayout(null);//no layout manager
       main.setVisible(true);//makes it visible
@@ -71,6 +70,7 @@ public class GUI {
      * 
      */
     void editScreen(){
+        JFrame edit = new JFrame();
         edit.setSize(1500,1000);//size of frame
         edit.setLayout(new FlowLayout());//no layout manager
         edit.setVisible(true);//makes it visible
