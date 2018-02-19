@@ -16,13 +16,36 @@ import java.awt.*;
 public class GUI {
     
     Node test = new Node(); // used for manipulating variables see craig for info
-    
-    void loginScreen() {
+    MysqlConnection connection;
+    String host = "silva.computing.dundee.ac.uk";
+    String db = "17agileteam8db";
+    String username = "17agileteam8";
+    String password = "7632.at8.2367";
+    void loginScreen() throws Exception {
+       
+       boolean connect = connection.open(host, db, username, password);
        
        JFrame login = new JFrame();
+       
+       JLabel usernamelabel = new JLabel("Staff ID: ");
+       usernamelabel.setBounds(40,40,120,23);
+       
+       JLabel passwordlabel = new JLabel("password: ");
+       passwordlabel.setBounds(40,70,120,23);
+       
+       JTextField username = new JTextField();
+       username.setBounds(200,40,150,25);
+       
+       JPasswordField password = new JPasswordField();
+       password.setBounds(200,70,150,25);
+       
        JButton b = new JButton("login");//Creates new Button
        b.setBounds(130,100,100,40);//Sets size of button
        
+       login.add(usernamelabel);
+       login.add(username);
+       login.add(passwordlabel);
+       login.add(password);
        login.add(b);//Adds button to Frame
        
        login.setSize(400,500);//size of frame
@@ -33,6 +56,10 @@ public class GUI {
       b.setTransferHandler(new TransferHandler("text"));
       b.addActionListener((ActionEvent event) -> 
         {
+            
+            int uname = Integer.parseInt(username.getText());
+            String pwd = password.getText();
+            
             login.dispose();
             mainScreen();
         }
