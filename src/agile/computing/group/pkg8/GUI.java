@@ -72,12 +72,12 @@ public class GUI {
     void editScreen(){
         JFrame edit = new JFrame();
         edit.setSize(1500,1000);//size of frame
-        edit.setLayout(new FlowLayout());//no layout manager
+        edit.setLayout(new GridLayout(10,10));//no layout manager
         edit.setVisible(true);//makes it visible
         
         JPanel buttons = new JPanel();
         JPanel fields = new JPanel();
-        fields.setLayout(new GridLayout(1,2,50,50));
+        fields.setLayout(new GridLayout(2,2,10,10));
         
         JTextArea projectID;
         JTextArea projectName;
