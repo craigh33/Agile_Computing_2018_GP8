@@ -43,26 +43,4 @@ public class DBConnectionTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of connect method, of class Connexion.
-     */
-    @Test
-    public void testConnect() throws Exception {
-        boolean expResult = true;
-        boolean result = connection.open(host, db, username, password);
-        assertEquals("Connexion failed", expResult, result);
-    }
-
-    /**
-     * Test of disconnect method, of class DBConnection.
-     */
-    @Test
-    public void testDisconnect() throws Exception {
-        connection.open(host, db, username, password);
-        boolean expResult = false;
-        boolean result = connection.close();
-        assertEquals("Failed to close the connection", expResult, result);
-    }
-
 }
