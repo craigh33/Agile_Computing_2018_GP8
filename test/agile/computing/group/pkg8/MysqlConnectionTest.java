@@ -46,6 +46,7 @@ public class MysqlConnectionTest {
 
     /**
      * Test of connect method, of class Connexion.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConnect() throws Exception {
@@ -56,6 +57,7 @@ public class MysqlConnectionTest {
 
     /**
      * Test of disconnect method, of class MysqlConnection.
+     * @throws java.lang.Exception
      */
     @Test
     public void testDisconnect() throws Exception {
