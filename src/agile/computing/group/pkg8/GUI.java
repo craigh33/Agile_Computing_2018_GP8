@@ -33,7 +33,7 @@ public class GUI {
       b.setTransferHandler(new TransferHandler("text"));
       b.addActionListener((ActionEvent event) -> 
         {
-            login.setVisible(false);//makes it visible
+            login.dispose();
             mainScreen();
         }
         );
@@ -60,7 +60,7 @@ public class GUI {
       newP.setTransferHandler(new TransferHandler("text"));
       newP.addActionListener((ActionEvent event) -> 
         {
-            main.setVisible(false);//makes it visible
+            main.dispose();
             newProject();
         }
         );
@@ -73,7 +73,7 @@ public class GUI {
       edit.setTransferHandler(new TransferHandler("text"));
       edit.addActionListener((ActionEvent event) -> 
         {
-            main.setVisible(false);//makes it visible
+            main.dispose();
             editScreen();
         }
         );
@@ -86,7 +86,7 @@ public class GUI {
       exit.setTransferHandler(new TransferHandler("text"));
       exit.addActionListener((ActionEvent event) -> 
         {
-            main.setVisible(false);//makes it visible
+            main.dispose();
             loginScreen();
         }
         );
@@ -224,6 +224,7 @@ public class GUI {
             test.editDepDeanSig(depDeanSig.isSelected());
             test.editDeanSig(deanSig.isSelected());
             
+            edit.dispose();
             editScreen(); //New Instance of edit screen
         }
         ); 
@@ -232,7 +233,7 @@ public class GUI {
         backButton.setTransferHandler(new TransferHandler("text"));
         backButton.addActionListener((ActionEvent event) -> 
         {
-            edit.setVisible(false);//makes it visible
+            edit.dispose();
             mainScreen();
         }
         );
@@ -354,6 +355,7 @@ public class GUI {
             test.editComments(comments.getText());
             test.editResearcherSig(researcherSig.isSelected());
             
+            newProject.dispose();
             newProject(); //New Instance of edit screen
            }
         ); 
@@ -363,7 +365,7 @@ public class GUI {
         backButton.setTransferHandler(new TransferHandler("text"));
         backButton.addActionListener((ActionEvent event) -> 
         {
-            newProject.setVisible(false);//makes it visible
+            newProject.dispose();
             mainScreen();
         }
         );
