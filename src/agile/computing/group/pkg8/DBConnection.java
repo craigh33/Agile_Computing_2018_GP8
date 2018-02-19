@@ -17,16 +17,18 @@ import java.sql.Statement;
 public class DBConnection {
 
     Connection con;
-    String host, username, password;
+    String host, db, username, password;
     Statement stmt;
     
-   public DBConnection(String host, String username, String password) {
+   public DBConnection(String host, String db, String username, String password) {
        this.host=host;
+       this.db=db;
        this.username=username;
        this.password=password;
        try {
            con = DriverManager.getConnection("jdbc:mysql://"+host+"/?user="+username+"&password="+password);
        } catch (SQLException e) {
+           // change to GUI output stream as required
            e.printStackTrace(System.out);
        }
    }
