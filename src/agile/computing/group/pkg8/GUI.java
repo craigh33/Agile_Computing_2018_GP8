@@ -16,14 +16,14 @@ import java.awt.*;
 public class GUI {
     
     Node test = new Node(); // used for manipulating variables see craig for info
-    MysqlConnection connection;
+    DBConnection connection;
     String host = "silva.computing.dundee.ac.uk";
     String db = "17agileteam8db";
     String username = "17agileteam8";
     String password = "7632.at8.2367";
     void loginScreen() throws Exception {
        
-       boolean connect = connection.open(host, db, username, password);
+       connection = new DBConnection(host, db, username, password);
        
        JFrame login = new JFrame();
        
@@ -53,8 +53,8 @@ public class GUI {
        login.setVisible(true);//makes it visible
        
        b.setMnemonic(KeyEvent.VK_A);
-      b.setTransferHandler(new TransferHandler("text"));
-      b.addActionListener((ActionEvent event) -> 
+       b.setTransferHandler(new TransferHandler("text"));
+       b.addActionListener((ActionEvent event) -> 
         {
             
             int uname = Integer.parseInt(username.getText());
