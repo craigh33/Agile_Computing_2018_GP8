@@ -8,6 +8,7 @@ package agile.computing.group.pkg8;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -26,7 +27,7 @@ public class GUI {
        connection = new DBConnection(host, db, username, password);
        
        JFrame login = new JFrame();
-       
+       JOptionPane frame = new JOptionPane();
        JLabel usernamelabel = new JLabel("Staff ID: ");
        usernamelabel.setBounds(40,40,120,23);
        
@@ -60,8 +61,14 @@ public class GUI {
             int uname = Integer.parseInt(username.getText());
             String pwd = password.getText();
             
+            if(uname == 0 || pwd == null)
+            {
+                JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);
+            }
+            else{
             login.dispose();
             mainScreen();
+            }
         }
         );
        }
@@ -227,32 +234,35 @@ public class GUI {
         editButton.setTransferHandler(new TransferHandler("text"));
         editButton.addActionListener((ActionEvent event) -> 
         {
-            /*
-            * Coverts Strings from JTextAreas int integer values
-            */
-            int prID = Integer.parseInt(projectID.getText());
-            int dy = Integer.parseInt(day.getText());
-            int mh = Integer.parseInt(month.getText());
-            int yr = Integer.parseInt(year.getText());
-            
-            /*
-            This following set of methods updates the test node with variables from JTextAreas
-            */
-            test.editProjectID(prID);
-            test.editProjectName(projectName.getText());
-            test.editResearcher(researcher.getText());
-            test.editDay(dy);
-            test.editMonth(mh);
-            test.editYear(yr);
-            test.editDownload_URL(downloadURL.getText());
-            test.editComments(comments.getText());
-            test.editResearcherSig(researcherSig.isSelected());
-            test.editRISSig(risSig.isSelected());
-            test.editDepDeanSig(depDeanSig.isSelected());
-            test.editDeanSig(deanSig.isSelected());
-            
-            edit.dispose();
-            editScreen(); //New Instance of edit screen
+            int reply = JOptionPane.showConfirmDialog(null, "This action will edit the project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                /*
+                * Coverts Strings from JTextAreas int integer values
+                */
+                int prID = Integer.parseInt(projectID.getText());
+                int dy = Integer.parseInt(day.getText());
+                int mh = Integer.parseInt(month.getText());
+                int yr = Integer.parseInt(year.getText());
+
+                /*
+                This following set of methods updates the test node with variables from JTextAreas
+                */
+                test.editProjectID(prID);
+                test.editProjectName(projectName.getText());
+                test.editResearcher(researcher.getText());
+                test.editDay(dy);
+                test.editMonth(mh);
+                test.editYear(yr);
+                test.editDownload_URL(downloadURL.getText());
+                test.editComments(comments.getText());
+                test.editResearcherSig(researcherSig.isSelected());
+                test.editRISSig(risSig.isSelected());
+                test.editDepDeanSig(depDeanSig.isSelected());
+                test.editDeanSig(deanSig.isSelected());
+
+                edit.dispose();
+                editScreen(); //New Instance of edit screen
+            }
         }
         ); 
         backButton.setBounds(130,100,100,40);//Sets size of button
@@ -361,29 +371,32 @@ public class GUI {
         editButton.setTransferHandler(new TransferHandler("text"));
         editButton.addActionListener((ActionEvent event) -> 
         {
-            /*
-            * Coverts Strings from JTextAreas int integer values
-            */
-            int prID = Integer.parseInt(projectID.getText());
-            int dy = Integer.parseInt(day.getText());
-            int mh = Integer.parseInt(month.getText());
-            int yr = Integer.parseInt(year.getText());
-            
-            /*
-            This following set of methods updates the test node with variables from JTextAreas
-            */
-            test.editProjectID(prID);
-            test.editProjectName(projectName.getText());
-            test.editResearcher(researcher.getText());
-            test.editDay(dy);
-            test.editMonth(mh);
-            test.editYear(yr);
-            test.editDownload_URL(downloadURL.getText());
-            test.editComments(comments.getText());
-            test.editResearcherSig(researcherSig.isSelected());
-            
-            newProject.dispose();
-            newProject(); //New Instance of edit screen
+            int reply = JOptionPane.showConfirmDialog(null, "This action will create new project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                /*
+                * Coverts Strings from JTextAreas int integer values
+                */
+                int prID = Integer.parseInt(projectID.getText());
+                int dy = Integer.parseInt(day.getText());
+                int mh = Integer.parseInt(month.getText());
+                int yr = Integer.parseInt(year.getText());
+
+                /*
+                This following set of methods updates the test node with variables from JTextAreas
+                */
+                test.editProjectID(prID);
+                test.editProjectName(projectName.getText());
+                test.editResearcher(researcher.getText());
+                test.editDay(dy);
+                test.editMonth(mh);
+                test.editYear(yr);
+                test.editDownload_URL(downloadURL.getText());
+                test.editComments(comments.getText());
+                test.editResearcherSig(researcherSig.isSelected());
+
+                newProject.dispose();
+                newProject(); //New Instance of edit screen
+            }
            }
         ); 
         
