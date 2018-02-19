@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class GUI {
     
-    Node test = new Node();
+    Node test = new Node(); // used for manipulating variables see craig for info
     
     void loginScreen() {
        
@@ -67,17 +67,20 @@ public class GUI {
     }
     
     /**
-     * 
+     * Swing Screen to allow user to edit fields
      */
     void editScreen(){
         JFrame edit = new JFrame();
         edit.setSize(1500,1000);//size of frame
-        edit.setLayout(new GridLayout(10,10));//no layout manager
+        edit.setLayout(new GridLayout(10,10));//change this to change edit screen layout
         edit.setVisible(true);//makes it visible
         
+        /*
+        *JPanels to strore java swing content
+        */
         JPanel buttons = new JPanel();
         JPanel fields = new JPanel();
-        fields.setLayout(new GridLayout(2,2,10,10));
+        fields.setLayout(new GridLayout(2,2,10,10)); //edit this to change layout of fields
         
         JTextArea projectID;
         JTextArea projectName;
@@ -113,9 +116,13 @@ public class GUI {
         depDeanSig = new JCheckBox("Deputy Dean Signature", test.returnDepDeanSig());
         deanSig = new JCheckBox("Deans Signature", test.returnDeanSig());
         
+        /*
+        Button Variables
+        */
         JButton editButton = new JButton("Edit");
+        JButton backButton = new JButton("Back");
         
-        
+        // Adds Text areas to fields panel
         fields.add(projectName);
         fields.add(researcher);
         fields.add(day);
@@ -127,21 +134,36 @@ public class GUI {
         fields.add(depDeanSig);
         fields.add(deanSig);
         
+        //adds panels to fields
         edit.add(fields);
         edit.add(buttons);
         
+        //adds buttons to buttons panel
          buttons.add(editButton);
+         buttons.add(backButton);
       
+         
+        /*
+         This following code handles how the edit button will react when clicked
+         
+         I have it pulling the information from the text boxes then pushing them to the test Code class instance
+         */ 
         editButton.setBounds(130,100,100,40);//Sets size of button
         editButton.setMnemonic(KeyEvent.VK_A);
         editButton.setTransferHandler(new TransferHandler("text"));
         editButton.addActionListener((ActionEvent event) -> 
         {
+            /*
+            * Coverts Strings from JTextAreas int integer values
+            */
             int prID = Integer.parseInt(projectID.getText());
             int dy = Integer.parseInt(day.getText());
             int mh = Integer.parseInt(month.getText());
             int yr = Integer.parseInt(year.getText());
             
+            /*
+            This following set of methods updates the test node with variables from JTextAreas
+            */
             test.editProjectID(prID);
             test.editProjectName(projectName.getText());
             test.editResearcher(researcher.getText());
@@ -155,7 +177,7 @@ public class GUI {
             test.editDepDeanSig(depDeanSig.isSelected());
             test.editDeanSig(deanSig.isSelected());
             
-            editScreen();
+            editScreen(); //New Instance of edit screen
         }
         );
         
