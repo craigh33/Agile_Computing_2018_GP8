@@ -395,7 +395,7 @@ public class GUI {
                 test.editResearcherSig(researcherSig.isSelected());
 
                 newProject.dispose();
-                newProject(); //New Instance of edit screen
+                mainScreen(); //New Instance of edit screen
             }
            }
         ); 
