@@ -21,7 +21,7 @@ public class GUI {
     String db = "17agileteam8db";
     String username = "17agileteam8";
     String password = "7632.at8.2367";
-    void loginScreen() throws Exception {
+    void loginScreen() {
        
        connection = new DBConnection(host, db, username, password);
        
