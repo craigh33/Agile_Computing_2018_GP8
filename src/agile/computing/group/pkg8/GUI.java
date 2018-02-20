@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.awt.*;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.sql.Statement; 
+import java.util.Hashtable;
 
 /**
  *
@@ -62,15 +63,23 @@ public class GUI {
         {
             
             int uname = Integer.parseInt(username.getText());
-            String pwd = password.getText();
+            char[] pwd = password.getPassword();
+            String pass = new String(pwd);
+            System.out.println(pass);
+            
+            Hashtable result = connection.getUserByStaffID(Integer.toString(uname));
            
             if(uname == 0 || pwd == null)
             {
                 JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);
-            }
-            else{
-            login.dispose();
-            mainScreen();
+            } else if (result.get("Password") == null) {
+                JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
+            } else if (result.get("Password").equals(pass)) {
+                login.dispose();
+                mainScreen();
+            }else{
+                //things should probably go here but idk.
+                JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
             }
         }
         );
