@@ -26,7 +26,6 @@ public class GUI {
     void loginScreen() {
        
        connection = new DBConnection(host, db, username, password);
-       Connection con = DBConnection.getConnection();
        
        JFrame login = new JFrame();
        login.setSize(400,500);
