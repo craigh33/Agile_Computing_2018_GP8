@@ -29,6 +29,8 @@ public class GUI {
        //Connection con = DBConnection.getConnection();
        
        JFrame login = new JFrame();
+       login.setSize(400,500);
+       login.setLocationRelativeTo(null);
        JOptionPane frame = new JOptionPane();
        JLabel usernamelabel = new JLabel("Staff ID: ");
        usernamelabel.setBounds(40,40,120,23);
@@ -64,8 +66,8 @@ public class GUI {
             String pwd = password.getText();
             
              try{
-                stmt = connection.createStatement();
-                connection.rs = connection.stmt.executeQuery("SELECT");
+                //stmt = connection.createStatement();
+                //connection.rs = connection.stmt.executeQuery("SELECT");
             
             }catch(Exception ex)
             {
@@ -92,6 +94,7 @@ public class GUI {
     void mainScreen(){
       JFrame main = new JFrame();
       main.setSize(400,500);//size of frame
+      main.setLocationRelativeTo(null);
       main.setLayout(new GridLayout(10,10));//no layout manager
       main.setVisible(true);//makes it visible
       
@@ -142,8 +145,9 @@ public class GUI {
      */
     void editScreen(){
         JFrame edit = new JFrame();
-        edit.setSize(1500,1000);//size of frame
-        edit.setLayout(new GridLayout(10,10));//change this to change edit screen layout
+        edit.setSize(400,500);//size of frame
+        edit.setLocationRelativeTo(null);
+        edit.setLayout(new GridLayout(2,2));//change this to change edit screen layout
         edit.setVisible(true);//makes it visible
         
         /*
@@ -151,7 +155,7 @@ public class GUI {
         */
         JPanel buttons = new JPanel();
         JPanel fields = new JPanel();
-        fields.setLayout(new GridLayout(2,2,10,10)); //edit this to change layout of fields
+        fields.setLayout(new GridLayout(10,1,5,5)); //edit this to change layout of fields
         
         JTextArea projectID;
         JTextArea projectName;
@@ -287,8 +291,9 @@ public class GUI {
     
     void newProject(){
         JFrame newProject = new JFrame();
-        newProject.setSize(1500,1000);//size of frame
-        newProject.setLayout(new GridLayout(10,10));//change this to change edit screen layout
+        newProject.setSize(400,500);//size of frame
+        newProject.setLocationRelativeTo(null);
+        newProject.setLayout(new GridLayout(2,2));//change this to change edit screen layout
         newProject.setVisible(true);//makes it visible
         
         /*
@@ -296,7 +301,7 @@ public class GUI {
         */
         JPanel buttons = new JPanel();
         JPanel fields = new JPanel();
-        fields.setLayout(new GridLayout(2,2,10,10)); //edit this to change layout of fields
+        fields.setLayout(new GridLayout(10,1,5,5)); //edit this to change layout of fields
         
         JTextArea projectID;
         JTextArea projectName;
