@@ -46,12 +46,11 @@ public class UploadTest {
      */
     @Test
     public void testUploadFile() {
-        File file = new File("..\\Files\\test.xlsx");
+        File file = new File("test.xlsx");
         File uploadPath = new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
         boolean expResult = true;
         boolean result = upload.uploadFile(uploadPath, file);
         assertEquals(expResult, result);
-
     }
 
     /**
@@ -60,9 +59,9 @@ public class UploadTest {
     @Test
     public void testFileExists() {
         File path = new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
-        File file = new File("..\\..\\Files\\test.xlsx");
-        
-        boolean expResult = false;
+        File file = new File("test.xlsx");
+
+        boolean expResult = true;
         boolean result = upload.fileExists(path, file);
         assertEquals(expResult, result);
     }
