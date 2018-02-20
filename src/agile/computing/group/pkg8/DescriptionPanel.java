@@ -9,12 +9,12 @@ package agile.computing.group.pkg8;
  *
  * @author Andrei
  */
-public class DescriptionGui extends javax.swing.JPanel {
+public class DescriptionPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DescriptionGui
      */
-    public DescriptionGui() {
+    public DescriptionPanel() {
         initComponents();
     }
 
