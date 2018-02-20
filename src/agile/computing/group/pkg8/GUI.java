@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import java.sql.Statement; 
 
 /**
  *
@@ -25,6 +26,7 @@ public class GUI {
     void loginScreen() {
        
        connection = new DBConnection(host, db, username, password);
+       //Connection con = DBConnection.getConnection();
        
        JFrame login = new JFrame();
        JOptionPane frame = new JOptionPane();
@@ -61,6 +63,13 @@ public class GUI {
             int uname = Integer.parseInt(username.getText());
             String pwd = password.getText();
             
+             try{
+                stmt = connection.createStatement();
+                connection.rs = connection.stmt.executeQuery("SELECT");
+            
+            }catch(Exception ex)
+            {
+            }
             if(uname == 0 || pwd == null)
             {
                 JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);
