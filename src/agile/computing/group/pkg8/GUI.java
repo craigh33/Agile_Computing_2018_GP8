@@ -64,14 +64,7 @@ public class GUI {
             
             int uname = Integer.parseInt(username.getText());
             String pwd = password.getText();
-            
-             try{
-                //stmt = connection.createStatement();
-                //connection.rs = connection.stmt.executeQuery("SELECT");
-            
-            }catch(Exception ex)
-            {
-            }
+           
             if(uname == 0 || pwd == null)
             {
                 JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);

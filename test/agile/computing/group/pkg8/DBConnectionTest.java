@@ -5,6 +5,7 @@
  */
 package agile.computing.group.pkg8;
 
+import java.util.Hashtable;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,10 +20,10 @@ import static org.junit.Assert.*;
 public class DBConnectionTest {
 
     DBConnection connection;
-    String host = "sql2.freesqldatabase.com";
-    String db = "sql2220155";
-    String username = "sql2220155";
-    String password = "nC8!uE3*";
+    String host = "silva.computing.dundee.ac.uk";
+    String db = "17agileteam8db";
+    String username = "17agileteam8";
+    String password = "7632.at8.2367";
 
     public DBConnectionTest() {
     }
@@ -38,6 +39,12 @@ public class DBConnectionTest {
     @Before
     public void setUp() {
         connection = new DBConnection(host, db, username, password);
+    }
+    
+    @Test
+    public void testGetUserByStaffID() {
+        Hashtable x = connection.getUserByStaffID("1");
+        assertEquals("admin", x.get("Password"));
     }
 
     @After
