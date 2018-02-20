@@ -34,6 +34,7 @@ public class GUI {
        JOptionPane frame = new JOptionPane();
        JLabel usernamelabel = new JLabel("Staff ID: ");
        usernamelabel.setBounds(40,40,120,23);
+       login.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        
        JLabel passwordlabel = new JLabel("password: ");
        passwordlabel.setBounds(40,70,120,23);
@@ -98,6 +99,7 @@ public class GUI {
       main.setLocationRelativeTo(null);
       main.setLayout(new GridLayout(10,10));//no layout manager
       main.setVisible(true);//makes it visible
+      main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       JButton newP = new JButton("New Project");//Creates new Button
       main.add(newP);
