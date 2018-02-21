@@ -5,12 +5,16 @@
  */
 package agile.computing.group.pkg8;
 
+import com.itextpdf.text.DocumentException;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.IOException;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.sql.Statement; 
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +23,7 @@ import java.util.Hashtable;
 public class GUI {
     
     Node test = new Node(); // used for manipulating variables see craig for info
+    PrintHandler print = new PrintHandler();
     DBConnection connection;
     String host = "silva.computing.dundee.ac.uk";
     String db = "17agileteam8db";
@@ -221,6 +226,7 @@ public class GUI {
         */
         JButton editButton = new JButton("Edit");
         JButton backButton = new JButton("Back");
+        JButton printButton = new JButton("Print");
         
         JLabel prIDName = new JLabel("Project ID");
         JLabel prName = new JLabel("Project Name");
@@ -260,6 +266,7 @@ public class GUI {
         //adds buttons to buttons panel
          buttons.add(editButton);
          buttons.add(backButton);
+         buttons.add(printButton);
       
          
         /*
@@ -310,6 +317,22 @@ public class GUI {
         {
             edit.dispose();
             mainScreen();
+        }
+        );
+        
+        printButton.setBounds(130,100,100,40);//Sets size of button
+        printButton.setMnemonic(KeyEvent.VK_A);
+        printButton.setTransferHandler(new TransferHandler("text"));
+        printButton.addActionListener((ActionEvent event) -> 
+        {
+            
+            try {
+                print.createPdf(test.returnProjectName());
+            } catch (DocumentException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         );
     }
