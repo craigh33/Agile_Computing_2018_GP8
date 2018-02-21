@@ -69,6 +69,8 @@ public class GUI {
             System.out.println(pass);
             
             Hashtable result = connection.getUserByStaffID(Integer.toString(uname));
+            
+            
            
             if(uname == 0 || pwd == null)
             {
@@ -76,8 +78,14 @@ public class GUI {
             } else if (result.get("Password") == null) {
                 JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
             } else if (result.get("Password").equals(pass)) {
-                login.dispose();
-                mainScreen();
+                    if(result.get("JobType").equals("Researcher")){
+                        login.dispose();
+                        mainScreen();
+                    }
+                    else if (result.get("JobType").equals("RIS")){
+                        login.dispose();
+                        risPanel();
+                    } 
             }else{
                 //things should probably go here but idk.
                 JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
@@ -426,5 +434,45 @@ public class GUI {
             mainScreen();
         }
         );
+    }
+    
+    void risPanel(){
+      JFrame risPanel = new JFrame();
+
+      risPanel.setSize(400,500);//size of frame
+      risPanel.setLocationRelativeTo(null);
+      risPanel.setLayout(new GridLayout(10,10));//no layout manager
+      risPanel.setVisible(true);//makes it visible
+      risPanel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      
+      JButton viewP = new JButton("View Projects");//Creates new Button
+      risPanel.add(viewP);
+      
+      viewP.setBounds(130,100,100,40);//Sets size of button
+      viewP.setMnemonic(KeyEvent.VK_A);
+      viewP.setTransferHandler(new TransferHandler("text"));
+      viewP.addActionListener((ActionEvent event) -> 
+        {
+            risPanel.dispose();
+            //Change this to something else
+            newProject();
+        }
+        );
+     
+      
+      JButton exit = new JButton("Logout");//Creates new Button
+      risPanel.add(exit);
+      
+      exit.setBounds(130,100,100,40);//Sets size of button
+      exit.setMnemonic(KeyEvent.VK_A);
+      exit.setTransferHandler(new TransferHandler("text"));
+      exit.addActionListener((ActionEvent event) -> 
+        {
+            risPanel.dispose();
+            loginScreen();
+        }
+        );
+      
+      
     }
 }

@@ -42,6 +42,7 @@ public class Node {
         this.researcherSig = false;
         this.depDeanSig = false;
         this.deanSig = false;
+
     }
 
     /**
