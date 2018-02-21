@@ -7,6 +7,7 @@ package agile.computing.group.pkg8;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,10 +84,9 @@ public class FileHandlerTest {
      */
     @Test
     public void testDownloadFile() throws IOException {
-        File path = new File("file:////silva.computing.dundee.ac.uk/webapps/2017-agileteam8/files/test.xlsx");
-        File file = new File("test.xlsx");
+        File path = new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files\\test.xlsx");
         boolean expResult = true;
-        boolean result = fh.downloadFile(path, file);
+        boolean result = fh.downloadFile(path);
         assertEquals("File failed to download",expResult, result);
     }
 
