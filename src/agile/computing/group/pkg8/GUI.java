@@ -78,6 +78,7 @@ public class GUI {
             } else if (result.get("Password") == null) {
                 JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
             } else if (result.get("Password").equals(pass)) {
+                
                     if(result.get("JobType").equals("Researcher")){
                         login.dispose();
                         mainScreen();
@@ -85,7 +86,12 @@ public class GUI {
                     else if (result.get("JobType").equals("RIS")){
                         login.dispose();
                         risPanel();
-                    } 
+                    }
+                    else if (result.get("JobType").equals("Admin")){
+                        login.dispose();
+                        adminScreen();
+                    }
+                    
             }else{
                 //things should probably go here but idk.
                 JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
@@ -469,6 +475,71 @@ public class GUI {
       exit.addActionListener((ActionEvent event) -> 
         {
             risPanel.dispose();
+            loginScreen();
+        }
+        );
+           
+    }
+    
+    void adminScreen(){
+      JFrame admin = new JFrame();
+      admin.setSize(400,500);//size of frame
+      admin.setLocationRelativeTo(null);
+      admin.setLayout(new GridLayout(10,10));//no layout manager
+      admin.setVisible(true);//makes it visible
+      admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      
+      JButton search = new JButton("Search");//Creates new Button
+      admin.add(search);
+      
+      search.setBounds(130,100,100,40);//Sets size of button
+      search.setMnemonic(KeyEvent.VK_A);
+      search.setTransferHandler(new TransferHandler("text"));
+      search.addActionListener((ActionEvent event) -> 
+        {
+            admin.dispose();
+            //change this to something else
+            newProject();
+        }
+        );
+      
+      JButton add = new JButton("Add");//Creates new Button
+      admin.add(add);
+      
+      add.setBounds(130,100,100,40);//Sets size of button
+      add.setMnemonic(KeyEvent.VK_A);
+      add.setTransferHandler(new TransferHandler("text"));
+      add.addActionListener((ActionEvent event) -> 
+        {
+            admin.dispose();
+            //Also change this to something else
+            editScreen();
+        }
+        );
+      
+      JButton edit = new JButton("Edit");//Creates new Button
+      admin.add(edit);
+      
+      edit.setBounds(130,100,100,40);//Sets size of button
+      edit.setMnemonic(KeyEvent.VK_A);
+      edit.setTransferHandler(new TransferHandler("text"));
+      edit.addActionListener((ActionEvent event) -> 
+        {
+            admin.dispose();
+            //Also change this to something else
+            editScreen();
+        }
+        );
+      
+      JButton exit = new JButton("Logout");//Creates new Button
+      admin.add(exit);
+      
+      exit.setBounds(130,100,100,40);//Sets size of button
+      exit.setMnemonic(KeyEvent.VK_A);
+      exit.setTransferHandler(new TransferHandler("text"));
+      exit.addActionListener((ActionEvent event) -> 
+        {
+            admin.dispose();
             loginScreen();
         }
         );
