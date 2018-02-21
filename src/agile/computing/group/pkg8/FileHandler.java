@@ -6,16 +6,15 @@
 package agile.computing.group.pkg8;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.util.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -41,7 +40,7 @@ public class FileHandler {
     public boolean uploadFile(File uploadPath, File file, int id) {
         boolean uploaded = false;
         File destination;
-        String newName = id + "" + new SimpleDateFormat("ddmmyyhhmmss").format(new Date());
+        String newName = id + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date());
         String format = file.getName().split("\\.")[1];
 
         if (!fileExists(uploadPath, new File(newName)) && fileIsSupported(format)) {
@@ -52,7 +51,7 @@ public class FileHandler {
                 e.printStackTrace(System.out);
             }
 
-            query = "INSERT INTO " + con.getDatabase() + ".Project (file_name,file_path) VALUES ('" +  newName + "." + format + "', '" + uploadPath.toString().replace("\\", "\\\\") + "')";
+            query = "INSERT INTO " + con.getDatabase() + ".Project (file_name,file_path) VALUES ('" + newName + "." + format + "', '" + uploadPath.toString().replace("\\", "\\\\") + "')";
 
             try {
                 con.getConnection().prepareStatement(query).execute();
@@ -65,13 +64,50 @@ public class FileHandler {
         return uploaded;
     }
 
-    public boolean downloadFile(File path, File file) throws MalformedURLException, IOException {
+    /**
+     *
+     * @param path the path of the file to be downloaded
+     * @return true if the file was successfully downloaded, false if not
+     */
+    public boolean downloadFile(File path) {
         boolean downloaded = false;
 
-        URL url = new URL(path.toString());
-        ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-        FileOutputStream fos = new FileOutputStream("test.xlsx");
-        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JFrame dialogFrame = new JFrame();
+
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
+        fc.setFileFilter(new FileNameExtensionFilter("Excel file","xls","xlsx"));
+        fc.setDialogTitle("Save file");
+
+        int userSelection = fc.showSaveDialog(dialogFrame);
+
+        switch (userSelection) {
+            case JFileChooser.APPROVE_OPTION:
+                File downloadPath = fc.getCurrentDirectory();
+                File fileName = fc.getSelectedFile();
+                File destination = new File(downloadPath.toString() + "\\" + fileName.getName() + "." + path.getName().split("\\.")[1]);
+                 {
+                    try {
+                        Files.copy(path.toPath(), destination.toPath());
+                        downloaded = true;
+                    } catch (IOException e) {
+                        e.printStackTrace(System.out);
+                    }
+                }
+                break;
+        }
 
         return downloaded;
     }
@@ -97,7 +133,7 @@ public class FileHandler {
     /**
      * This method checks if the specified file is supported
      *
-     * @param filename the name of the file that will be checked
+     * @param format the name of the file that will be checked
      * @return true if the file is supported, false if not
      */
     public boolean fileIsSupported(String format) {
