@@ -95,6 +95,10 @@ public class GUI {
                         login.dispose();
                         associateDeanScreen();
                     }
+                    else if (result.get("JobType").equals("Dean")){
+                        login.dispose();
+                        associateDeanScreen();                      
+                    }
                     
             }else{
                 //things should probably go here but idk.
@@ -586,4 +590,7 @@ public class GUI {
         );
             
     }
+       
+    
+
 }
