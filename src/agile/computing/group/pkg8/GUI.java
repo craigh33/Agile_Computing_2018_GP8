@@ -91,6 +91,10 @@ public class GUI {
                         login.dispose();
                         adminScreen();
                     }
+                    else if (result.get("JobType").equals("Associate Dean")){
+                        login.dispose();
+                        associateDeanScreen();
+                    }
                     
             }else{
                 //things should probably go here but idk.
@@ -543,7 +547,43 @@ public class GUI {
             loginScreen();
         }
         );
+            
+    }
+    
+    void associateDeanScreen(){
+      JFrame aDean = new JFrame();
+      aDean.setSize(400,500);//size of frame
+      aDean.setLocationRelativeTo(null);
+      aDean.setLayout(new GridLayout(10,10));//no layout manager
+      aDean.setVisible(true);//makes it visible
+      aDean.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
+      JButton view = new JButton("View Projects");//Creates new Button
+      aDean.add(view);
       
+      view.setBounds(130,100,100,40);//Sets size of button
+      view.setMnemonic(KeyEvent.VK_A);
+      view.setTransferHandler(new TransferHandler("text"));
+      view.addActionListener((ActionEvent event) -> 
+        {
+            aDean.dispose();
+            //change this to something else
+            newProject();
+        }
+        );
+      
+      JButton exit = new JButton("Logout");//Creates new Button
+      aDean.add(exit);
+      
+      exit.setBounds(130,100,100,40);//Sets size of button
+      exit.setMnemonic(KeyEvent.VK_A);
+      exit.setTransferHandler(new TransferHandler("text"));
+      exit.addActionListener((ActionEvent event) -> 
+        {
+            aDean.dispose();
+            loginScreen();
+        }
+        );
+            
     }
 }
