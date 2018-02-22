@@ -51,7 +51,7 @@ public class FileHandler {
                 e.printStackTrace(System.out);
             }
 
-            query = "INSERT INTO " + con.getDatabase() + ".Project (file_name,file_path) VALUES ('" + newName + "." + format + "', '" + uploadPath.toString().replace("\\", "\\\\") + "')";
+            query = "INSERT INTO " + con.getDatabase() + ".Project (file_name,file_path) VALUES ('" + newName + "." + format + "', '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "')";
 
             try {
                 con.getConnection().prepareStatement(query).execute();
@@ -74,21 +74,22 @@ public class FileHandler {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace(System.out);
+        } catch (InstantiationException e) {
+            e.printStackTrace(System.out);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace(System.out);
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace(System.out);
         }
 
         JFrame dialogFrame = new JFrame();
 
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
-        fc.setFileFilter(new FileNameExtensionFilter("Excel file","xls","xlsx"));
+        fc.setFileFilter(new FileNameExtensionFilter("Excel file", "xls", "xlsx"));
+        fc.setSelectedFile(new File("finances.xlsx"));
         fc.setDialogTitle("Save file");
 
         int userSelection = fc.showSaveDialog(dialogFrame);
@@ -96,8 +97,13 @@ public class FileHandler {
         switch (userSelection) {
             case JFileChooser.APPROVE_OPTION:
                 File downloadPath = fc.getCurrentDirectory();
-                File fileName = fc.getSelectedFile();
-                File destination = new File(downloadPath.toString() + "\\" + fileName.getName() + "." + path.getName().split("\\.")[1]);
+                String fileName = fc.getSelectedFile().getName();
+
+                if (fileName.contains(".")) {
+                    fileName = fileName.split("\\.")[0];
+                }
+
+                File destination = new File(downloadPath.toString() + "\\" + fileName + "." + path.getName().split("\\.")[1]);
                  {
                     try {
                         Files.copy(path.toPath(), destination.toPath());
