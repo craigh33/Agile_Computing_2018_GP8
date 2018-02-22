@@ -11,8 +11,11 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.IOException;
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.sql.Statement; 
+import static java.util.Collections.list;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -122,12 +125,20 @@ public class GUI {
     * @authot Craig
     */
     void mainScreen(){
+      String[] data = {"one", "two"};
       JFrame main = new JFrame();
       main.setSize(400,500);//size of frame
       main.setLocationRelativeTo(null);
       main.setLayout(new GridLayout(10,10));//no layout manager
       main.setVisible(true);//makes it visible
       main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      
+      JList mlist = new JList(data); //data has type Object[]
+      mlist.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+      mlist.setLayoutOrientation(JList.VERTICAL_WRAP);
+      mlist.setVisibleRowCount(-1);
+     
+      main.add(mlist);
       
       JButton newP = new JButton("New Project");//Creates new Button
       main.add(newP);
