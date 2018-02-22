@@ -265,6 +265,7 @@ public class GUI {
         JButton editButton = new JButton("Edit");
         JButton backButton = new JButton("Back");
         JButton printButton = new JButton("Print");
+        JButton uploadButton = new JButton("Upload new File");
 
         JLabel prIDName = new JLabel("Project ID");
         JLabel prName = new JLabel("Project Name");
@@ -318,12 +319,9 @@ public class GUI {
             if (reply == JOptionPane.YES_OPTION) {
                 connection.editProject(projectID.getText(), projectName.getText(), comments.getText(), researcherSig.isSelected(), risSig.isSelected(), depDeanSig.isSelected(), deanSig.isSelected());
                 edit.dispose();
-                try {
-                    editScreen(); //New Instance of edit screen
-                } catch (SQLException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                mainScreen(); //New Instance of edit screen
             }
+
         }
         );
         backButton.setBounds(130, 100, 100, 40);//Sets size of button
@@ -349,6 +347,17 @@ public class GUI {
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        );
+        
+        buttons.add(uploadButton);
+        uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
+        uploadButton.setMnemonic(KeyEvent.VK_A);
+        uploadButton.setTransferHandler(new TransferHandler("text"));
+        uploadButton.addActionListener((ActionEvent event)
+                -> {
+              File file =  uploadFile();
+              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
         }
         );
     }
@@ -414,26 +423,13 @@ public class GUI {
         editButton.addActionListener((ActionEvent event)
                 -> {
 
-            JFrame dialogFrame = new JFrame();
-
-            JFileChooser fc = new JFileChooser();
-            fc.setFileFilter(new FileNameExtensionFilter("Excel file", "xls", "xlsx"));
-            fc.setDialogTitle("Choose file");
-
-            int userSelection = fc.showSaveDialog(dialogFrame);
-            File file = null;
-            switch (userSelection) {
-                case JFileChooser.APPROVE_OPTION:
-                    //File file = new File(fc.getSelectedFile().getName());
-                    file = new File(fc.getSelectedFile().toString());
-                    break;
-            }
+            File file = uploadFile();
 
             int reply = JOptionPane.showConfirmDialog(null, "This action will create new project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
 
-                connection.newProject(id, projectName.getText(), researcher.getText(), comments.getText(), fc.getSelectedFile().getName(), "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
-                fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), fc.getSelectedFile(), id);
+                connection.newProject(id, projectName.getText(), researcher.getText(), comments.getText(), file.getName(), "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
+                fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
                 newProject.dispose();
                 mainScreen(); //New Instance of edit screen
 
@@ -451,14 +447,7 @@ public class GUI {
         }
         );
 
-        uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
-        uploadButton.setMnemonic(KeyEvent.VK_A);
-        uploadButton.setTransferHandler(new TransferHandler("text"));
-        uploadButton.addActionListener((ActionEvent event)
-                -> {
-
-        }
-        );
+       
     }
 
     void risPanel() {
@@ -607,6 +596,24 @@ public class GUI {
         }
         );
 
+    }
+    
+    File uploadFile(){
+        JFrame dialogFrame = new JFrame();
+
+            JFileChooser fc = new JFileChooser();
+            fc.setFileFilter(new FileNameExtensionFilter("Excel file", "xls", "xlsx"));
+            fc.setDialogTitle("Choose file");
+
+            int userSelection = fc.showSaveDialog(dialogFrame);
+            File file = null;
+            switch (userSelection) {
+                case JFileChooser.APPROVE_OPTION:
+                    //File file = new File(fc.getSelectedFile().getName());
+                    file = new File(fc.getSelectedFile().toString());
+                    break;
+            }
+            return file;
     }
 
 }
