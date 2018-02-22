@@ -91,19 +91,19 @@ public class GUI {
                     }
                     else if (result.get("JobType").equals("RIS")){
                         login.dispose();
-                        risPanel();
+                        mainScreen();
                     }
                     else if (result.get("JobType").equals("Admin")){
                         login.dispose();
-                        adminScreen();
+                        mainScreen();
                     }
                     else if (result.get("JobType").equals("Associate Dean")){
                         login.dispose();
-                        associateDeanScreen();
+                        mainScreen();
                     }
                     else if (result.get("JobType").equals("Dean")){
                         login.dispose();
-                        associateDeanScreen();                      
+                        mainScreen();                      
                     }
                     
             }else{
