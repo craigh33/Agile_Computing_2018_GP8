@@ -65,7 +65,8 @@ public class FileHandler {
     }
 
     /**
-     *
+     * This method downloads a file at the specified path and prompts the user where to save this file
+     * 
      * @param path the path of the file to be downloaded
      * @return true if the file was successfully downloaded, false if not
      */
