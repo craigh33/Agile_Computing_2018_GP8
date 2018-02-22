@@ -38,6 +38,7 @@ public class GUI {
     String db = "17agileteam8db";
     String username = "17agileteam8";
     String password = "7632.at8.2367";
+    String selected;
     int id;
 
     void loginScreen() {
@@ -99,6 +100,7 @@ public class GUI {
             ResultSet result = connection.getUserByStaffID(uname);
 
             try {
+                result.next();
                 if (uname == 0 || pwd == null) {
                     JOptionPane.showMessageDialog(frame, "Please enter valid username or password", "Login Error", ERROR_MESSAGE);
                 } else if (result.getString("Password") == null) {
@@ -133,13 +135,13 @@ public class GUI {
         );
     }
 
-    /*
+    /**
     * @param 
     *
     * @return 
     *
     * @authot Craig
-     */
+    **/
     void mainScreen() {
         JFrame main = new JFrame();
         main.setSize(400, 500);//size of frame
@@ -186,8 +188,14 @@ public class GUI {
         edit.setTransferHandler(new TransferHandler("text"));
         edit.addActionListener((ActionEvent event)
                 -> {
+            selected = mlist.getSelectedValue().toString();
+            System.out.println(selected);
             main.dispose();
-            editScreen();
+            try {
+                editScreen();
+            } catch (SQLException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         );
 
@@ -209,7 +217,7 @@ public class GUI {
     /**
      * Swing Screen to allow user to edit fields
      */
-    void editScreen() {
+    void editScreen() throws SQLException {
         JFrame edit = new JFrame();
         edit.setSize(400, 500);//size of frame
         edit.setLocationRelativeTo(null);
@@ -226,9 +234,7 @@ public class GUI {
         JTextArea projectID;
         JTextArea projectName;
         JTextArea researcher;
-        JTextArea day;
-        JTextArea month;
-        JTextArea year;
+        JTextArea dateBox;
         JTextArea downloadURL;
         JTextArea comments;
         JCheckBox researcherSig;
@@ -239,23 +245,19 @@ public class GUI {
         /*
         * Converts String variables to int for JTextAreas
          */
-        String id = Integer.toString(test.returnProjectID());
-        String d = Integer.toString(test.returnDay());
-        String m = Integer.toString(test.returnMonth());
-        String y = Integer.toString(test.returnYear());
-
-        projectID = new JTextArea(id, 1, 1);
-        projectName = new JTextArea(test.returnProjectName(), 10, 10);
-        researcher = new JTextArea(test.returnResearcher(), 10, 10);
-        day = new JTextArea(d, 10, 10);
-        month = new JTextArea(m, 10, 10);
-        year = new JTextArea(y, 10, 10);
-        downloadURL = new JTextArea(test.returnDownload_URL(), 10, 10);
-        comments = new JTextArea(test.returnComments(), 10, 10);
-        researcherSig = new JCheckBox("Researcher Signature", test.returnResearcherSig());
-        risSig = new JCheckBox("RIS Signature", test.returnRISSig());
-        depDeanSig = new JCheckBox("Deputy Dean Signature", test.returnDepDeanSig());
-        deanSig = new JCheckBox("Deans Signature", test.returnDeanSig());
+        
+        ResultSet rs = connection.getProject(selected.split(" ")[0]);
+        rs.next();
+        projectID = new JTextArea(Integer.toString(rs.getInt("id")), 1, 1);
+        projectName = new JTextArea(rs.getString("name"), 10, 10);
+        researcher = new JTextArea(rs.getString("researcher"), 10, 10);
+        dateBox = new JTextArea((rs.getDate("date")).toString(), 10, 10);
+        downloadURL = new JTextArea(rs.getString("file_path"), 10, 10);
+        comments = new JTextArea(rs.getString("comments"), 10, 10);
+        researcherSig = new JCheckBox("Researcher Signature", rs.getInt("researcher_sig") > 0);
+        risSig = new JCheckBox("RIS Signature", rs.getInt("ris_sig") > 0);
+        depDeanSig = new JCheckBox("Deputy Dean Signature", rs.getInt("depDean_sig") > 0);
+        deanSig = new JCheckBox("Deans Signature", rs.getInt("dean_sig") > 0);
 
         /*
         Button Variables
@@ -267,27 +269,25 @@ public class GUI {
         JLabel prIDName = new JLabel("Project ID");
         JLabel prName = new JLabel("Project Name");
         JLabel rsName = new JLabel("Reasearcher Name");
-        JLabel dayName = new JLabel("Day of Creation");
-        JLabel monthName = new JLabel("Month of Creation");
-        JLabel yearName = new JLabel("Year of Creation");
+        JLabel dayName = new JLabel("Date of Creation");
         JLabel urlName = new JLabel("Download URL");
         JLabel commentName = new JLabel("Comments");
 
         // Adds Text areas to fields panel
         fields.add(prIDName);
         fields.add(projectID);
+        projectID.setEditable(false);
         fields.add(prName);
         fields.add(projectName);
         fields.add(rsName);
         fields.add(researcher);
+        researcher.setEditable(false);
         fields.add(dayName);
-        fields.add(day);
-        fields.add(monthName);
-        fields.add(month);
-        fields.add(yearName);
-        fields.add(year);
+        fields.add(dateBox);
+        dateBox.setEditable(false);
         fields.add(urlName);
         fields.add(downloadURL);
+        downloadURL.setEditable(false);
         fields.add(commentName);
         fields.add(comments);
         fields.add(researcherSig);
@@ -316,32 +316,13 @@ public class GUI {
                 -> {
             int reply = JOptionPane.showConfirmDialog(null, "This action will edit the project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                /*
-                * Coverts Strings from JTextAreas int integer values
-                 */
-                int prID = Integer.parseInt(projectID.getText());
-                int dy = Integer.parseInt(day.getText());
-                int mh = Integer.parseInt(month.getText());
-                int yr = Integer.parseInt(year.getText());
-
-                /*
-                This following set of methods updates the test node with variables from JTextAreas
-                 */
-                test.editProjectID(prID);
-                test.editProjectName(projectName.getText());
-                test.editResearcher(researcher.getText());
-                test.editDay(dy);
-                test.editMonth(mh);
-                test.editYear(yr);
-                test.editDownload_URL(downloadURL.getText());
-                test.editComments(comments.getText());
-                test.editResearcherSig(researcherSig.isSelected());
-                test.editRISSig(risSig.isSelected());
-                test.editDepDeanSig(depDeanSig.isSelected());
-                test.editDeanSig(deanSig.isSelected());
-
+                connection.editProject(projectID.getText(), projectName.getText(), comments.getText(), researcherSig.isSelected(), risSig.isSelected(), depDeanSig.isSelected(), deanSig.isSelected());
                 edit.dispose();
-                editScreen(); //New Instance of edit screen
+                try {
+                    editScreen(); //New Instance of edit screen
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         );
@@ -549,8 +530,12 @@ public class GUI {
         add.addActionListener((ActionEvent event)
                 -> {
             admin.dispose();
-            //Also change this to something else
-            editScreen();
+            try {
+                //Also change this to something else
+                editScreen();
+            } catch (SQLException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         );
 
@@ -563,8 +548,12 @@ public class GUI {
         edit.addActionListener((ActionEvent event)
                 -> {
             admin.dispose();
-            //Also change this to something else
-            editScreen();
+            try {
+                //Also change this to something else
+                editScreen();
+            } catch (SQLException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         );
 

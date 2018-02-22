@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -122,6 +124,27 @@ public class DBConnection {
 
             stmt = con.createStatement();
             stmt.execute("INSERT INTO project (name, researcher, comments ,date, file_name,file_path) VALUES ('" + projectName + "','" + researcher + "','" + comments + "','" + date + "','" + newName + "." + format + "', '" + filePath.replace("\\", "\\\\") + "\\\\" + newName + "." + format + "')");
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    public ResultSet getProject(String  id){
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM project WHERE id = " + id);
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return rs;
+    }
+    
+    public void editProject(String id, String name, String comments, boolean researcher_sig, boolean ris_sig, boolean depDean_sig, boolean dean_sig){
+        try {
+            stmt = con.createStatement();
+            stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', researcher_sig = " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + " WHERE id = " + id);
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
