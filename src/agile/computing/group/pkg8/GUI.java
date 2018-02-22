@@ -339,16 +339,36 @@ public class GUI {
         printButton.setTransferHandler(new TransferHandler("text"));
         printButton.addActionListener((ActionEvent event)
                 -> {
+           
+            JFrame dialogFrame = new JFrame();
+            JFileChooser fc = new JFileChooser();
+            fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
+            fc.setFileFilter(new FileNameExtensionFilter("pdf"));
+            fc.setSelectedFile(new File("Summary.pdf"));
+            fc.setDialogTitle("Save file");
+            
+            int userSelection = fc.showSaveDialog(dialogFrame);
 
-            try {
-                print.createPdf(test.returnProjectName());
-            } catch (DocumentException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            switch (userSelection) {
+            case JFileChooser.APPROVE_OPTION:
+                String savePath = fc.getCurrentDirectory().toString();
+                String fName = fc.getSelectedFile().getName();
+
+
+                   /*try {
+                       print.createPdf(savePath,fName);
+                   } catch (DocumentException ex) {
+                       Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                   } catch (IOException ex) {
+                       Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                   }*/
+               break;
+            
+           
+            
             }
-        }
-        );
+            }
+            );
         
         buttons.add(uploadButton);
         uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
