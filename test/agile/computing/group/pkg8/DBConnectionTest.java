@@ -52,6 +52,10 @@ public class DBConnectionTest {
             e.printStackTrace(System.out);
         }
     }
+    
+    @Test
+    public void testAdduser() {
+    }
 
     @After
     public void tearDown() {

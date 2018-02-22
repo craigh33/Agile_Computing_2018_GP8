@@ -77,12 +77,15 @@ public class GUI {
             int uname = Integer.parseInt(username.getText());
             char[] pwd = password.getPassword();
             String pass = new String(pwd);
+            System.out.println(uname);
             System.out.println(pass);
             
             ResultSet result = connection.getUserByStaffID(uname);
-            
-            
+
             try {
+                // essential fix do not remove -- courtesy of Megan :)
+                result.next();
+
                 if(uname == 0 || pwd == null)
                 {
                     JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);

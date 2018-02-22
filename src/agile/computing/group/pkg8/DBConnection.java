@@ -8,6 +8,7 @@ package agile.computing.group.pkg8;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -68,6 +69,23 @@ public class DBConnection {
         return rs;
 
     }
+    
+    public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
+        try {
+            String sqlStatement = "INSERT INTO Staff(StaffID, Password, FirstName, LastName, email, JobType) VALUES (?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = con.prepareStatement(sqlStatement);
+            pstmt.executeUpdate();
+            pstmt.setInt(1, staffID);
+            pstmt.setString(2, password);
+            pstmt.setString(3, firstName);
+            pstmt.setString(4, lastName);
+            pstmt.setString(5, email);
+            pstmt.setString(6, jobType);
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
 
     public ResultSet getProjects() {
         ResultSet rs = null;
@@ -96,6 +114,5 @@ public class DBConnection {
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-
     }
 }
