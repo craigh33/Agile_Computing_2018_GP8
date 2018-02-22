@@ -47,6 +47,7 @@ public class DBConnectionTest {
     public void testGetUserByStaffID() {
         ResultSet x = connection.getUserByStaffID(1);
         try {
+        x.next();
         assertEquals("admin", x.getString("Password"));
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -54,7 +55,26 @@ public class DBConnectionTest {
     }
     
     @Test
-    public void testAdduser() {
+    public void testAddUser() {
+        connection.addUser(700, "thing", "James", "Bond", "007@mi6.com", "Researcher");
+        ResultSet x = connection.getUserByStaffID(700);
+        try {
+            x.next();
+            assertEquals("Bond", x.getString("Lastname"));
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    @Test
+    public void testRemoveUser() {
+        connection.removeUserById(700);
+        ResultSet x = connection.getUserByStaffID(700);
+        try {
+            assertNull(x.getInt("staffid"));
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
     }
 
     @After

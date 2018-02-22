@@ -72,16 +72,27 @@ public class DBConnection {
     
     public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
         try {
-            String sqlStatement = "INSERT INTO Staff(StaffID, Password, FirstName, LastName, email, JobType) VALUES (?, ?, ?, ?, ?, ?);";
+            String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?);";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
-            pstmt.executeUpdate();
             pstmt.setInt(1, staffID);
             pstmt.setString(2, password);
             pstmt.setString(3, firstName);
             pstmt.setString(4, lastName);
             pstmt.setString(5, email);
             pstmt.setString(6, jobType);
+            System.out.println(pstmt.toString());
+            pstmt.executeUpdate();
             pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    public void removeUserById(int staffID) {
+        try {
+            stmt = con.createStatement();
+            stmt.execute("DELETE FROM Staff WHERE StaffID=" + staffID);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
