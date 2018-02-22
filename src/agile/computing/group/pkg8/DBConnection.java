@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Hashtable;
 
 /**
  *
@@ -54,28 +53,19 @@ public class DBConnection {
         return this.db;
     }
 
-    public Hashtable getUserByStaffID(String staffID) {
+    public ResultSet getUserByStaffID(int staffID) {
         /*
         returns hashtable with keys equal to database column names as result
          */
-        Hashtable<String, String> result = new Hashtable();
+        ResultSet rs = null;
         try {
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Staff WHERE StaffID = " + staffID);
+            rs = stmt.executeQuery("SELECT * FROM Staff WHERE StaffID = " + staffID);
             //return rs;
-            while (rs.next()) {
-                System.out.println(rs.getString("StaffID"));
-                result.put("StaffID", rs.getString("StaffID"));
-                result.put("Password", rs.getString("Password"));
-                result.put("FirstName", rs.getString("FirstName"));
-                result.put("LastName", rs.getString("LastName"));
-                result.put("email", rs.getString("email"));
-                result.put("JobType", rs.getString("JobType"));
-            }
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-        return result;
+        return rs;
 
     }
 

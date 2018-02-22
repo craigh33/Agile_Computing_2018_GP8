@@ -5,6 +5,8 @@
  */
 package agile.computing.group.pkg8;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Hashtable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,8 +45,12 @@ public class DBConnectionTest {
     
     @Test
     public void testGetUserByStaffID() {
-        Hashtable x = connection.getUserByStaffID("1");
-        assertEquals("admin", x.get("Password"));
+        ResultSet x = connection.getUserByStaffID(1);
+        try {
+        assertEquals("admin", x.getString("Password"));
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
     }
 
     @After

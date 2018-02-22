@@ -13,6 +13,8 @@ import java.awt.*;
 import java.io.IOException;
 import static java.nio.file.Files.list;
 import static java.rmi.Naming.list;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.sql.Statement; 
 import static java.util.Collections.list;
@@ -77,41 +79,44 @@ public class GUI {
             String pass = new String(pwd);
             System.out.println(pass);
             
-            Hashtable result = connection.getUserByStaffID(Integer.toString(uname));
+            ResultSet result = connection.getUserByStaffID(uname);
             
             
-           
-            if(uname == 0 || pwd == null)
-            {
-                JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);
-            } else if (result.get("Password") == null) {
-                JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
-            } else if (result.get("Password").equals(pass)) {
-                
-                    if(result.get("JobType").equals("Researcher")){
-                        login.dispose();
-                        mainScreen();
-                    }
-                    else if (result.get("JobType").equals("RIS")){
-                        login.dispose();
-                        mainScreen();
-                    }
-                    else if (result.get("JobType").equals("Admin")){
-                        login.dispose();
-                        mainScreen();
-                    }
-                    else if (result.get("JobType").equals("Associate Dean")){
-                        login.dispose();
-                        mainScreen();
-                    }
-                    else if (result.get("JobType").equals("Dean")){
-                        login.dispose();
-                        mainScreen();                      
-                    }
-                    
-            }else{
-                //things should probably go here but idk.
-                JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
+            try {
+                if(uname == 0 || pwd == null)
+                {
+                    JOptionPane.showMessageDialog(frame,"Please enter valid username or password" ,"Login Error",ERROR_MESSAGE);
+                } else if (result.getString("Password") == null) {
+                    JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
+                } else if (result.getString("Password").equals(pass)) {
+
+                        if(result.getString("JobType").equals("Researcher")){
+                            login.dispose();
+                            mainScreen();
+                        }
+                        else if (result.getString("JobType").equals("RIS")){
+                            login.dispose();
+                            mainScreen();
+                        }
+                        else if (result.getString("JobType").equals("Admin")){
+                            login.dispose();
+                            mainScreen();
+                        }
+                        else if (result.getString("JobType").equals("Associate Dean")){
+                            login.dispose();
+                            mainScreen();
+                        }
+                        else if (result.getString("JobType").equals("Dean")){
+                            login.dispose();
+                            mainScreen();                      
+                        }
+
+                }else{
+                    //things should probably go here but idk.
+                    JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
             }
         }
         );
