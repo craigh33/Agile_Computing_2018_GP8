@@ -19,17 +19,15 @@ import java.io.IOException;
  * @author craig
  */
 public class PrintHandler {
-    /** Path to the resulting PDF file. */
-    public static final String RESULT
-        = "results/part1/chapter01/hello.pdf";
  
     
-    public void createPdf(String filename)
+    public void createPdf(String savePath, String fname)
+        
 	throws DocumentException, IOException {
         // step 1
         Document document = new Document();
         // step 2
-        PdfWriter.getInstance(document, new FileOutputStream(filename));
+        PdfWriter.getInstance(document, new FileOutputStream(savePath));
         // step 3
         document.open();
         // step 4
