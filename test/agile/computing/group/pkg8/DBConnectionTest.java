@@ -5,8 +5,10 @@
  */
 package agile.computing.group.pkg8;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Hashtable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,9 +29,6 @@ public class DBConnectionTest {
     String username = "17agileteam8";
     String password = "7632.at8.2367";
 
-    public DBConnectionTest() {
-    }
-
     @BeforeClass
     public static void setUpClass() {
     }
@@ -41,6 +40,40 @@ public class DBConnectionTest {
     @Before
     public void setUp() {
         connection = new DBConnection(host, db, username, password);
+    }
+    
+    @Test
+    public void testNewProject() {
+        connection.newProject(700, "TESTPROJECT", "TESTRESEARCHER", "TESTCOMMENT", "TEST.TEST", "C:\\TEST");
+        Connection con = connection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
+            assertNotNull(rs.getString("name"));
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    @Test
+    public void testDeleteProject() {
+        
+    }
+    
+    @Test
+    public void testGetProjets() {
+        ResultSet rs = connection.getProjects();
+        try {
+            assertNotNull(rs.getArray(0));
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    @Test
+    public void testGetProjectByID() {
+        
     }
     
     @Test
