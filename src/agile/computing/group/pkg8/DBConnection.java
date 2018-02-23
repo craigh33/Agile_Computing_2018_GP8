@@ -82,7 +82,6 @@ public class DBConnection {
             pstmt.setString(4, lastName);
             pstmt.setString(5, email);
             pstmt.setString(6, jobType);
-            System.out.println(pstmt.toString());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -113,11 +112,11 @@ public class DBConnection {
         return rs;
     }
 
-    public void newProject(int id, String projectName, String researcher, String comments, String fileName, String filePath) {
+    public void newProject(int Staffid, String projectName, String researcher, String comments, String fileName, String filePath) {
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         try {
             File destination;
-            String newName = id + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date());
+            String newName = Staffid + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date());
             String format = fileName.split("\\.")[1];
 
             destination = new File(filePath + "\\" + newName + "." + format);
