@@ -324,6 +324,7 @@ public class GUI {
         JButton backButton = new JButton("Back");
         JButton printButton = new JButton("Export to PDF");
         JButton uploadButton = new JButton("Upload new File");
+        JButton downloadButton = new JButton("Download excel");
 
         JLabel prIDName = new JLabel("Project ID");
         JLabel prName = new JLabel("Project Name");
@@ -362,7 +363,7 @@ public class GUI {
         buttons.add(editButton);
         buttons.add(backButton);
         buttons.add(printButton);
-
+        buttons.add(downloadButton);
         /*
          This following code handles how the edit button will react when clicked
          
@@ -441,6 +442,15 @@ public class GUI {
                 -> {
               File file =  uploadFile();
               fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+        }
+        );
+        
+        downloadButton.setBounds(130, 100, 100, 40);//Sets size of button
+        downloadButton.setMnemonic(KeyEvent.VK_A);
+        downloadButton.setTransferHandler(new TransferHandler("text"));
+        downloadButton.addActionListener((ActionEvent event)
+                -> {
+            fh.downloadFile(new File(downloadURL.getText()));
         }
         );
     }
