@@ -5,11 +5,24 @@
  */
 package agile.computing.group.pkg8;
 
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.ListItem;
+import com.itextpdf.text.List;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfImage;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import static java.nio.file.Files.list;
@@ -78,6 +91,7 @@ public class GUI {
 
         JButton b = new JButton("login");//Creates new Button
         b.setBounds(130, 100, 100, 40);//Sets size of button
+        login.getRootPane().setDefaultButton(b);
 
         login.add(usernamelabel);
         login.add(username);
@@ -217,7 +231,46 @@ public class GUI {
             loginScreen();
         }
         );
-
+        
+        
+        //display progress of projects signatures
+        //
+        DefaultListModel listProgress = new DefaultListModel();
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                
+                // implement checkboxes to indicate progress
+                JCheckBox researcherSig; 
+                JCheckBox risSig;
+                JCheckBox depDeanSig;
+                JCheckBox deanSig;
+                
+                if (rs2.getString("ris_sig").equals("1"))
+                {
+                    //
+                    
+                } else {
+                    
+                }
+                
+               
+                listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + ". Signed by:  RIS: " + rs2.getString("ris_sig") + " Researcher: " +rs2.getString("researcher_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        
+        JList mlist2 = new JList(listProgress); //data has type Object[]
+       
+        mlist2.setBounds(100, 100, 100, 100);
+        
+        mlist2.setLayoutOrientation(JList.VERTICAL);
+       
+        main.add(mlist2);
+        
     }
 
     /**
@@ -270,7 +323,7 @@ public class GUI {
          */
         JButton editButton = new JButton("Edit");
         JButton backButton = new JButton("Back");
-        JButton printButton = new JButton("Print");
+        JButton printButton = new JButton("Export to PDF");
         JButton uploadButton = new JButton("Upload new File");
 
         JLabel prIDName = new JLabel("Project ID");
@@ -345,35 +398,40 @@ public class GUI {
         printButton.setTransferHandler(new TransferHandler("text"));
         printButton.addActionListener((ActionEvent event)
                 -> {
-           
+                
             JFrame dialogFrame = new JFrame();
+
             JFileChooser fc = new JFileChooser();
             fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
-            fc.setFileFilter(new FileNameExtensionFilter("pdf"));
-            fc.setSelectedFile(new File("Summary.pdf"));
+            fc.setFileFilter(new FileNameExtensionFilter("PDF Document", "pdf"));
+            fc.setSelectedFile(new File("Project.pdf"));
             fc.setDialogTitle("Save file");
-            
+
             int userSelection = fc.showSaveDialog(dialogFrame);
 
             switch (userSelection) {
-            case JFileChooser.APPROVE_OPTION:
-                String savePath = fc.getCurrentDirectory().toString();
-                String fName = fc.getSelectedFile().getName();
-
-
-                   /*try {
-                       print.createPdf(savePath,fName);
-                   } catch (DocumentException ex) {
-                       Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                   } catch (IOException ex) {
-                       Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                   }*/
-               break;
+                case JFileChooser.APPROVE_OPTION:
+                    String downloadPath = fc.getCurrentDirectory().toString();
+                    System.out.println(downloadPath);
+                    String fileName = fc.getSelectedFile().getName();   
+                    System.out.println(fileName);
+                
+                String savePath = (downloadPath + '/' + fileName);
             
-           
+                {
+                    try {
+                        createPdf(savePath,rs);
+                    } catch (DocumentException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+            }
             
-            }
-            }
+            
+        }
             );
         
         buttons.add(uploadButton);
@@ -641,5 +699,77 @@ public class GUI {
             }
             return file;
     }
-
+    
+ public void createPdf(String filename, ResultSet rs)
+         
+	throws DocumentException, IOException {
+        Image image = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\University of Dundee (logo).png");
+        Image sigTest = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\testSig.png");
+        // step 1
+        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        // step 2
+        PdfWriter.getInstance(document, new FileOutputStream(filename));
+        // step 3
+        document.open();
+        // step 4
+        try{
+        ListItem iD = new ListItem(Integer.toString(rs.getInt("id")));
+        ListItem name = new ListItem(rs.getString("name"));
+        ListItem researcher = new ListItem(rs.getString("researcher"));
+        ListItem date = new ListItem(rs.getDate("date").toString());
+        ListItem filePath = new ListItem(rs.getString("file_path"));
+        ListItem comments = new ListItem(rs.getString("comments"));
+        image.scaleAbsolute(200, 75);
+        sigTest.scaleAbsolute(50, 25);        
+        document.add(image);
+        List list = new List(List.UNORDERED);
+        iD.setAlignment(Element.ALIGN_JUSTIFIED);
+        list.add("Project ID");
+        list.add(iD);
+        list.add("Project Name");
+        list.add(name);
+        list.add("Researcher Name");
+        list.add(researcher);
+        list.add("Date of Creation");
+        list.add(date);
+        list.add("Excel Filepath");
+        list.add(filePath);
+        list.add("Comments");
+        list.add(comments);
+        
+        Paragraph title2 = new Paragraph("Project Details", 
+ 
+        FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, 
+ 
+        new CMYKColor(0, 255, 0, 0)));
+        
+        document.add(title2);
+        document.add(list);
+        document.add(new Paragraph(" "));
+        
+        if (rs.getInt("researcher_sig") > 0){
+            document.add(new Paragraph("Researcher Signature"));
+            document.add(sigTest);
+        }
+        if (rs.getInt("ris_sig") > 0){
+            document.add(new Paragraph("RIS Signature"));
+            document.add(sigTest);
+        }
+        if (rs.getInt("depDean_Sig") > 0){
+            document.add(new Paragraph("Associate Dean Signature"));
+            document.add(sigTest);
+        }
+        if (rs.getInt("dean_Sig") > 0){
+            document.add(new Paragraph("Dean Signature"));
+            document.add(sigTest);
+        }
+        }
+        catch(SQLException e)
+        {
+        }
+        // step 5
+        document.close();
+    }
+    
 }
+
