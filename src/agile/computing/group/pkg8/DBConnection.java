@@ -97,8 +97,6 @@ public class DBConnection {
             pstmt.setString(4, lastName);
             pstmt.setString(5, email);
             pstmt.setString(6, jobType);
-            System.out.println(pstmt.toString());
-            //prepared statement is executed and the user is inserted to the database
             pstmt.executeUpdate();
             //closes the connection
             pstmt.close();
@@ -137,15 +135,11 @@ public class DBConnection {
         return rs;
     }
 
-    //Inserts a new project to the database
-    public void newProject(int id, String projectName, String researcher, String comments, String fileName, String filePath) {
-        //gets the current date
+    public void newProject(int Staffid, String projectName, String researcher, String comments, String fileName, String filePath) {
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         try {
             File destination;
-            
-            //name of file - combination of project ID with the date and time
-            String newName = id + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date());
+            String newName = Staffid + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date());
             String format = fileName.split("\\.")[1];
 
             //destination/file path of the new file 
