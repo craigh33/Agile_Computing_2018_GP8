@@ -54,9 +54,11 @@ public class GUI {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace(System.out);
         }
-
+        
+        //Sets up a new database connection
         connection = new DBConnection(host, db, username, password);
 
+        //LOGIN labels, text boxes and buttons.
         JFrame login = new JFrame();
         login.setSize(400, 500);
         login.setLocationRelativeTo(null);
@@ -87,20 +89,24 @@ public class GUI {
         login.setLayout(null);//no layout manager
         login.setVisible(true);//makes it visible
 
+        //Action handler for when login button is clicked
         b.setMnemonic(KeyEvent.VK_A);
         b.setTransferHandler(new TransferHandler("text"));
         b.addActionListener((ActionEvent event)
                 -> {
-
+            
+            //gets username and password from textboxes.
             int uname = Integer.parseInt(username.getText());
             char[] pwd = password.getPassword();
             String pass = new String(pwd);
             System.out.println(pass);
 
+            //calls the getUserByStaffID method in the DBConnection class
             ResultSet result = connection.getUserByStaffID(uname);
 
             try {
                 result.next();
+                //input validation 
                 if (uname == 0 || pwd == null) {
                     JOptionPane.showMessageDialog(frame, "Please enter valid username or password", "Login Error", ERROR_MESSAGE);
                 } else if (result.getString("Password") == null) {
