@@ -459,7 +459,7 @@ public class GUI {
         uploadButton.addActionListener((ActionEvent event)
                 -> {
               File file =  uploadFile();
-              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id+1);
         }
         );
         
