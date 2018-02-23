@@ -53,6 +53,7 @@ public class GUI {
     String username = "17agileteam8";
     String password = "7632.at8.2367";
     String selected;
+    JOptionPane SQLError = new JOptionPane();
     int id;
 
     void loginScreen() {
@@ -151,6 +152,7 @@ public class GUI {
                 }
             } catch (SQLException e) {
                 e.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
             }
         }
         );
@@ -164,7 +166,9 @@ public class GUI {
     * @authot Craig
     **/
     void mainScreen() {
-        JOptionPane notSelectErrorMSG = new JOptionPane();
+        
+        
+        JOptionPane notSelectedErrorMSG = new JOptionPane();
         JFrame main = new JFrame();
         main.setSize(500, 600);//size of frame
         main.setLocationRelativeTo(null);
@@ -211,7 +215,7 @@ public class GUI {
                 }
                 
                 // getting data from database 
-                listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  RIS: " + rs2.getString("ris_sig") + " Researcher: " +rs2.getString("researcher_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
                 
             }
         } catch (SQLException e) {
@@ -246,21 +250,6 @@ public class GUI {
 
         edit.setBounds(130, 100, 100, 100);//Sets size of button
         edit.setMnemonic(KeyEvent.VK_A);
-        
-        /*edit.setTransferHandler(new TransferHandler("text"));
-        edit.addActionListener((ActionEvent event)
-        -> {
-        selected = mlist.getSelectedValue().toString();
-        System.out.println(selected);
-        main.dispose();
-        try {
-        editScreen();
-        } catch (SQLException ex) {
-        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        );*/
-
         edit.setTransferHandler(new TransferHandler("text"));
         edit.addActionListener((ActionEvent event)
                 -> {
@@ -278,9 +267,10 @@ public class GUI {
                 //catching selected if it gets a response null, i.e. no project is selected
             } catch (NullPointerException  ex) {
                
-                JOptionPane.showMessageDialog(notSelectErrorMSG, "Please select a project", "No project Selected", WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(notSelectedErrorMSG, "Please select a project", "No project Selected", WARNING_MESSAGE);
             } catch (SQLException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
             }
         }
         );
@@ -644,6 +634,7 @@ public class GUI {
                 editScreen();
             } catch (SQLException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
             }
         }
         );
@@ -662,6 +653,8 @@ public class GUI {
                 editScreen();
             } catch (SQLException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
+                
             }
         }
         );
