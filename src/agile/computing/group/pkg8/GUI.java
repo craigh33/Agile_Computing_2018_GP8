@@ -401,7 +401,7 @@ public class GUI {
             JFrame dialogFrame = new JFrame();
 
             JFileChooser fc = new JFileChooser();
-            fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
+            fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Documents"));
             fc.setFileFilter(new FileNameExtensionFilter("PDF Document", "pdf"));
             fc.setSelectedFile(new File("Project.pdf"));
             fc.setDialogTitle("Save file");
@@ -471,7 +471,6 @@ public class GUI {
         /*
         Button Variables
          */
-        JButton uploadButton = new JButton("Upload File");
         JButton editButton = new JButton("Create");
         JButton backButton = new JButton("Back");
 
@@ -491,7 +490,6 @@ public class GUI {
         newProject.add(buttons);
 
         //adds buttons to buttons panel
-        buttons.add(uploadButton);
         buttons.add(editButton);
         buttons.add(backButton);
 
