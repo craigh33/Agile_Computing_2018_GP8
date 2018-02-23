@@ -259,11 +259,9 @@ public class GUI {
         
         JList mlist2 = new JList(listProgress); //data has type Object[]
         
-        
         //mlist2.setBounds(100, 100, 100, 100);
         JScrollPane pane = new JScrollPane(mlist2);
         mlist2.setLayoutOrientation(JList.VERTICAL);
-       
         main.add(pane);
         
     }
