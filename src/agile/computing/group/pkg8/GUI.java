@@ -220,7 +220,9 @@ public class GUI {
         try {
             while (rs2.next()) {
                 
-                JCheckBox researcherSig;
+                
+                // implement checkboxes to indicate progress
+                JCheckBox researcherSig; 
                 JCheckBox risSig;
                 JCheckBox depDeanSig;
                 JCheckBox deanSig;
