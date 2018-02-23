@@ -57,6 +57,20 @@ public class DBConnectionTest {
     }
     
     @Test
+    public void testEditProject() {
+        connection.editProject("700", "TESTPROJECT", "NEWTESTCOMMENT", true, false, false, false);
+        Connection con = connection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE comment='NEWTESTCOMMENT");
+            assertNotNull(rs.getString("comment"));
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    @Test
     public void testDeleteProject() {
         
     }
