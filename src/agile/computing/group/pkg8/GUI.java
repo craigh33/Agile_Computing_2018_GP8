@@ -176,6 +176,9 @@ public class GUI {
         main.setVisible(true);//makes it visible
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        
+        //obsolete below vvvvv
+        
         /*DefaultListModel dlm = new DefaultListModel();
         ResultSet rs = connection.getProjects();
         try {
