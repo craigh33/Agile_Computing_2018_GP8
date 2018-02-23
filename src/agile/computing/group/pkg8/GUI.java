@@ -35,6 +35,7 @@ import static java.util.Collections.list;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -163,6 +164,7 @@ public class GUI {
     * @authot Craig
     **/
     void mainScreen() {
+        JOptionPane notSelectErrorMSG = new JOptionPane();
         JFrame main = new JFrame();
         main.setSize(500, 600);//size of frame
         main.setLocationRelativeTo(null);
@@ -194,7 +196,7 @@ public class GUI {
             while (rs2.next()) {
                 
                 
-                // implement checkboxes to indicate progress
+                // implement checkboxes to indicate progress --> sprint2.
                 JCheckBox researcherSig; 
                 JCheckBox risSig;
                 JCheckBox depDeanSig;
@@ -202,13 +204,13 @@ public class GUI {
                 
                 if (rs2.getString("ris_sig").equals("1"))
                 {
-                    //
+                    //sprint2
                     
                 } else {
                     
                 }
                 
-               
+                // getting data from database 
                 listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  RIS: " + rs2.getString("ris_sig") + " Researcher: " +rs2.getString("researcher_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
                 
             }
@@ -218,10 +220,10 @@ public class GUI {
         
         JList mlist2 = new JList(listProgress); //data has type Object[]
         
-        //mlist2.setBounds(100, 100, 100, 100);
-        JScrollPane pane = new JScrollPane(mlist2);
+        // using JScrollPane to create a scrolling list that displays projects 
+        JScrollPane scrollerPane = new JScrollPane(mlist2);
         mlist2.setLayoutOrientation(JList.VERTICAL);
-        main.add(pane);
+        main.add(scrollerPane);
 
         JButton newP = new JButton("New Project");//Creates new Button
         main.add(newP);
@@ -259,11 +261,21 @@ public class GUI {
         edit.setTransferHandler(new TransferHandler("text"));
         edit.addActionListener((ActionEvent event)
                 -> {
-            selected = mlist2.getSelectedValue().toString();
-            System.out.println(selected);
-            main.dispose();
+            
+           // selected = mlist2.getSelectedValue().toString();
+           // System.out.println(selected);
+           // main.dispose();
             try {
-                editScreen();
+                selected = mlist2.getSelectedValue().toString();
+                System.out.println(selected);
+                
+                main.dispose();
+                editScreen();   
+               
+                //catching selected if it gets a response null, i.e. no project is selected
+            } catch (NullPointerException  ex) {
+               
+                JOptionPane.showMessageDialog(notSelectErrorMSG, "Please select a project", "No project Selected", WARNING_MESSAGE);
             } catch (SQLException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -283,15 +295,7 @@ public class GUI {
         }
         );
         
-        
-        //display progress of projects signatures
-        //
-        
-        
-       
-        
-        
-        
+          
     }
 
     /**
