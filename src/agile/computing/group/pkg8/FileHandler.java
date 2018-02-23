@@ -65,8 +65,9 @@ public class FileHandler {
     }
 
     /**
-     * This method downloads a file at the specified path and prompts the user where to save this file
-     * 
+     * This method downloads a file at the specified path and prompts the user
+     * where to save this file
+     *
      * @param path the path of the file to be downloaded
      * @return true if the file was successfully downloaded, false if not
      */
@@ -111,6 +112,7 @@ public class FileHandler {
                         downloaded = true;
                     } catch (IOException e) {
                         e.printStackTrace(System.out);
+                        JOptionPane.showMessageDialog(null, "A file with that name already exists. Download cancelled.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 break;
