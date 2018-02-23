@@ -89,6 +89,7 @@ public class GUI {
 
         JButton b = new JButton("login");//Creates new Button
         b.setBounds(130, 100, 100, 40);//Sets size of button
+        login.getRootPane().setDefaultButton(b);
 
         login.add(usernamelabel);
         login.add(username);
@@ -224,7 +225,46 @@ public class GUI {
             loginScreen();
         }
         );
-
+        
+        
+        //display progress of projects signatures
+        //
+        DefaultListModel listProgress = new DefaultListModel();
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                
+                // implement checkboxes to indicate progress
+                JCheckBox researcherSig; 
+                JCheckBox risSig;
+                JCheckBox depDeanSig;
+                JCheckBox deanSig;
+                
+                if (rs2.getString("ris_sig").equals("1"))
+                {
+                    //
+                    
+                } else {
+                    
+                }
+                
+               
+                listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + ". Signed by:  RIS: " + rs2.getString("ris_sig") + " Researcher: " +rs2.getString("researcher_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        
+        JList mlist2 = new JList(listProgress); //data has type Object[]
+       
+        mlist2.setBounds(100, 100, 100, 100);
+        
+        mlist2.setLayoutOrientation(JList.VERTICAL);
+       
+        main.add(mlist2);
+        
     }
 
     /**
