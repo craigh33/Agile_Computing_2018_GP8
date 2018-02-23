@@ -164,9 +164,9 @@ public class GUI {
     **/
     void mainScreen() {
         JFrame main = new JFrame();
-        main.setSize(400, 500);//size of frame
+        main.setSize(500, 600);//size of frame
         main.setLocationRelativeTo(null);
-        main.setLayout(new GridLayout(10, 10));//no layout manager
+        main.setLayout(new GridLayout(5, 1));//no layout manager
         main.setVisible(true);//makes it visible
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -203,7 +203,7 @@ public class GUI {
         JButton edit = new JButton("Edit");//Creates new Button
         main.add(edit);
 
-        edit.setBounds(130, 100, 100, 40);//Sets size of button
+        edit.setBounds(130, 100, 100, 100);//Sets size of button
         edit.setMnemonic(KeyEvent.VK_A);
         edit.setTransferHandler(new TransferHandler("text"));
         edit.addActionListener((ActionEvent event)
