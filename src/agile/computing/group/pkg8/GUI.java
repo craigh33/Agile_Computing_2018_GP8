@@ -5,8 +5,11 @@
  */
 package agile.computing.group.pkg8;
 
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.ListItem;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import javax.swing.*;
@@ -649,21 +652,29 @@ public class GUI {
          
 	throws DocumentException, IOException {
         // step 1
-        Document document = new Document();
+        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         // step 2
         PdfWriter.getInstance(document, new FileOutputStream(filename));
         // step 3
         document.open();
+        document.add(new Chunk(""));
         // step 4
         try{
         rs.next();
+        String iD = Integer.toString(rs.getInt("id"));
+        String name = rs.getString("name");
+        String researcher = rs.getString("researcher");
+        String date = (rs.getDate("date")).toString();
+        String filePath = rs.getString("file_path");
+        String comments = rs.getString("comments");
+        
         document.add(new Paragraph("Hello World!"));
-        document.add(new Paragraph (Integer.toString(rs.getInt("id"))));
-        document.add(new Paragraph(rs.getString("name")));
-        document.add(new Paragraph(rs.getString("researcher")));
-        document.add(new Paragraph((rs.getDate("date")).toString()));
-        document.add(new Paragraph(rs.getString("file_path")));
-        document.add(new Paragraph(rs.getString("comments")));
+        document.add(new Paragraph (iD));
+        document.add(new Paragraph(name));
+        document.add(new Paragraph());
+        document.add(new Paragraph());
+        document.add(new Paragraph());
+        document.add(new Paragraph());
        
         }
         catch(SQLException e)
