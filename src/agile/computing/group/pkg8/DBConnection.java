@@ -27,6 +27,7 @@ public class DBConnection {
     String host, db, username, password;
     Statement stmt;
 
+    //set up for database connection
     public DBConnection(String host, String db, String username, String password) {
         this.host = host;
         this.db = db;
@@ -40,10 +41,12 @@ public class DBConnection {
         }
     }
 
+    //connects to the database
     public Connection getConnection() {
         return this.con;
     }
 
+    //closes the connection to the database
     public void closeConnection() {
         try {
             con.close();
@@ -52,14 +55,17 @@ public class DBConnection {
         }
     }
 
+    
     public String getDatabase() {
         return this.db;
     }
 
+    /*
+        refactored code from hashtable to resultset
+        looks up staff by staffID
+    */
     public ResultSet getUserByStaffID(int staffID) {
-        /*
-        returns hashtable with keys equal to database column names as result
-         */
+       
         ResultSet rs = null;
         try {
             stmt = con.createStatement();
@@ -72,10 +78,13 @@ public class DBConnection {
 
     }
     
+    //adds a new user to the database
     public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
         try {
+            //SQL statement for the insertion of a user
             String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?);";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
+            //sets the values to the corresponding columns in the database
             pstmt.setInt(1, staffID);
             pstmt.setString(2, password);
             pstmt.setString(3, firstName);
@@ -83,16 +92,21 @@ public class DBConnection {
             pstmt.setString(5, email);
             pstmt.setString(6, jobType);
             System.out.println(pstmt.toString());
+            //prepared statement is executed and the user is inserted to the database
             pstmt.executeUpdate();
+            //closes the connection
             pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
     }
     
+    //Deletes a user from the database by staffID
     public void removeUserById(int staffID) {
         try {
+            //sets up a connection object with the createStatement method from sql library
             stmt = con.createStatement();
+            //executes delete query and removes staff member from the database
             stmt.execute("DELETE FROM Staff WHERE StaffID=" + staffID);
             stmt.close();
         } catch (SQLException e) {
@@ -100,6 +114,7 @@ public class DBConnection {
         }
     }
 
+    //gets all the projects from the database
     public ResultSet getProjects() {
         ResultSet rs = null;
 
@@ -113,15 +128,21 @@ public class DBConnection {
         return rs;
     }
 
+    //Inserts a new project to the database
     public void newProject(int id, String projectName, String researcher, String comments, String fileName, String filePath) {
+        //gets the current date
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         try {
             File destination;
+            
+            //name of file - combination of project ID with the date and time
             String newName = id + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date());
             String format = fileName.split("\\.")[1];
 
+            //destination/file path of the new file 
             destination = new File(filePath + "\\" + newName + "." + format);
 
+            //inserts the new file into the project table in the database
             stmt = con.createStatement();
             stmt.execute("INSERT INTO project (name, researcher, comments ,date, file_name,file_path) VALUES ('" + projectName + "','" + researcher + "','" + comments + "','" + date + "','" + newName + "." + format + "', '" + filePath.replace("\\", "\\\\") + "\\\\" + newName + "." + format + "')");
         } catch (SQLException e) {
@@ -129,6 +150,7 @@ public class DBConnection {
         }
     }
     
+    //gets a project in the database by projectID
     public ResultSet getProject(String  id){
         ResultSet rs = null;
         
@@ -141,6 +163,7 @@ public class DBConnection {
         return rs;
     }
     
+    //Updates values within the database if changes to projects have been made e.g if RIS has signed the document
     public void editProject(String id, String name, String comments, boolean researcher_sig, boolean ris_sig, boolean depDean_sig, boolean dean_sig){
         try {
             stmt = con.createStatement();

@@ -76,6 +76,7 @@ public class GUI {
 
         JButton b = new JButton("login");//Creates new Button
         b.setBounds(130, 100, 100, 40);//Sets size of button
+        login.getRootPane().setDefaultButton(b);
 
         login.add(usernamelabel);
         login.add(username);
