@@ -24,7 +24,7 @@ public class FileHandler {
 
     String[] supportedFormats = {"xls", "xlsx"};
 
-    DBConnection con = new DBConnection("sql2.freesqldatabase.com", "sql2220155", "sql2220155", "nC8!uE3*");
+    DBConnection con = new DBConnection("silva.computing.dundee.ac.uk", "17agileteam8db", "17agileteam8", "7632.at8.2367");
 
     String query;
 
