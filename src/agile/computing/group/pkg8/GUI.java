@@ -5,11 +5,15 @@
  */
 package agile.computing.group.pkg8;
 
+import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import static java.nio.file.Files.list;
@@ -264,7 +268,7 @@ public class GUI {
          */
         JButton editButton = new JButton("Edit");
         JButton backButton = new JButton("Back");
-        JButton printButton = new JButton("Print");
+        JButton printButton = new JButton("Export to PDF");
         JButton uploadButton = new JButton("Upload new File");
 
         JLabel prIDName = new JLabel("Project ID");
@@ -339,35 +343,40 @@ public class GUI {
         printButton.setTransferHandler(new TransferHandler("text"));
         printButton.addActionListener((ActionEvent event)
                 -> {
-           
+                
             JFrame dialogFrame = new JFrame();
+
             JFileChooser fc = new JFileChooser();
             fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
-            fc.setFileFilter(new FileNameExtensionFilter("pdf"));
-            fc.setSelectedFile(new File("Summary.pdf"));
+            fc.setFileFilter(new FileNameExtensionFilter("PDF Document", "pdf"));
+            fc.setSelectedFile(new File("finances.pdf"));
             fc.setDialogTitle("Save file");
-            
+
             int userSelection = fc.showSaveDialog(dialogFrame);
 
             switch (userSelection) {
-            case JFileChooser.APPROVE_OPTION:
-                String savePath = fc.getCurrentDirectory().toString();
-                String fName = fc.getSelectedFile().getName();
-
-
-                   /*try {
-                       print.createPdf(savePath,fName);
-                   } catch (DocumentException ex) {
-                       Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                   } catch (IOException ex) {
-                       Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                   }*/
-               break;
+                case JFileChooser.APPROVE_OPTION:
+                    String downloadPath = fc.getCurrentDirectory().toString();
+                    System.out.println(downloadPath);
+                    String fileName = fc.getSelectedFile().getName();   
+                    System.out.println(fileName);
+                
+                String savePath = (downloadPath + '/' + fileName);
             
-           
+                {
+                    try {
+                        createPdf(savePath,rs);
+                    } catch (DocumentException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+            }
             
-            }
-            }
+            
+        }
             );
         
         buttons.add(uploadButton);
@@ -635,5 +644,35 @@ public class GUI {
             }
             return file;
     }
-
+    
+ public void createPdf(String filename, ResultSet rs)
+         
+	throws DocumentException, IOException {
+        // step 1
+        Document document = new Document();
+        // step 2
+        PdfWriter.getInstance(document, new FileOutputStream(filename));
+        // step 3
+        document.open();
+        // step 4
+        try{
+        rs.next();
+        document.add(new Paragraph("Hello World!"));
+        document.add(new Paragraph (Integer.toString(rs.getInt("id"))));
+        document.add(new Paragraph(rs.getString("name")));
+        document.add(new Paragraph(rs.getString("researcher")));
+        document.add(new Paragraph((rs.getDate("date")).toString()));
+        document.add(new Paragraph(rs.getString("file_path")));
+        document.add(new Paragraph(rs.getString("comments")));
+       
+        }
+        catch(SQLException e)
+        {
+        }
+        
+        // step 5
+        document.close();
+    }
+    
 }
+
