@@ -255,11 +255,7 @@ public class GUI {
         edit.setMnemonic(KeyEvent.VK_A);
         edit.setTransferHandler(new TransferHandler("text"));
         edit.addActionListener((ActionEvent event)
-                -> {
-            
-           // selected = mlist2.getSelectedValue().toString();
-           // System.out.println(selected);
-           // main.dispose();
+                -> {   
             try {
                 selected = mlist2.getSelectedValue().toString();
                 System.out.println(selected);
