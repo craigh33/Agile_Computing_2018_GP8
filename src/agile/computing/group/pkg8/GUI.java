@@ -166,75 +166,28 @@ public class GUI {
         JFrame main = new JFrame();
         main.setSize(500, 600);//size of frame
         main.setLocationRelativeTo(null);
-        main.setLayout(new GridLayout(5, 1));//no layout manager
+        main.setLayout(new GridLayout(4, 1));//no layout manager
         main.setVisible(true);//makes it visible
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        DefaultListModel dlm = new DefaultListModel();
+        /*DefaultListModel dlm = new DefaultListModel();
         ResultSet rs = connection.getProjects();
         try {
-            while (rs.next()) {
-                dlm.addElement(rs.getString("id") + " " + rs.getString("name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
+        while (rs.next()) {
+        dlm.addElement(rs.getString("id") + " " + rs.getString("name"));
         }
-
-        JList mlist = new JList(dlm); //data has type Object[]
+        } catch (SQLException e) {
+        e.printStackTrace(System.out);
+        }
+        
+        /*JList mlist = new JList(dlm); //data has type Object[]
         mlist.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         mlist.setLayoutOrientation(JList.VERTICAL_WRAP);
         mlist.setVisibleRowCount(-1);
-
-        main.add(mlist);
-
-        JButton newP = new JButton("New Project");//Creates new Button
-        main.add(newP);
-
-        newP.setBounds(130, 100, 100, 40);//Sets size of button
-        newP.setMnemonic(KeyEvent.VK_A);
-        newP.setTransferHandler(new TransferHandler("text"));
-        newP.addActionListener((ActionEvent event)
-                -> {
-            main.dispose();
-            newProject();
-        }
-        );
-
-        JButton edit = new JButton("Edit");//Creates new Button
-        main.add(edit);
-
-        edit.setBounds(130, 100, 100, 100);//Sets size of button
-        edit.setMnemonic(KeyEvent.VK_A);
-        edit.setTransferHandler(new TransferHandler("text"));
-        edit.addActionListener((ActionEvent event)
-                -> {
-            selected = mlist.getSelectedValue().toString();
-            System.out.println(selected);
-            main.dispose();
-            try {
-                editScreen();
-            } catch (SQLException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        );
-
-        JButton exit = new JButton("Logout");//Creates new Button
-        main.add(exit);
-
-        exit.setBounds(130, 100, 100, 40);//Sets size of button
-        exit.setMnemonic(KeyEvent.VK_A);
-        exit.setTransferHandler(new TransferHandler("text"));
-        exit.addActionListener((ActionEvent event)
-                -> {
-            main.dispose();
-            loginScreen();
-        }
-        );
+        
+        main.add(mlist);*/
         
         
-        //display progress of projects signatures
-        //
         DefaultListModel listProgress = new DefaultListModel();
         ResultSet rs2 = connection.getProjects();
         try {
@@ -256,7 +209,7 @@ public class GUI {
                 }
                 
                
-                listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + ". Signed by:  RIS: " + rs2.getString("ris_sig") + " Researcher: " +rs2.getString("researcher_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  RIS: " + rs2.getString("ris_sig") + " Researcher: " +rs2.getString("researcher_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
                 
             }
         } catch (SQLException e) {
@@ -269,6 +222,75 @@ public class GUI {
         JScrollPane pane = new JScrollPane(mlist2);
         mlist2.setLayoutOrientation(JList.VERTICAL);
         main.add(pane);
+
+        JButton newP = new JButton("New Project");//Creates new Button
+        main.add(newP);
+
+        newP.setBounds(130, 100, 100, 40);//Sets size of button
+        newP.setMnemonic(KeyEvent.VK_A);
+        newP.setTransferHandler(new TransferHandler("text"));
+        newP.addActionListener((ActionEvent event)
+                -> {
+            main.dispose();
+            newProject();
+        }
+        );
+
+        JButton edit = new JButton("Edit");//Creates new Button
+        main.add(edit);
+
+        edit.setBounds(130, 100, 100, 100);//Sets size of button
+        edit.setMnemonic(KeyEvent.VK_A);
+        
+        /*edit.setTransferHandler(new TransferHandler("text"));
+        edit.addActionListener((ActionEvent event)
+        -> {
+        selected = mlist.getSelectedValue().toString();
+        System.out.println(selected);
+        main.dispose();
+        try {
+        editScreen();
+        } catch (SQLException ex) {
+        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        );*/
+
+        edit.setTransferHandler(new TransferHandler("text"));
+        edit.addActionListener((ActionEvent event)
+                -> {
+            selected = mlist2.getSelectedValue().toString();
+            System.out.println(selected);
+            main.dispose();
+            try {
+                editScreen();
+            } catch (SQLException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+        
+        JButton exit = new JButton("Logout");//Creates new Button
+        main.add(exit);
+
+        exit.setBounds(130, 100, 100, 40);//Sets size of button
+        exit.setMnemonic(KeyEvent.VK_A);
+        exit.setTransferHandler(new TransferHandler("text"));
+        exit.addActionListener((ActionEvent event)
+                -> {
+            main.dispose();
+            loginScreen();
+        }
+        );
+        
+        
+        //display progress of projects signatures
+        //
+        
+        
+       
+        
+        
         
     }
 
