@@ -73,7 +73,16 @@ public class DBConnectionTest {
     
     @Test
     public void testGetProjectByID() {
-        
+        Connection con = connection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE id=1");
+            ResultSet rs2 = connection.getProject("1");
+            assertEquals(rs.getInt("id"), rs2.getInt("id"));
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
     }
     
     @Test
