@@ -164,9 +164,9 @@ public class GUI {
     **/
     void mainScreen() {
         JFrame main = new JFrame();
-        main.setSize(400, 500);//size of frame
+        main.setSize(500, 600);//size of frame
         main.setLocationRelativeTo(null);
-        main.setLayout(new GridLayout(10, 10));//no layout manager
+        main.setLayout(new GridLayout(5, 1));//no layout manager
         main.setVisible(true);//makes it visible
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
