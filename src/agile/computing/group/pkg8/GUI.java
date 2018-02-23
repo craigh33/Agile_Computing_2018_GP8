@@ -8,10 +8,16 @@ package agile.computing.group.pkg8;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.ListItem;
+import com.itextpdf.text.List;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfImage;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -352,7 +358,7 @@ public class GUI {
             JFileChooser fc = new JFileChooser();
             fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Downloads"));
             fc.setFileFilter(new FileNameExtensionFilter("PDF Document", "pdf"));
-            fc.setSelectedFile(new File("finances.pdf"));
+            fc.setSelectedFile(new File("Project.pdf"));
             fc.setDialogTitle("Save file");
 
             int userSelection = fc.showSaveDialog(dialogFrame);
@@ -651,36 +657,70 @@ public class GUI {
  public void createPdf(String filename, ResultSet rs)
          
 	throws DocumentException, IOException {
+        Image image = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\University of Dundee (logo).png");
+        Image sigTest = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\testSig.png");
         // step 1
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         // step 2
         PdfWriter.getInstance(document, new FileOutputStream(filename));
         // step 3
         document.open();
-        document.add(new Chunk(""));
         // step 4
         try{
-        rs.next();
-        String iD = Integer.toString(rs.getInt("id"));
-        String name = rs.getString("name");
-        String researcher = rs.getString("researcher");
-        String date = (rs.getDate("date")).toString();
-        String filePath = rs.getString("file_path");
-        String comments = rs.getString("comments");
+        ListItem iD = new ListItem(Integer.toString(rs.getInt("id")));
+        ListItem name = new ListItem(rs.getString("name"));
+        ListItem researcher = new ListItem(rs.getString("researcher"));
+        ListItem date = new ListItem(rs.getDate("date").toString());
+        ListItem filePath = new ListItem(rs.getString("file_path"));
+        ListItem comments = new ListItem(rs.getString("comments"));
+        image.scaleAbsolute(200, 75);
+        sigTest.scaleAbsolute(50, 25);        
+        document.add(image);
+        List list = new List(List.UNORDERED);
+        iD.setAlignment(Element.ALIGN_JUSTIFIED);
+        list.add("Project ID");
+        list.add(iD);
+        list.add("Project Name");
+        list.add(name);
+        list.add("Researcher Name");
+        list.add(researcher);
+        list.add("Date of Creation");
+        list.add(date);
+        list.add("Excel Filepath");
+        list.add(filePath);
+        list.add("Comments");
+        list.add(comments);
         
-        document.add(new Paragraph("Hello World!"));
-        document.add(new Paragraph (iD));
-        document.add(new Paragraph(name));
-        document.add(new Paragraph());
-        document.add(new Paragraph());
-        document.add(new Paragraph());
-        document.add(new Paragraph());
-       
+        Paragraph title2 = new Paragraph("Project Details", 
+ 
+        FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, 
+ 
+        new CMYKColor(0, 255, 0, 0)));
+        
+        document.add(title2);
+        document.add(list);
+        document.add(new Paragraph(" "));
+        
+        if (rs.getInt("researcher_sig") > 0){
+            document.add(new Paragraph("Researcher Signature"));
+            document.add(sigTest);
+        }
+        if (rs.getInt("ris_sig") > 0){
+            document.add(new Paragraph("RIS Signature"));
+            document.add(sigTest);
+        }
+        if (rs.getInt("depDean_Sig") > 0){
+            document.add(new Paragraph("Associate Dean Signature"));
+            document.add(sigTest);
+        }
+        if (rs.getInt("dean_Sig") > 0){
+            document.add(new Paragraph("Dean Signature"));
+            document.add(sigTest);
+        }
         }
         catch(SQLException e)
         {
         }
-        
         // step 5
         document.close();
     }
