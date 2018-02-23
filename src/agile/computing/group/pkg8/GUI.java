@@ -24,6 +24,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.nio.file.Files;
 import static java.nio.file.Files.list;
 import static java.rmi.Naming.list;
@@ -153,6 +154,10 @@ public class GUI {
             } catch (SQLException e) {
                 e.printStackTrace(System.out);
                 JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(SQLError, "Sign in Error. No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(SQLError, "Please enter valid sign in details.", "MySQL Error", ERROR_MESSAGE);
             }
         }
         );
@@ -440,8 +445,10 @@ public class GUI {
                     try {
                         createPdf(savePath,rs);
                     } catch (DocumentException ex) {
+                        JOptionPane.showMessageDialog(SQLError, "PDF Writer Error", "PDF Writer Error", ERROR_MESSAGE);
                         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(SQLError, "PDF Writer Error", "PDF Writer Error", ERROR_MESSAGE);
                         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -794,6 +801,7 @@ public class GUI {
         }
         catch(SQLException e)
         {
+            JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
         }
         // step 5
         document.close();
