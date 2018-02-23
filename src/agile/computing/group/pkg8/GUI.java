@@ -126,7 +126,7 @@ public class GUI {
                 } else if (result.getString("Password") == null) {
                     JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
                 } else if (result.getString("Password").equals(pass)) {
-
+                    //These if statements will be for when we implement views. Right now they all go to the same place.
                     if (result.getString("JobType").equals("Researcher")) {
                         login.dispose();
                         mainScreen();
@@ -145,7 +145,7 @@ public class GUI {
                     }
 
                 } else {
-                    //things should probably go here but idk.
+                    
                     JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
                 }
             } catch (SQLException e) {
