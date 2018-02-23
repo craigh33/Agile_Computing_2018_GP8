@@ -223,8 +223,11 @@ public class GUI {
         mlist2.setLayoutOrientation(JList.VERTICAL);
         main.add(pane);
 
+        JPanel button = new JPanel();
+        main.add(button);
+        
         JButton newP = new JButton("New Project");//Creates new Button
-        main.add(newP);
+        button.add(newP);
 
         newP.setBounds(130, 100, 100, 40);//Sets size of button
         newP.setMnemonic(KeyEvent.VK_A);
@@ -237,7 +240,7 @@ public class GUI {
         );
 
         JButton edit = new JButton("Edit");//Creates new Button
-        main.add(edit);
+        button.add(edit);
 
         edit.setBounds(130, 100, 100, 100);//Sets size of button
         edit.setMnemonic(KeyEvent.VK_A);
@@ -271,7 +274,7 @@ public class GUI {
         );
         
         JButton exit = new JButton("Logout");//Creates new Button
-        main.add(exit);
+        button.add(exit);
 
         exit.setBounds(130, 100, 100, 40);//Sets size of button
         exit.setMnemonic(KeyEvent.VK_A);
