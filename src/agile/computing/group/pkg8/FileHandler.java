@@ -44,6 +44,8 @@ public class FileHandler {
         String format = file.getName().split("\\.")[1];
 
         if (!fileExists(uploadPath, new File(newName)) && fileIsSupported(format)) {
+            
+            
             destination = new File(uploadPath.toString() + "\\" + newName + "." + format);
             try {
                 Files.copy(file.toPath(), destination.toPath());
@@ -51,8 +53,8 @@ public class FileHandler {
                 e.printStackTrace(System.out);
             }
 
-            query = "INSERT INTO " + con.getDatabase() + ".Project (file_name,file_path) VALUES ('" + newName + "." + format + "', '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "')";
-
+            query = "UPDATE " + con.getDatabase() + ".Project SET file_name = '" + newName + "." + format + "' , file_path = '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "' WHERE id = " + id ;
+            System.out.println(query);
             try {
                 con.getConnection().prepareStatement(query).execute();
             } catch (SQLException e) {
@@ -112,7 +114,7 @@ public class FileHandler {
                         downloaded = true;
                     } catch (IOException e) {
                         e.printStackTrace(System.out);
-                        JOptionPane.showMessageDialog(null, "A file with that name already exists. Download cancelled.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "There was a problem with your acion. Download cancelled.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 break;

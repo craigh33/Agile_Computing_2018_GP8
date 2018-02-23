@@ -20,7 +20,14 @@ import java.io.IOException;
  */
 public class PrintHandler {
  
-    
+    /**
+     * This method creates a pdf file with the details of a project
+     * 
+     * @param savePath the path where the file while be saved
+     * @param fname the name of the file to be saved
+     * @throws DocumentException
+     * @throws IOException 
+     */
     public void createPdf(String savePath, String fname)
         
 	throws DocumentException, IOException {

@@ -116,7 +116,6 @@ public class GUI {
             int uname = Integer.parseInt(username.getText());
             char[] pwd = password.getPassword();
             String pass = new String(pwd);
-            System.out.println(pass);
 
             //calls the getUserByStaffID method in the DBConnection class
             ResultSet result = connection.getUserByStaffID(uname);
@@ -329,6 +328,7 @@ public class GUI {
         
         ResultSet rs = connection.getProject(selected.split(" ")[0]);
         rs.next();
+        id = rs.getInt("id");
         projectID = new JTextArea(Integer.toString(rs.getInt("id")), 1, 1);
         projectName = new JTextArea(rs.getString("name"), 10, 10);
         researcher = new JTextArea(rs.getString("researcher"), 10, 10);
