@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -23,6 +25,7 @@ import java.util.logging.Logger;
  */
 public class DBConnection {
 
+    JOptionPane SQLError = new JOptionPane();
     Connection con;
     String host, db, username, password;
     Statement stmt;
@@ -38,6 +41,7 @@ public class DBConnection {
         } catch (SQLException e) {
             // change to GUI output stream as required
             e.printStackTrace(System.out);
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
         }
     }
 
@@ -51,6 +55,7 @@ public class DBConnection {
         try {
             con.close();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
     }
@@ -72,6 +77,7 @@ public class DBConnection {
             rs = stmt.executeQuery("SELECT * FROM Staff WHERE StaffID = " + staffID);
             //return rs;
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
         return rs;
@@ -97,6 +103,7 @@ public class DBConnection {
             //closes the connection
             pstmt.close();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
     }
@@ -110,6 +117,7 @@ public class DBConnection {
             stmt.execute("DELETE FROM Staff WHERE StaffID=" + staffID);
             stmt.close();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
     }
@@ -122,6 +130,7 @@ public class DBConnection {
             stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM 17agileteam8db.project");
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
 
@@ -146,6 +155,7 @@ public class DBConnection {
             stmt = con.createStatement();
             stmt.execute("INSERT INTO project (name, researcher, comments ,date, file_name,file_path) VALUES ('" + projectName + "','" + researcher + "','" + comments + "','" + date + "','" + newName + "." + format + "', '" + filePath.replace("\\", "\\\\") + "\\\\" + newName + "." + format + "')");
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
     }
@@ -158,6 +168,7 @@ public class DBConnection {
             stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM project WHERE id = " + id);
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
         return rs;
@@ -169,6 +180,7 @@ public class DBConnection {
             stmt = con.createStatement();
             stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', researcher_sig = " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + " WHERE id = " + id);
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
     }
