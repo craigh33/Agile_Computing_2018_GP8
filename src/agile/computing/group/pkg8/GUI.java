@@ -45,6 +45,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class GUI {
 
+    EmailNotification email = new EmailNotification();
     Node test = new Node(); // used for manipulating variables see craig for info
     FileHandler fh = new FileHandler();
     PrintHandler print = new PrintHandler();
@@ -54,11 +55,15 @@ public class GUI {
     String username = "17agileteam8";
     String password = "7632.at8.2367";
     String selected;
+    String recipient = "craighutcheon333@hotmail.com";
+    String content = "This is a test";
+    String subject = "New Notification";
     JOptionPane SQLError = new JOptionPane();
     int id;
 
     void loginScreen() {
 
+        email.sendEmail(subject, content, recipient);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
