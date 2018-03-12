@@ -21,8 +21,8 @@ public class EmailNotification
   
   public void sendEmail(String subject, String body, String recipient)
   {
-    String from = "agilecomputing@mail.com";
-    String pass = "Agilegroup:8";
+    String from = USER_NAME;
+    String pass = PASSWORD;
     String[] to = { recipient };
     
 
