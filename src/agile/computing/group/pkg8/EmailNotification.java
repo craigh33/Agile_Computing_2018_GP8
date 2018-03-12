@@ -30,6 +30,7 @@ public class EmailNotification
     Properties props = System.getProperties();
     
     String host = "smtp.mail.com";
+    //String host = "smtp-mail.outlook.com";//outlook Test
     
     props.put("mail.smtp.starttls.enable", "true");
     props.put("mail.smtp.host", host);
