@@ -282,7 +282,19 @@ public class GUI {
             }
         }
         );
+        JButton help = new JButton("Help");
+        button.add(help);
         
+        help.setBounds(130, 100, 100, 40);
+        help.setMnemonic(KeyEvent.VK_A);
+        help.setTransferHandler(new TransferHandler("text"));
+        help.addActionListener((ActionEvent event)
+                -> {
+            main.dispose();
+            helpScreen();
+        }
+        );
+                
         JButton exit = new JButton("Logout");//Creates new Button
         button.add(exit);
 
@@ -483,6 +495,84 @@ public class GUI {
             fh.downloadFile(new File(downloadURL.getText()));
         }
         );
+    }
+    
+    void helpScreen() {
+        
+        JFrame helpScreen = new JFrame();
+        helpScreen.setSize(400, 500);
+        helpScreen.setLocationRelativeTo(null);
+        helpScreen.setLayout(new GridLayout(0, 1));//change this to change edit screen layout
+        helpScreen.setVisible(true);//makes it visible
+        
+        JPanel buttons = new JPanel();
+        JPanel fields = new JPanel();
+        fields.setLayout(new GridLayout(4,1));
+        
+        JLabel subjectLabel;
+        subjectLabel = new JLabel("Subject:");
+        
+        JTextArea subjectArea;
+        subjectArea = new JTextArea(5,20);
+        subjectArea.setLineWrap(true);
+        
+        JLabel queryLabel;
+        queryLabel = new JLabel("Body:");
+        
+        JTextArea queryArea;
+        queryArea = new JTextArea(5, 20);
+        JScrollPane scrollPane = new JScrollPane(queryArea);
+        queryArea.setLineWrap(true);
+        
+        fields.add(subjectLabel);
+        fields.add(subjectArea);
+        fields.add(queryLabel);
+        fields.add(scrollPane);
+        
+        helpScreen.add(fields);
+        
+        
+        JButton sendButton = new JButton("Send");
+        JButton backButton = new JButton("Back");
+        
+        buttons.add(sendButton);
+        buttons.add(backButton);
+        helpScreen.add(buttons);
+        
+        
+        sendButton.setBounds(130, 100, 100, 40);//Sets size of button
+        sendButton.setMnemonic(KeyEvent.VK_A);
+        sendButton.setTransferHandler(new TransferHandler("text"));
+        sendButton.addActionListener((ActionEvent event)
+                -> {
+            //send query to email
+            EmailNotification email = new EmailNotification();
+            String subject = subjectArea.getText();
+            String content = queryArea.getText();
+            String recipient = "andreilins96@gmail.com";
+            
+            email.sendEmail(subject, content, recipient);
+            
+            subjectArea.setText("");
+            queryArea.setText("");
+            
+            JOptionPane.showMessageDialog(helpScreen, "Your message has been sent.");
+        }
+        );
+        
+        backButton.setBounds(130, 100, 100, 40);//Sets size of button
+        backButton.setMnemonic(KeyEvent.VK_A);
+        backButton.setTransferHandler(new TransferHandler("text"));
+        backButton.addActionListener((ActionEvent event)
+                -> {
+            helpScreen.dispose();
+            mainScreen();
+        }
+        );
+        
+        
+        
+        
     }
 
     void newProject() {
