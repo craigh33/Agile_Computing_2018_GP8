@@ -19,7 +19,7 @@ public class AgileComputingGroup8 {
        GUI gui;
         gui = new GUI();
         
-        gui.loginScreen();
+        gui.startScreen();
     }
     
 }

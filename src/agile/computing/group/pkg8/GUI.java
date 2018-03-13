@@ -60,10 +60,9 @@ public class GUI {
     String subject = "New Notification";
     JOptionPane SQLError = new JOptionPane();
     int id;
-
-    void loginScreen() {
-
-        email.sendEmail(subject, content, recipient);
+    
+    void startScreen(){
+        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
@@ -75,6 +74,94 @@ public class GUI {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace(System.out);
         }
+        
+        JFrame startScreen = new JFrame();
+        startScreen.setSize(400, 500);
+        startScreen.setLocationRelativeTo(null);
+        
+        JPanel buttons = new JPanel();
+        startScreen.add(buttons);
+        
+        
+        startScreen.setVisible(true);//makes it visible
+        
+        JButton signIn = new JButton("Sign in");//Creates new Button
+        buttons.add(signIn);
+
+        signIn.setBounds(130, 100, 100, 40);//Sets size of button
+        signIn.setMnemonic(KeyEvent.VK_A);
+        signIn.setTransferHandler(new TransferHandler("text"));
+        signIn.addActionListener((ActionEvent event)
+                -> {
+            startScreen.dispose();
+            loginScreen();
+        }
+        );
+        
+        JButton signUp = new JButton("Sign up");//Creates new Button
+        buttons.add(signUp);
+        
+        signUp.setBounds(130, 100, 100, 40);//Sets size of button
+        signUp.setMnemonic(KeyEvent.VK_A);
+        signUp.setTransferHandler(new TransferHandler("text"));
+        signUp.addActionListener((ActionEvent event)
+                -> {
+            startScreen.dispose();
+            //signUpScreen();
+        }
+        );
+        
+    }
+    
+/*    WIP
+    void signUpScreen(){
+        JFrame signupScreen = new JFrame();
+        signupScreen.setSize(400, 500);
+        signupScreen.setLocationRelativeTo(null);
+        signupScreen.setVisible(true);
+        
+        JPanel buttons = new JPanel();
+        JPanel fields = new JPanel();
+        fields.setLayout(new GridLayout(4,2));
+        
+        JLabel firstName = new JLabel("First Name:");
+        JLabel lastName = new JLabel("Last name(s):");
+        JLabel staffID = new JLabel("Staff ID:");
+        JLabel jobType = new JLabel("Job Type:");
+        
+        JTextField firstNameData = new JTextField();
+        JTextField lastNameData = new JTextField();
+        JTextField staffIDData = new JTextField();
+        JTextField jobTypeData = new JTextField();
+        
+        fields.add(firstName);
+        fields.add(firstNameData);
+        fields.add(lastName);
+        fields.add(lastNameData);
+        fields.add(staffID);
+        fields.add(staffIDData);
+        fields.add(jobType);
+        fields.add(jobTypeData);
+        
+        signupScreen.add(fields);
+        
+        
+        
+        //need 4 labels and 4 text fields
+        //
+        //first name
+        //last name
+        //staff id
+        //job type
+        
+    }
+*/
+    
+    void loginScreen() {
+
+        //commented out for the moment
+        //email.sendEmail(subject, content, recipient);
+
         
         //Sets up a new database connection
         connection = new DBConnection(host, db, username, password);
