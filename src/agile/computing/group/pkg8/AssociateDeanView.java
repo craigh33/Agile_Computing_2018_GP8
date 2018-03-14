@@ -95,11 +95,12 @@ public class AssociateDeanView extends javax.swing.JFrame {
        // String depDeanSig = selectedProjectResultSet.getString("depDeanSig");
        // String deanSig = selectedProjectResultSet.getString("deanSig");
         
-        projectName_label.setText(projectName);
-        researcher_label.setText(researcher);
-        date_label.setText(dateBox);
-        downloadURL_label.setText(downloadURL);
-        comments_label.setText(comments);
+        projectName_txtbox.setText(projectName);
+        
+        researcher_txtbox.setText(researcher);
+        date_txtbox.setText(dateBox);
+        download_txtbox.setText(downloadURL);
+        comments_txtbox.setText(comments);
         
         
     }
@@ -116,16 +117,18 @@ public class AssociateDeanView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         projects_List = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        projectName_label = new javax.swing.JLabel();
-        researcher_label = new javax.swing.JLabel();
-        date_label = new javax.swing.JLabel();
-        downloadURL_label = new javax.swing.JLabel();
-        comments_label = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        projectName_txtbox = new javax.swing.JTextField();
+        researcher_txtbox = new javax.swing.JTextField();
+        date_txtbox = new javax.swing.JTextField();
+        download_txtbox = new javax.swing.JTextField();
+        comments_txtbox = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        export_PDF_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
@@ -147,84 +150,107 @@ public class AssociateDeanView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Active projects to be reviewed - ");
 
-        jLabel2.setText("Project Name: ");
+        jLabel6.setText("Comments: ");
 
-        jLabel3.setText("Researcher: ");
+        jLabel2.setText("Project Name: ");
 
         jLabel4.setText("Creation Date:");
 
+        jLabel3.setText("Researcher: ");
+
         jLabel5.setText("Download URL:");
 
-        jLabel6.setText("Comments: ");
+        projectName_txtbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectName_txtboxActionPerformed(evt);
+            }
+        });
 
-        projectName_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agile/computing/group/pkg8/dundee logo.jpg"))); // NOI18N
 
-        researcher_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-
-        downloadURL_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-
-        comments_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        export_PDF_btn.setText("Export PDF");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(projectName_label))
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(researcher_label))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comments_label)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(downloadURL_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(date_label)))))
-                .addGap(0, 401, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(projectName_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel4)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(date_txtbox))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel3)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(researcher_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel1))
+                                .addGap(287, 287, 287)))
+                        .addGap(326, 326, 326)
+                        .addComponent(jLabel8)
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comments_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(download_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)
+                        .addComponent(export_PDF_btn)
+                        .addGap(399, 399, 399))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(projectName_label))
-                .addGap(30, 30, 30)
+                    .addComponent(projectName_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(researcher_label))
-                .addGap(30, 30, 30)
+                    .addComponent(researcher_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(date_label))
-                .addGap(30, 30, 30)
+                    .addComponent(date_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(downloadURL_label))
-                .addGap(18, 18, 18)
+                    .addComponent(download_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(export_PDF_btn))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(comments_label))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(comments_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,6 +265,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
             Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_projects_ListMouseClicked
+
+    private void projectName_txtboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectName_txtboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectName_txtboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,18 +306,20 @@ public class AssociateDeanView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel comments_label;
-    private javax.swing.JLabel date_label;
-    private javax.swing.JLabel downloadURL_label;
+    private javax.swing.JTextField comments_txtbox;
+    private javax.swing.JTextField date_txtbox;
+    private javax.swing.JTextField download_txtbox;
+    private javax.swing.JButton export_PDF_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel projectName_label;
+    private javax.swing.JTextField projectName_txtbox;
     private javax.swing.JList<String> projects_List;
-    private javax.swing.JLabel researcher_label;
+    private javax.swing.JTextField researcher_txtbox;
     // End of variables declaration//GEN-END:variables
 }
