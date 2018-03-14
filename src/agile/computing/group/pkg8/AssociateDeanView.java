@@ -31,6 +31,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
     String username = "17agileteam8";
     String password = "7632.at8.2367";
     String SelectedID;
+    boolean sign_button_clicked = false;
     
     
     /**
@@ -85,7 +86,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
     
     private void getSelectedProjectDetails() throws SQLException
     {
-        
+        boolean researcherSig_bool;
+        boolean risSig_bool;
+        boolean assoSig_bool;
+        boolean deanSig_bool;
         
         selected = projects_List.getSelectedValue();
         //get id of selected list element
@@ -106,10 +110,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
         String dateBox = selectedProjectResultSet.getDate("date").toString();
         String downloadURL = selectedProjectResultSet.getString("file_path");
         String comments = selectedProjectResultSet.getString("comments");
-        //String researcherSig = selectedProjectResultSet.getString("researcherSig");
-       // String risSig = selectedProjectResultSet.getString("risSig");
-       // String depDeanSig = selectedProjectResultSet.getString("depDeanSig");
-       // String deanSig = selectedProjectResultSet.getString("deanSig");
+        String researcherSig = selectedProjectResultSet.getString("researcher_Sig");
+        String risSig = selectedProjectResultSet.getString("ris_Sig");
+        String depDeanSig = selectedProjectResultSet.getString("depDean_Sig");
+        String deanSig = selectedProjectResultSet.getString("dean_Sig");
         
         projectName_txtbox.setText(projectName);
         
@@ -117,6 +121,38 @@ public class AssociateDeanView extends javax.swing.JFrame {
         date_txtbox.setText(dateBox);
         download_txtbox.setText(downloadURL);
         comments_txtbox.setText(comments);
+        
+        
+        if (sign_button_clicked == true){
+            
+            
+            
+            //change associsate dean signature to true
+            
+            //does some nice validation with a are u sure box
+            
+            
+            
+            //convert signatures to boolean
+            researcherSig_bool = researcherSig.equals("1");
+            risSig_bool = risSig.equals("1");
+            assoSig_bool = depDeanSig.equals("1");
+            deanSig_bool = deanSig.equals("1");
+            
+            assoSig_bool = true;
+            
+            System.out.println(researcherSig_bool + "   <<<<<<<<<<<< sig");
+            System.out.println(risSig_bool + "   <<<<<<<<<<<< sig");
+            System.out.println(assoSig_bool + "   <<<<<<<<<<<< sig");
+            System.out.println(deanSig_bool + "   <<<<<<<<<<<< sig");
+            
+            
+            connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool);
+            
+            sign_button_clicked = false;
+        }
+        
+        
         
         
         
@@ -145,7 +181,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
         download_txtbox = new javax.swing.JTextField();
         comments_txtbox = new javax.swing.JTextField();
         export_PDF_btn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        sign_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
@@ -190,10 +226,15 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 51));
-        jButton1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 12)); // NOI18N
-        jButton1.setText("Sign Selected Project");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sign_button.setBackground(new java.awt.Color(0, 102, 51));
+        sign_button.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 12)); // NOI18N
+        sign_button.setText("Sign Selected Project");
+        sign_button.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sign_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sign_buttonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,7 +275,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addComponent(export_PDF_btn)
                         .addGap(149, 149, 149)
-                        .addComponent(jButton1)
+                        .addComponent(sign_button)
                         .addGap(177, 177, 177))))
         );
         layout.setVerticalGroup(
@@ -261,7 +302,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(download_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(export_PDF_btn)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sign_button, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -283,11 +324,11 @@ public class AssociateDeanView extends javax.swing.JFrame {
     }//GEN-LAST:event_projects_ListMouseClicked
 
     private void projectName_txtboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectName_txtboxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_projectName_txtboxActionPerformed
 
     private void export_PDF_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_export_PDF_btnMouseClicked
-        // TODO add your handling code here:
+        
         //initilize pdf export 
         if (SelectedID == null){
                 JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before exporting.", "No Selected Project", WARNING_MESSAGE);
@@ -304,6 +345,24 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_export_PDF_btnMouseClicked
+
+   
+    private void sign_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_buttonMouseClicked
+        ///adding ability to sign document
+        
+        if (SelectedID == null){
+                JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            sign_button_clicked = true;
+        
+            try {
+                getSelectedProjectDetails();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_sign_buttonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -343,7 +402,6 @@ public class AssociateDeanView extends javax.swing.JFrame {
     private javax.swing.JTextField date_txtbox;
     private javax.swing.JTextField download_txtbox;
     private javax.swing.JButton export_PDF_btn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -354,5 +412,6 @@ public class AssociateDeanView extends javax.swing.JFrame {
     private javax.swing.JTextField projectName_txtbox;
     private javax.swing.JList<String> projects_List;
     private javax.swing.JTextField researcher_txtbox;
+    private javax.swing.JButton sign_button;
     // End of variables declaration//GEN-END:variables
 }
