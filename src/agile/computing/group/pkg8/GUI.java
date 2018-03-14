@@ -236,8 +236,7 @@ public class GUI {
                         
                         // launch view
                         AssociateDeanView assoView = new AssociateDeanView();
-                        assoView.show();
-                        
+                        assoView.setVisible(true);
                     } else if (result.getString("JobType").equals("Dean")) {
                         login.dispose();
                         mainScreen();
@@ -256,7 +255,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(SQLError, "Please enter valid sign in details.", "MySQL Error", ERROR_MESSAGE);
             }
         }
-        );
+        );             
     }
 
     /**
@@ -559,12 +558,17 @@ public class GUI {
     
     // for testing, ignore for now
     void getNewResultSet(String id) throws SQLException{
+
+        //open new connection
+        
+        DBConnection connection2 = new DBConnection(host, db, username, password);
         
         System.out.println(id);
         ResultSet rs;
-        rs = connection.getProject(id);
+        rs = connection2.getProject(id);
         rs.next();
         
+
         exportPDFLogic(rs);
     }
     
