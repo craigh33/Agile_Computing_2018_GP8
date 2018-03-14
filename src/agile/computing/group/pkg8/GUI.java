@@ -557,6 +557,7 @@ public class GUI {
         );  
     }
     
+    // for testing, ignore for now
     void getNewResultSet(String id) throws SQLException{
         
         System.out.println(id);
