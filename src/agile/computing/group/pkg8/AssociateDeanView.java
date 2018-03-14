@@ -5,6 +5,7 @@
  */
 package agile.computing.group.pkg8;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -32,6 +33,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
     String password = "7632.at8.2367";
     String SelectedID;
     boolean sign_button_clicked = false;
+    FileHandler fh = new FileHandler();
     
     
     /**
@@ -131,6 +133,12 @@ public class AssociateDeanView extends javax.swing.JFrame {
             
             //does some nice validation with a are u sure box
             
+            int reply = JOptionPane.showConfirmDialog(null, "This action will sign the currently selected project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+            
+            if (reply == JOptionPane.YES_OPTION) {
+                
+            
+            
             
             
             //convert signatures to boolean
@@ -149,15 +157,20 @@ public class AssociateDeanView extends javax.swing.JFrame {
             
             connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool);
             
-            sign_button_clicked = false;
+            
+        }
+        
         }
         
         
-        
-        
-        
+        sign_button_clicked = false;
     }
     
+    
+    private void downloadExcel(){
+        
+        fh.downloadFile(new File(download_txtbox.getText()));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,6 +195,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
         comments_txtbox = new javax.swing.JTextField();
         export_PDF_btn = new javax.swing.JButton();
         sign_button = new javax.swing.JButton();
+        download_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
@@ -236,6 +250,13 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         });
 
+        download_btn.setText("Download Excel");
+        download_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                download_btnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -273,8 +294,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(download_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(47, 47, 47)
-                        .addComponent(export_PDF_btn)
-                        .addGap(149, 149, 149)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(download_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(export_PDF_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(129, 129, 129)
                         .addComponent(sign_button)
                         .addGap(177, 177, 177))))
         );
@@ -303,11 +326,12 @@ public class AssociateDeanView extends javax.swing.JFrame {
                     .addComponent(download_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(export_PDF_btn)
                     .addComponent(sign_button, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(comments_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(comments_txtbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(download_btn))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         pack();
@@ -364,6 +388,11 @@ public class AssociateDeanView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sign_buttonMouseClicked
 
+    private void download_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_download_btnMouseClicked
+        // add ability to download excel file
+        downloadExcel();
+    }//GEN-LAST:event_download_btnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -400,6 +429,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField comments_txtbox;
     private javax.swing.JTextField date_txtbox;
+    private javax.swing.JButton download_btn;
     private javax.swing.JTextField download_txtbox;
     private javax.swing.JButton export_PDF_btn;
     private javax.swing.JLabel jLabel1;
