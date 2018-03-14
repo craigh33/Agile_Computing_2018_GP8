@@ -530,8 +530,38 @@ public class GUI {
         printButton.setTransferHandler(new TransferHandler("text"));
         printButton.addActionListener((ActionEvent event)
                 -> {
-                
-            JFrame dialogFrame = new JFrame();
+                    //calling logic on button press
+                    
+                    exportPDFLogic(rs);
+            
+            
+        }
+            );
+        
+        buttons.add(uploadButton);
+        uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
+        uploadButton.setMnemonic(KeyEvent.VK_A);
+        uploadButton.setTransferHandler(new TransferHandler("text"));
+        uploadButton.addActionListener((ActionEvent event)
+                -> {
+              File file =  uploadFile();
+              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+        }
+        );
+        
+        downloadButton.setBounds(130, 100, 100, 40);//Sets size of button
+        downloadButton.setMnemonic(KeyEvent.VK_A);
+        downloadButton.setTransferHandler(new TransferHandler("text"));
+        downloadButton.addActionListener((ActionEvent event)
+                -> {
+            fh.downloadFile(new File(downloadURL.getText()));
+        }
+        );
+    }
+    
+    void exportPDFLogic(ResultSet rs){
+        
+        JFrame dialogFrame = new JFrame();
 
             JFileChooser fc = new JFileChooser();
             fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Documents"));
@@ -563,32 +593,9 @@ public class GUI {
                 }
                 break;
             }
-            
-            
-        }
-            );
         
-        buttons.add(uploadButton);
-        uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
-        uploadButton.setMnemonic(KeyEvent.VK_A);
-        uploadButton.setTransferHandler(new TransferHandler("text"));
-        uploadButton.addActionListener((ActionEvent event)
-                -> {
-              File file =  uploadFile();
-              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
-        }
-        );
         
-        downloadButton.setBounds(130, 100, 100, 40);//Sets size of button
-        downloadButton.setMnemonic(KeyEvent.VK_A);
-        downloadButton.setTransferHandler(new TransferHandler("text"));
-        downloadButton.addActionListener((ActionEvent event)
-                -> {
-            fh.downloadFile(new File(downloadURL.getText()));
-        }
-        );
     }
-    
     void helpScreen() {
         
         JFrame helpScreen = new JFrame();
