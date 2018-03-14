@@ -533,8 +533,6 @@ public class GUI {
                     //calling logic on button press
                     
                     exportPDFLogic(rs);
-            
-            
         }
             );
         
@@ -556,7 +554,17 @@ public class GUI {
                 -> {
             fh.downloadFile(new File(downloadURL.getText()));
         }
-        );
+        );  
+    }
+    
+    void getNewResultSet(String id) throws SQLException{
+        
+        System.out.println(id);
+        ResultSet rs;
+        rs = connection.getProject(id);
+        rs.next();
+        
+        exportPDFLogic(rs);
     }
     
     void exportPDFLogic(ResultSet rs){
