@@ -233,6 +233,11 @@ public class GUI {
                     } else if (result.getString("JobType").equals("Associate Dean")) {
                         login.dispose();
                         mainScreen();
+                        
+                        // launch view
+                        AssociateDeanView assoView = new AssociateDeanView();
+                        assoView.show();
+                        
                     } else if (result.getString("JobType").equals("Dean")) {
                         login.dispose();
                         mainScreen();
@@ -928,6 +933,7 @@ public class GUI {
         PdfWriter.getInstance(document, new FileOutputStream(filename));
         // step 3
         document.open();
+        document.add(new Chunk(""));
         // step 4
         try{
         ListItem iD = new ListItem(Integer.toString(rs.getInt("id")));
