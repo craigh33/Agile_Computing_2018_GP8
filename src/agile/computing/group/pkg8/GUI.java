@@ -225,18 +225,32 @@ public class GUI {
                     if (result.getString("JobType").equals("Researcher")) {
                         login.dispose();
                         mainScreen();
+                        //launch view
+                        ResearcherView reView = new ResearcherView(uname);
+                        reView.setVisible(true);
+                        
                     } else if (result.getString("JobType").equals("RIS")) {
                         login.dispose();
                         mainScreen();
+                        //launch view
+                        RISView risView = new RISView();
+                        risView.setVisible(true);
+                        
                     } else if (result.getString("JobType").equals("Admin")) {
                         login.dispose();
                         mainScreen();
                     } else if (result.getString("JobType").equals("Associate Dean")) {
                         login.dispose();
                         mainScreen();
+                        
+                        // launch view
+                        AssociateDeanView assoView = new AssociateDeanView();
+                        assoView.setVisible(true);
                     } else if (result.getString("JobType").equals("Dean")) {
                         login.dispose();
                         mainScreen();
+                        DeanView deanView = new DeanView();
+                        deanView.setVisible(true);
                     }
 
                 } else {
@@ -252,7 +266,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(SQLError, "Please enter valid sign in details.", "MySQL Error", ERROR_MESSAGE);
             }
         }
-        );
+        );             
     }
 
     /**
@@ -526,8 +540,52 @@ public class GUI {
         printButton.setTransferHandler(new TransferHandler("text"));
         printButton.addActionListener((ActionEvent event)
                 -> {
-                
-            JFrame dialogFrame = new JFrame();
+                    //calling logic on button press
+                    
+                    exportPDFLogic(rs);
+        }
+            );
+        
+        buttons.add(uploadButton);
+        uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
+        uploadButton.setMnemonic(KeyEvent.VK_A);
+        uploadButton.setTransferHandler(new TransferHandler("text"));
+        uploadButton.addActionListener((ActionEvent event)
+                -> {
+              File file =  uploadFile();
+              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+        }
+        );
+        
+        downloadButton.setBounds(130, 100, 100, 40);//Sets size of button
+        downloadButton.setMnemonic(KeyEvent.VK_A);
+        downloadButton.setTransferHandler(new TransferHandler("text"));
+        downloadButton.addActionListener((ActionEvent event)
+                -> {
+            fh.downloadFile(new File(downloadURL.getText()));
+        }
+        );  
+    }
+    
+    // for testing, ignore for now
+    void getNewResultSet(String id) throws SQLException{
+
+        //open new connection
+        
+        DBConnection connection2 = new DBConnection(host, db, username, password);
+        
+        System.out.println(id);
+        ResultSet rs;
+        rs = connection2.getProject(id);
+        rs.next();
+        
+
+        exportPDFLogic(rs);
+    }
+    
+    void exportPDFLogic(ResultSet rs){
+        
+        JFrame dialogFrame = new JFrame();
 
             JFileChooser fc = new JFileChooser();
             fc.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Documents"));
@@ -559,32 +617,9 @@ public class GUI {
                 }
                 break;
             }
-            
-            
-        }
-            );
         
-        buttons.add(uploadButton);
-        uploadButton.setBounds(130, 100, 100, 40);//Sets size of button
-        uploadButton.setMnemonic(KeyEvent.VK_A);
-        uploadButton.setTransferHandler(new TransferHandler("text"));
-        uploadButton.addActionListener((ActionEvent event)
-                -> {
-              File file =  uploadFile();
-              fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
-        }
-        );
         
-        downloadButton.setBounds(130, 100, 100, 40);//Sets size of button
-        downloadButton.setMnemonic(KeyEvent.VK_A);
-        downloadButton.setTransferHandler(new TransferHandler("text"));
-        downloadButton.addActionListener((ActionEvent event)
-                -> {
-            fh.downloadFile(new File(downloadURL.getText()));
-        }
-        );
     }
-    
     void helpScreen() {
         
         JFrame helpScreen = new JFrame();
@@ -929,6 +964,7 @@ public class GUI {
         PdfWriter.getInstance(document, new FileOutputStream(filename));
         // step 3
         document.open();
+        document.add(new Chunk(""));
         // step 4
         try{
         ListItem iD = new ListItem(Integer.toString(rs.getInt("id")));
