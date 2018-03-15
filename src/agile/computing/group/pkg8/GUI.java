@@ -224,6 +224,10 @@ public class GUI {
                     if (result.getString("JobType").equals("Researcher")) {
                         login.dispose();
                         mainScreen();
+                        //launch view
+                        ResearcherView reView = new ResearcherView();
+                        reView.setVisible(true);
+                        
                     } else if (result.getString("JobType").equals("RIS")) {
                         login.dispose();
                         mainScreen();
