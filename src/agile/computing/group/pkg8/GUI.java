@@ -227,6 +227,10 @@ public class GUI {
                     } else if (result.getString("JobType").equals("RIS")) {
                         login.dispose();
                         mainScreen();
+                        //launch view
+                        RISView risView = new RISView();
+                        risView.setVisible(true);
+                        
                     } else if (result.getString("JobType").equals("Admin")) {
                         login.dispose();
                         mainScreen();
@@ -240,6 +244,8 @@ public class GUI {
                     } else if (result.getString("JobType").equals("Dean")) {
                         login.dispose();
                         mainScreen();
+                        DeanView deanView = new DeanView();
+                        deanView.setVisible(true);
                     }
 
                 } else {
