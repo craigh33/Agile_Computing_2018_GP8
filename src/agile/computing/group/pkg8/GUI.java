@@ -94,7 +94,8 @@ public class GUI {
         signIn.addActionListener((ActionEvent event)
                 -> {
             startScreen.dispose();
-            loginScreen();
+           loginScreen();
+           //FAQScreen();
         }
         );
         
@@ -987,6 +988,34 @@ public class GUI {
         }
         // step 5
         document.close();
+    }
+ 
+    void FAQScreen(){
+        
+        JFrame faq = new JFrame();
+        faq.setSize(400, 500);//size of frame
+        faq.setLocationRelativeTo(null);
+        faq.setVisible(true);
+        faq.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        JPanel information = new JPanel();
+        
+        JTextArea text = new JTextArea(25,40);
+        //faq.add(information);
+        
+        text.setEditable(false);
+        text.setText("This area is for questions and answers");
+        text.setLineWrap(true);
+        text.setWrapStyleWord(true);
+        
+        //JScrollPane scrollbar = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollbar = new JScrollPane(text);
+
+        information.add(scrollbar,BorderLayout.CENTER);
+        faq.add(information);
+        
+        
+        
     }
     
 }
