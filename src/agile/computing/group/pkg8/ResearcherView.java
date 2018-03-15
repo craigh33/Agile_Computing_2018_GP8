@@ -32,18 +32,54 @@ public class ResearcherView extends javax.swing.JFrame {
     String username = "17agileteam8";
     String password = "7632.at8.2367";
     String SelectedID;
+    int staffID;
+    String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
     
     /**
      * Creates new form ResearcherView
+     * @param staffid
+     *
      */
-    public ResearcherView() {
+    public ResearcherView(int staffid) {
         initComponents();
         connection = new DBConnection(host,db,username,password);
-        getDataForList();
+        
+        
+        staffID = staffid;
+        
+        System.out.println(staffID + ":::::::");
+        
+        try {
+            getDetailsOnActiveLogin();
+        } catch (SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
+    private void getDetailsOnActiveLogin() throws SQLException{
+    
+        ResultSet rs = connection.getUserByStaffID(staffID);
+        rs.next();
+        
+        String firstname = rs.getString("FirstName");
+        String lastName = rs.getString("LastName");
+        
+        fullName = firstname + " " + lastName;
+        
+        System.out.println(fullName + " <<>>");
+        
+                
+                
+                
+                
+                
+        
+        getDataForList();
+    }
+    
     
     private void getDataForList()
     {
@@ -54,7 +90,7 @@ public class ResearcherView extends javax.swing.JFrame {
             while (rs2.next()) {
                 
                 //getting projects to display that only associate dean needs to see.
-                if (rs2.getString("ris_sig").equals("1") && rs2.getString("depDean_sig").equals("0"))
+                if (rs2.getString("researcher").equals(fullName))
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
@@ -119,11 +155,15 @@ public class ResearcherView extends javax.swing.JFrame {
         
         if (sign_button_clicked == true){
             
+            ///
+            /// dont really need this part of the code for researcher as they done really sign anything. 
+            /// maybe change to submit button? 
+            ///
+            ///
             
             
-            //change associsate dean signature to true
             
-            //does some nice validation with a are u sure box
+            
             
             int reply = JOptionPane.showConfirmDialog(null, "This action will sign the currently selected project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
             
@@ -449,10 +489,9 @@ public class ResearcherView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ResearcherView().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            int a = 1;
+            new ResearcherView(a).setVisible(true);
         });
     }
 

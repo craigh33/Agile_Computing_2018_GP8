@@ -225,7 +225,7 @@ public class GUI {
                         login.dispose();
                         mainScreen();
                         //launch view
-                        ResearcherView reView = new ResearcherView();
+                        ResearcherView reView = new ResearcherView(uname);
                         reView.setVisible(true);
                         
                     } else if (result.getString("JobType").equals("RIS")) {
