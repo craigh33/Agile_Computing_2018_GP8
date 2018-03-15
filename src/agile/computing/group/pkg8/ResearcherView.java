@@ -69,14 +69,7 @@ public class ResearcherView extends javax.swing.JFrame {
         
         fullName = firstname + " " + lastName;
         
-        System.out.println(fullName + " <<>>");
-        
-                
-                
-                
-                
-                
-        
+        System.out.println(fullName + " <<>>");   
         getDataForList();
     }
     
@@ -157,7 +150,7 @@ public class ResearcherView extends javax.swing.JFrame {
             
             ///
             /// dont really need this part of the code for researcher as they done really sign anything. 
-            /// maybe change to submit button? 
+            /// 
             ///
             ///
             
@@ -179,7 +172,7 @@ public class ResearcherView extends javax.swing.JFrame {
             assoSig_bool = depDeanSig.equals("1");
             deanSig_bool = deanSig.equals("1");
             
-            assoSig_bool = true;
+            //assoSig_bool = true;
             
             System.out.println(researcherSig_bool + "   <<<<<<<<<<<< sig");
             System.out.println(risSig_bool + "   <<<<<<<<<<<< sig");
