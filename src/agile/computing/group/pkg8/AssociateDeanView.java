@@ -157,7 +157,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
             
             connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool);
             
-            
+            getDataForList();
         }
         
         }
@@ -168,7 +168,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
         
         //refresh the list of valid projects
         
-        getDataForList();
+        
     }
     
     
