@@ -366,7 +366,7 @@ public class RISViewLegacy extends javax.swing.JFrame {
 
                 newGUI_PDF.getNewResultSet(SelectedID);
             } catch (SQLException ex) {
-                Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RISViewLegacy.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_export_PDF_btnMouseClicked
@@ -383,7 +383,7 @@ public class RISViewLegacy extends javax.swing.JFrame {
             try {
                 getSelectedProjectDetails();
             } catch (SQLException ex) {
-                Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RISViewLegacy.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_sign_buttonMouseClicked
@@ -409,7 +409,7 @@ public class RISViewLegacy extends javax.swing.JFrame {
 
             getSelectedProjectDetails();
         } catch (SQLException ex) {
-            Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RISViewLegacy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_projects_ListMouseClicked
 
