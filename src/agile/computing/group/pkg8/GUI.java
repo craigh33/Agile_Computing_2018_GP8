@@ -231,12 +231,12 @@ public class GUI {
                         
                     } else if (result.getString("JobType").equals("RIS")) {
                         login.dispose();
-                        mainScreen();
+                       // mainScreen();
                         //launch view
-                        RISView risView = new RISView();
-                        TestTemplate test1 = new TestTemplate();
-                        test1.setVisible(true);
+                        //RISViewLegacy legacy = new RISViewLegacy();
+                        RISView risView= new RISView();
                         risView.setVisible(true);
+                        //legacy.setVisible(true);
                         
                     } else if (result.getString("JobType").equals("Admin")) {
                         login.dispose();
