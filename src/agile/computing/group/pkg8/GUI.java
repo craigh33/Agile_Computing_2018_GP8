@@ -234,6 +234,8 @@ public class GUI {
                         mainScreen();
                         //launch view
                         RISView risView = new RISView();
+                        TestTemplate test1 = new TestTemplate();
+                        test1.setVisible(true);
                         risView.setVisible(true);
                         
                     } else if (result.getString("JobType").equals("Admin")) {
