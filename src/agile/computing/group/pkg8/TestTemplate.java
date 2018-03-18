@@ -607,8 +607,7 @@ public class TestTemplate extends javax.swing.JFrame {
 
     private void unsigned_projects_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unsigned_projects_listMouseClicked
         try {
-            // TODO add your handling code here:
-
+            selected = unsigned_projects_list.getSelectedValue();
             getSelectedProjectDetails();
         } catch (SQLException ex) {
             Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
@@ -616,11 +615,21 @@ public class TestTemplate extends javax.swing.JFrame {
     }//GEN-LAST:event_unsigned_projects_listMouseClicked
 
     private void signed_by_researcher_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signed_by_researcher_listMouseClicked
-        // TODO add your handling code here:
+        try {
+            selected = signed_by_researcher_list.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_signed_by_researcher_listMouseClicked
 
     private void completed_projects_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completed_projects_listMouseClicked
-        // TODO add your handling code here:
+        try {
+            selected = completed_projects_list.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(AssociateDeanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_completed_projects_listMouseClicked
 
     /**
@@ -762,7 +771,6 @@ public class TestTemplate extends javax.swing.JFrame {
         boolean assoSig_bool;
         boolean deanSig_bool;
         
-        selected = unsigned_projects_list.getSelectedValue();
         //get id of selected list element
         
        
