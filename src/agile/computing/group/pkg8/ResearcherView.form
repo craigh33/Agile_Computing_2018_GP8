@@ -599,12 +599,9 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane7" min="-2" pref="425" max="-2" attributes="0"/>
-                              <EmptySpace pref="92" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="new_excel_upload" max="32767" attributes="0"/>
-                                  <Component id="create_project_button" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace pref="90" max="32767" attributes="0"/>
+                              <Component id="create_project_button" min="-2" pref="165" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -620,12 +617,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane7" min="-2" pref="109" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="new_excel_upload" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="create_project_button" min="-2" pref="54" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -677,14 +673,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Excel Download URL"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="new_excel_upload">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Upload Excel Document"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="new_excel_uploadActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="create_project_button">
               <Properties>
