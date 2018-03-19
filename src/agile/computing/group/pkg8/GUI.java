@@ -61,6 +61,9 @@ public class GUI {
     JOptionPane SQLError = new JOptionPane();
     int id;
     
+    /**
+     * Start Screen GUI
+     */
     void startScreen(){
         
         try {
@@ -158,7 +161,9 @@ public class GUI {
         
     }
 */
-    
+    /**
+     * Login Screen GUI
+     */
     void loginScreen() {
 
         //commented out for the moment
@@ -227,15 +232,17 @@ public class GUI {
                         login.dispose();
                         mainScreen();
                         //launch view
-                        ResearcherView reView = new ResearcherView(uname);
+                        ResearcherView reView = new ResearcherView();
                         reView.setVisible(true);
                         
                     } else if (result.getString("JobType").equals("RIS")) {
                         login.dispose();
-                        mainScreen();
+                       // mainScreen();
                         //launch view
-                        RISView risView = new RISView();
-                        risView.setVisible(true);
+                        //RISViewLegacy legacy = new RISViewLegacy();
+                       RISView risView= new RISView();
+                       risView.setVisible(true);
+                        //legacy.setVisible(true);
                         
                     } else if (result.getString("JobType").equals("Admin")) {
                         login.dispose();
@@ -289,27 +296,6 @@ public class GUI {
         main.setVisible(true);//makes it visible
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        
-        //obsolete below vvvvv
-        
-        /*DefaultListModel dlm = new DefaultListModel();
-        ResultSet rs = connection.getProjects();
-        try {
-        while (rs.next()) {
-        dlm.addElement(rs.getString("id") + " " + rs.getString("name"));
-        }
-        } catch (SQLException e) {
-        e.printStackTrace(System.out);
-        }
-        
-        /*JList mlist = new JList(dlm); //data has type Object[]
-        mlist.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        mlist.setLayoutOrientation(JList.VERTICAL_WRAP);
-        mlist.setVisibleRowCount(-1);
-        
-        main.add(mlist);*/
-        
-        
         DefaultListModel listProgress = new DefaultListModel();
         ResultSet rs2 = connection.getProjects();
         try {
@@ -417,6 +403,8 @@ public class GUI {
 
     /**
      * Swing Screen to allow user to edit fields
+     * 
+     * USED FOR TESTING
      */
     void editScreen() throws SQLException {
         JFrame edit = new JFrame();
@@ -569,7 +557,12 @@ public class GUI {
         );  
     }
     
-    // for testing, ignore for now
+    /**
+     * For PrintHandler
+     * 
+     * @param id
+     * @throws SQLException 
+     */
     void getNewResultSet(String id) throws SQLException{
 
         //open new connection
@@ -622,6 +615,10 @@ public class GUI {
         
         
     }
+    
+    /**
+     * GUI Help Screen
+     */
     void helpScreen() {
         
         JFrame helpScreen = new JFrame();

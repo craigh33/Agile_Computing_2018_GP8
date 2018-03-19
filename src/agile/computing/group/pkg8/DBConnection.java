@@ -178,4 +178,18 @@ public class DBConnection {
             e.printStackTrace(System.out);
         }
     }
+    
+        public ResultSet getStaff() {
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM 17agileteam8db.staff");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+
+        return rs;
+    }
 }
