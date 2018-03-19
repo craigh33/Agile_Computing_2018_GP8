@@ -174,6 +174,10 @@ public class AdminView extends javax.swing.JFrame {
         deleteProjectID = new javax.swing.JTextField();
         deleteProjectButton = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        change_password_button = new javax.swing.JMenuItem();
+        change_sig_image_button = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -318,7 +322,7 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(jobTypeLabel)
                     .addComponent(jobType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Add Staff", jPanel3);
@@ -361,7 +365,7 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(deleteStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(deleteButton)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Delete Staff", jPanel4);
@@ -405,7 +409,7 @@ public class AdminView extends javax.swing.JFrame {
                         .addComponent(projectLabel)))
                 .addGap(18, 18, 18)
                 .addComponent(deleteProjectButton)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Delete Project", jPanel5);
@@ -416,6 +420,18 @@ public class AdminView extends javax.swing.JFrame {
                 logout_buttonActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("File");
+
+        change_password_button.setText("Change Password");
+        jMenu1.add(change_password_button);
+
+        change_sig_image_button.setText("Change Signature Image");
+        jMenu1.add(change_sig_image_button);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -539,6 +555,8 @@ public class AdminView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JMenuItem change_password_button;
+    private javax.swing.JMenuItem change_sig_image_button;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel deleteLabel;
     private javax.swing.JTabbedPane deleteProject;
@@ -552,6 +570,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel fnameLabel;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
