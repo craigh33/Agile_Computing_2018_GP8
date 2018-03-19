@@ -99,6 +99,7 @@ public class GUI {
             startScreen.dispose();
            loginScreen();
            //FAQScreen();
+           //adminScreen();
         }
         );
         
@@ -245,7 +246,8 @@ public class GUI {
                         
                     } else if (result.getString("JobType").equals("Admin")) {
                         login.dispose();
-                        mainScreen();
+                        AdminView adminView = new AdminView();
+                        adminView.setVisible(true);
                     } else if (result.getString("JobType").equals("Associate Dean")) {
                         login.dispose();
                         mainScreen();
@@ -1037,7 +1039,9 @@ public class GUI {
         //faq.add(information);
         
         text.setEditable(false);
-        text.setText("This area is for questions and answers");
+        text.setText("This area is for questions and answers \n"
+                + "Q) Do pigs fly? \n"
+                + "A) yes pigs do fly \n");
         text.setLineWrap(true);
         text.setWrapStyleWord(true);
         
