@@ -581,7 +581,10 @@ public class RISView extends javax.swing.JFrame {
     }//GEN-LAST:event_completed_projects_listMouseClicked
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
-        dispose();
+        RISView.this.dispose();
+        StartScreen startScreen = new StartScreen();
+        startScreen.setLocationRelativeTo(null);
+        startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     private void notifications_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notifications_listMouseClicked

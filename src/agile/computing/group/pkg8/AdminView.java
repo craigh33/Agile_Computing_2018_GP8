@@ -474,7 +474,7 @@ public class AdminView extends javax.swing.JFrame {
     private void deleteProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProjectButtonActionPerformed
         // TODO add your handling code here:
         int id = Integer.parseInt(deleteProjectID.getText());
-        connection.removeProjectById(id);
+       // connection.removeProjectById(id);
         
         deleteProjectID.setText("");
     }//GEN-LAST:event_deleteProjectButtonActionPerformed

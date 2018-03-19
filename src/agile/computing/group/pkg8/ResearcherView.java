@@ -649,7 +649,10 @@ public class ResearcherView extends javax.swing.JFrame {
     }//GEN-LAST:event_completed_projects_listMouseClicked
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
-        dispose();
+        ResearcherView.this.dispose();
+        StartScreen startScreen = new StartScreen();
+        startScreen.setLocationRelativeTo(null);
+        startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     private void create_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_project_buttonActionPerformed

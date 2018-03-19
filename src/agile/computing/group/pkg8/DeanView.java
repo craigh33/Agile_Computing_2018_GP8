@@ -503,7 +503,10 @@ public class DeanView extends javax.swing.JFrame {
     }//GEN-LAST:event_unsigned_projects_listMouseClicked
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
-        dispose();
+        DeanView.this.dispose();
+        StartScreen startScreen = new StartScreen();
+        startScreen.setLocationRelativeTo(null);
+        startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     /**

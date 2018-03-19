@@ -6,12 +6,27 @@
 package agile.computing.group.pkg8;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
  * @author andreilins
  */
 public class LoginScreen extends javax.swing.JFrame {
+    
+    DBConnection connection;
+    String host = "silva.computing.dundee.ac.uk";
+    String db = "17agileteam8db";
+    String username = "17agileteam8";
+    String password = "7632.at8.2367";
+    JOptionPane frame = new JOptionPane();
+    JOptionPane SQLError = new JOptionPane();
 
     /**
      * Creates new form LoginScreen
@@ -35,10 +50,10 @@ public class LoginScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        login_field = new javax.swing.JTextField();
+        login_button = new javax.swing.JButton();
+        back_button = new javax.swing.JButton();
+        password_field = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,25 +78,30 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Staff ID:");
 
         jLabel3.setText("Password:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        login_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                login_fieldActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Login");
-
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        login_button.setText("Login");
+        login_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                login_buttonActionPerformed(evt);
+            }
+        });
+
+        back_button.setText("Back");
+        back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_buttonActionPerformed(evt);
             }
         });
 
@@ -99,14 +119,14 @@ public class LoginScreen extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(login_field, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(password_field))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(127, 127, 127)
-                .addComponent(jButton1)
+                .addComponent(login_button)
                 .addGap(29, 29, 29)
-                .addComponent(jButton2)
+                .addComponent(back_button)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -116,30 +136,99 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(login_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(login_button)
+                    .addComponent(back_button))
                 .addGap(0, 243, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void login_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_login_fieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
             LoginScreen.this.dispose();
             StartScreen startScreen = new StartScreen();
+            startScreen.setLocationRelativeTo(null);
             startScreen.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_back_buttonActionPerformed
+
+    private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
+        connection = new DBConnection(host, db, username, password);
+        //gets username and password from textboxes.
+            int uname = Integer.parseInt(login_field.getText());
+            char[] pwd = password_field.getPassword();
+            String pass = new String(pwd);
+
+            //calls the getUserByStaffID method in the DBConnection class
+            ResultSet result = connection.getUserByStaffID(uname);
+
+            try {
+                result.next();
+                //input validation 
+                if (uname == 0 || pwd == null) {
+                    JOptionPane.showMessageDialog(frame, "Please enter valid username or password", "Login Error", ERROR_MESSAGE);
+                } else if (result.getString("Password") == null) {
+                    JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");
+                } else if (result.getString("Password").equals(pass)) {
+                    //These if statements will be for when we implement views. Right now they all go to the same place.
+                    if (result.getString("JobType").equals("Researcher")) {
+                        ResearcherView reView = new ResearcherView();
+                        
+                        reView.getStaffID(uname);
+                        try{
+                                reView.getDetailsOnActiveLogin();
+                            } catch(SQLException ex) {
+                                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+                                System.out.println("login details not passed");
+                            }
+                        LoginScreen.this.dispose();
+                        reView.setLocationRelativeTo(null);
+                        reView.setVisible(true);                       
+                    } else if (result.getString("JobType").equals("RIS")) {
+                       LoginScreen.this.dispose();
+                       RISView risView= new RISView();
+                       risView.setLocationRelativeTo(null);
+                       risView.setVisible(true);                      
+                    } else if (result.getString("JobType").equals("Admin")) {
+                        LoginScreen.this.dispose();
+                        AdminView adminView = new AdminView();
+                        adminView.setLocationRelativeTo(null);
+                        adminView.setVisible(true);
+                    } else if (result.getString("JobType").equals("Associate Dean")) {
+                        LoginScreen.this.dispose();
+                        AssociateDeanView assoView = new AssociateDeanView();
+                        assoView.setLocationRelativeTo(null);
+                        assoView.setVisible(true);
+                    } else if (result.getString("JobType").equals("Dean")) {
+                        LoginScreen.this.dispose();
+                        DeanView deanView = new DeanView();
+                        deanView.setLocationRelativeTo(null);
+                        deanView.setVisible(true);
+                    }
+
+                } else {
+                    
+                    JOptionPane.showMessageDialog(frame, "The password you have entered is wrong. Please try again.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
+                JOptionPane.showMessageDialog(SQLError, "MySQL Error", "MySQL Error", ERROR_MESSAGE);
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(SQLError, "Sign in Error. No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(SQLError, "Please enter valid sign in details.", "MySQL Error", ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_login_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,13 +266,13 @@ public class LoginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton back_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton login_button;
+    private javax.swing.JTextField login_field;
+    private javax.swing.JPasswordField password_field;
     // End of variables declaration//GEN-END:variables
 }

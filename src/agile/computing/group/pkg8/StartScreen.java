@@ -105,8 +105,9 @@ public class StartScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         StartScreen.this.dispose();
-        GUI gui = new GUI();
-        gui.loginScreen();
+        LoginScreen login = new LoginScreen();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
