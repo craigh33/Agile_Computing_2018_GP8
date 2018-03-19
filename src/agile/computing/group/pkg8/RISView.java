@@ -894,7 +894,7 @@ public class RISView extends javax.swing.JFrame {
         
         ris_seen = "1";
         needs_review = true;
-        //connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
+        connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
         
         
         sign_button_clicked = false;
