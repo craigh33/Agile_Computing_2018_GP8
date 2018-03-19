@@ -20,7 +20,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  */
 public class ResearcherView extends javax.swing.JFrame {
     
-    private String downloadURL;
+     private String downloadURL;
     ResultSet rs;
     JOptionPane warningWindow = new JOptionPane();
     DBConnection connection;
@@ -52,13 +52,9 @@ public class ResearcherView extends javax.swing.JFrame {
         comments_field_update.setEditable(false);
         project_name_field_Update.setEditable(false);
         date_of_creation_field_update.setEditable(false);
-        new_download_link_field.setEditable(false);
+        //new_download_link_field.setEditable(false);
         researcher_name_field_update.setEditable(false);
-        try {
-            getDetailsOnActiveLogin();
-        } catch (SQLException ex) {
-            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new_download_url.setEditable(false);
         
     }
 
@@ -80,7 +76,6 @@ public class ResearcherView extends javax.swing.JFrame {
         signed_by_researcher_list = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         completed_projects_list = new javax.swing.JList<>();
-        refresh_button = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -94,16 +89,6 @@ public class ResearcherView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         download_excel_button = new javax.swing.JButton();
         export_to_pdf_button = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        new_project_name_field = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        new_comments_field = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        new_download_link_field = new javax.swing.JTextField();
-        create_project_button = new javax.swing.JButton();
-        clear_fields_button = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        upload_new_excel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -118,6 +103,17 @@ public class ResearcherView extends javax.swing.JFrame {
         sign_project_button = new javax.swing.JButton();
         send_for_revision_button = new javax.swing.JButton();
         update_excel_button = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        new_project_name = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        new_comments_field = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        new_download_url = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        new_excel_upload = new javax.swing.JButton();
+        create_project_button = new javax.swing.JButton();
+        refresh_button = new javax.swing.JButton();
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
         sign_in_details = new javax.swing.JLabel();
@@ -174,13 +170,6 @@ public class ResearcherView extends javax.swing.JFrame {
         jScrollPane3.setViewportView(completed_projects_list);
 
         jTabbedPane5.addTab("Completed Projects", jScrollPane3);
-
-        refresh_button.setText("Refresh Lists");
-        refresh_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refresh_buttonActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Project Name");
 
@@ -278,104 +267,10 @@ public class ResearcherView extends javax.swing.JFrame {
                         .addComponent(download_excel_button)
                         .addGap(29, 29, 29)
                         .addComponent(export_to_pdf_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("View Project Data", jPanel2);
-
-        new_project_name_field.setText("Project Name");
-        new_project_name_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                new_project_name_fieldActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Project Name");
-
-        new_comments_field.setText("Comments");
-
-        jLabel2.setText("Comments");
-
-        new_download_link_field.setText("Download Link");
-        new_download_link_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                new_download_link_fieldActionPerformed(evt);
-            }
-        });
-
-        create_project_button.setText("Create");
-
-        clear_fields_button.setText("Clear Fields");
-
-        jLabel7.setText("File Download Link");
-
-        upload_new_excel.setText("Upload File");
-        upload_new_excel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                upload_new_excelActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addGap(182, 182, 182)
-                                    .addComponent(create_project_button))
-                                .addComponent(new_comments_field, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(clear_fields_button)
-                                .addGap(244, 244, 244))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(upload_new_excel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(new_download_link_field, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(new_project_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(upload_new_excel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(new_project_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(new_download_link_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(new_comments_field, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(create_project_button)
-                    .addComponent(clear_fields_button)))
-        );
-
-        jTabbedPane1.addTab("Create New Project", jPanel3);
 
         jLabel8.setText("Project Name");
 
@@ -501,7 +396,7 @@ public class ResearcherView extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
+            .addGap(0, 269, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -510,6 +405,79 @@ public class ResearcherView extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Sign or Update Project", jPanel1);
+
+        new_project_name.setText("New Project Name");
+
+        jLabel1.setText("New Project Name");
+
+        new_comments_field.setColumns(20);
+        new_comments_field.setRows(5);
+        jScrollPane7.setViewportView(new_comments_field);
+
+        jLabel2.setText("Comments");
+
+        new_download_url.setText("Excel Download URL");
+
+        jLabel7.setText("Excel Download URL");
+
+        new_excel_upload.setText("Upload Excel Document");
+
+        create_project_button.setText("Create Project");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(new_download_url, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(new_project_name, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(new_excel_upload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(create_project_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(59, 59, 59))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(new_project_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(new_excel_upload)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(create_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(new_download_url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Create New Project", jPanel3);
+
+        refresh_button.setText("Refresh Lists");
+        refresh_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refresh_buttonActionPerformed(evt);
+            }
+        });
 
         help_button.setText("Help");
 
@@ -563,21 +531,9 @@ public class ResearcherView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void upload_new_excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upload_new_excelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_upload_new_excelActionPerformed
-
-    private void new_project_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_project_name_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_new_project_name_fieldActionPerformed
-
     private void project_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_project_name_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_project_name_fieldActionPerformed
-
-    private void new_download_link_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_download_link_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_new_download_link_fieldActionPerformed
 
     private void refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_buttonActionPerformed
         getDataForUnsignedProjectsList();
@@ -612,7 +568,7 @@ public class ResearcherView extends javax.swing.JFrame {
 
                 newPDF.getNewResultSet(SelectedID);
             } catch (SQLException ex) {
-                Logger.getLogger(RISView.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_export_to_pdf_buttonActionPerformed
@@ -707,6 +663,18 @@ public class ResearcherView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ResearcherView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -908,7 +876,7 @@ public class ResearcherView extends javax.swing.JFrame {
         
         fh.downloadFile(new File(downloadURL));
     }
-
+     
      private void getDetailsOnActiveLogin() throws SQLException{
     
         rs = connection.getUserByStaffID(staffID);
@@ -922,9 +890,8 @@ public class ResearcherView extends javax.swing.JFrame {
         System.out.println(fullName + " <<>>");   
         //getDataForList();
     }
-      
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton clear_fields_button;
     private javax.swing.JTextArea comments_field;
     private javax.swing.JTextArea comments_field_update;
     private javax.swing.JList<String> completed_projects_list;
@@ -955,12 +922,14 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JButton logout_button;
-    private javax.swing.JTextField new_comments_field;
-    private javax.swing.JTextField new_download_link_field;
-    private javax.swing.JTextField new_project_name_field;
+    private javax.swing.JTextArea new_comments_field;
+    private javax.swing.JTextField new_download_url;
+    private javax.swing.JButton new_excel_upload;
+    private javax.swing.JTextField new_project_name;
     private javax.swing.JList<String> notifications_list;
     private javax.swing.JTextField project_name_field;
     private javax.swing.JTextField project_name_field_Update;
@@ -973,6 +942,5 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JList<String> signed_by_researcher_list;
     private javax.swing.JList<String> unsigned_projects_list;
     private javax.swing.JButton update_excel_button;
-    private javax.swing.JButton upload_new_excel;
     // End of variables declaration//GEN-END:variables
 }
