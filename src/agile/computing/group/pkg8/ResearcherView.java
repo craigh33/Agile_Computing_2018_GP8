@@ -900,8 +900,11 @@ public class ResearcherView extends javax.swing.JFrame {
             
             
             //set researcher needs to review to false
+            //cleaning up values so it can be passed to asso dean with most of these things set to values that make sense
             researcher_needs2_review = "0";
-            //change researcher signature to true
+            needs_review = false;
+            ris_seen = "0";
+            
             
             //does some nice validation with a are u sure box
             
@@ -922,6 +925,7 @@ public class ResearcherView extends javax.swing.JFrame {
             
             
             connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool);
+            connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
             
             getDataForUnsignedProjectsList();
             getDataForSignedByResearcherProjectsList();
@@ -955,6 +959,7 @@ public class ResearcherView extends javax.swing.JFrame {
             
         
         }
+        // feedback for user as to why they cannot send for revision 
         else if (revision_button_clicked == true && researcherSig_bool == true)
         {
             JOptionPane.showMessageDialog(warningWindow, "This Project cannot be sent away for revision. it is signed by researcher", "No Selected Project", WARNING_MESSAGE);
