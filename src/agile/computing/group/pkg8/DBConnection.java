@@ -190,10 +190,10 @@ public class DBConnection {
         }
     }
     
-    public void REVISIONeditProject(String id, int revision, String ris_seen, boolean needs_reviewed){
+    public void REVISIONeditProject(String id, int revision, String ris_seen, boolean needs_reviewed, String researcher_needs2_review){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET revision = '" + revision + "', ris_seen = '" + ris_seen + "', needs_reviewed = " + needs_reviewed + " WHERE id = " + id);
+            stmt.execute("UPDATE project SET revision = '" + revision + "', ris_seen = '" + ris_seen + "', needs_reviewed = " + needs_reviewed + "', researcher_needs2_review = " + researcher_needs2_review + "  WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
