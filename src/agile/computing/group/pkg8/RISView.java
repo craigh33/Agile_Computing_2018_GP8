@@ -802,8 +802,11 @@ public class RISView extends javax.swing.JFrame {
          // addtional columns
         int revision = selectedProjectResultSet.getInt("revision");
         String ris_seen = selectedProjectResultSet.getString("ris_seen");
-        String needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
+        String needs_reviewed; 
+               needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
         String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
+        
+        
         
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
@@ -877,11 +880,22 @@ public class RISView extends javax.swing.JFrame {
                 getDataForUnsignedProjectsList();
                 getDataForSignedByResearcherProjectsList();
                 getDataForCompletedProjectsList();
+                getDataForCompletedProjectsList();
                 
                 
             
             }
         }
+        
+        
+        
+        
+        //updates RIS SEEN VALUE TO TRUE WHEN IT IS SELECTED 
+        
+        ris_seen = "1";
+        needs_review = true;
+        //connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
+        
         
         sign_button_clicked = false;
         revision_button_clicked = false;
