@@ -624,7 +624,6 @@
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="new_download_url" min="-2" max="-2" attributes="0"/>
@@ -678,6 +677,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create Project"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="create_project_buttonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
