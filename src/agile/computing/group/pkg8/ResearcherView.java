@@ -34,6 +34,7 @@ public class ResearcherView extends javax.swing.JFrame {
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
+    boolean revision_button_clicked = false;
 
     /**
      * Creates new form TestTemplate
@@ -55,6 +56,7 @@ public class ResearcherView extends javax.swing.JFrame {
         //new_download_link_field.setEditable(false);
         researcher_name_field_update.setEditable(false);
         new_download_url.setEditable(false);
+        
         
     }
 
@@ -602,6 +604,18 @@ public class ResearcherView extends javax.swing.JFrame {
         // add sent for revision variable in DB to true and it effectively sends to RIS view
         
         
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            revision_button_clicked = true;
+
+            try {
+                getSelectedProjectDetails();
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         
     }//GEN-LAST:event_send_for_revision_buttonActionPerformed
@@ -867,9 +881,15 @@ public class ResearcherView extends javax.swing.JFrame {
         
         }
         
+        if (revision_button_clicked == true)
+        {
+            
+        
+        }
+        
         
         sign_button_clicked = false;
-        
+        revision_button_clicked = false;
         
         //refresh the list of valid projects
         
