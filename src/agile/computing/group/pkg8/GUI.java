@@ -64,6 +64,7 @@ public class GUI {
     /**
      * Start Screen GUI
      */
+
     void startScreen(){
         
         try {
@@ -96,7 +97,7 @@ public class GUI {
         signIn.setTransferHandler(new TransferHandler("text"));
         signIn.addActionListener((ActionEvent event)
                 -> {
-            startScreen.dispose();
+           startScreen.dispose();
            loginScreen();
            //FAQScreen();
            //adminScreen();
@@ -119,6 +120,7 @@ public class GUI {
         );
         
     }
+    
     /**
      * Login Screen GUI
      */
