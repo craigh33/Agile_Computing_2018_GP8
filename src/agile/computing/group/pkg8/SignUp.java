@@ -6,6 +6,7 @@
 package agile.computing.group.pkg8;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,14 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class SignUp extends javax.swing.JFrame {
 
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
+    
     /**
      * Creates new form SignUp
      */
     public SignUp() {
         initComponents();
         getContentPane().setBackground(new Color(255,255,255));
-        
-        
+        setIconImage(img.getImage());   
     }
 
     /**

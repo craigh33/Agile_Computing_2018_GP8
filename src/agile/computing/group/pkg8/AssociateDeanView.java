@@ -5,12 +5,14 @@
  */
 package agile.computing.group.pkg8;
 
+import java.awt.Color;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -20,6 +22,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  */
 public class AssociateDeanView extends javax.swing.JFrame {
     
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
     private String downloadURL;
     ResultSet rs;
     JOptionPane warningWindow = new JOptionPane();
@@ -40,6 +43,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
      */
     public AssociateDeanView() {
         initComponents();
+        setIconImage(img.getImage());
+        getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         project_name_field.setEditable(false);
