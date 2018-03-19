@@ -34,6 +34,7 @@ public class ResearcherView extends javax.swing.JFrame {
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
+    boolean revision_button_clicked = false;
 
     /**
      * Creates new form TestTemplate
@@ -55,6 +56,7 @@ public class ResearcherView extends javax.swing.JFrame {
         //new_download_link_field.setEditable(false);
         researcher_name_field_update.setEditable(false);
         new_download_url.setEditable(false);
+        
         
     }
 
@@ -602,6 +604,18 @@ public class ResearcherView extends javax.swing.JFrame {
         // add sent for revision variable in DB to true and it effectively sends to RIS view
         
         
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            revision_button_clicked = true;
+
+            try {
+                getSelectedProjectDetails();
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         
     }//GEN-LAST:event_send_for_revision_buttonActionPerformed
@@ -802,6 +816,8 @@ public class ResearcherView extends javax.swing.JFrame {
         boolean risSig_bool;
         boolean assoSig_bool;
         boolean deanSig_bool;
+        boolean ris_seen_bool;
+        boolean needs_review;
         
         //get id of selected list element
         
@@ -826,6 +842,11 @@ public class ResearcherView extends javax.swing.JFrame {
         String depDeanSig = selectedProjectResultSet.getString("depDean_Sig");
         String deanSig = selectedProjectResultSet.getString("dean_Sig");
         
+        // addtional columns
+        int revision = selectedProjectResultSet.getInt("revision");
+        String ris_seen = selectedProjectResultSet.getString("ris_seen");
+        String needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
+        
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
         researcher_name_field.setText(researcher);
@@ -840,7 +861,7 @@ public class ResearcherView extends javax.swing.JFrame {
             
             
             
-            //change associsate dean signature to true
+            //change researcher signature to true
             
             //does some nice validation with a are u sure box
             
@@ -875,8 +896,36 @@ public class ResearcherView extends javax.swing.JFrame {
         
         }
         
+        if (revision_button_clicked == true)
+        {
+            int reply = JOptionPane.showConfirmDialog(null, "This action will send the currently selected project for review. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+            
+            if (reply == JOptionPane.YES_OPTION) {
+                
+                needs_review = needs_reviewed.equals("1");
+                
+                ris_seen_bool = ris_seen.equals("1");
+                
+                //setting needs review to true to allow it to appear on RIS notification screen
+                needs_review = true;
+                
+                connection.REVISIONeditProject(id, revision, ris_seen, needs_review);
+                
+                getDataForUnsignedProjectsList();
+                getDataForSignedByResearcherProjectsList();
+                getDataForCompletedProjectsList();
+                
+                
+            
+            }
+            
+        
+        }
+        
         
         sign_button_clicked = false;
+        revision_button_clicked = false;
+        
         
         return selectedProjectResultSet;
         //refresh the list of valid projects

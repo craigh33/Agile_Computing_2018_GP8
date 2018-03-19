@@ -190,7 +190,7 @@ public class DBConnection {
         }
     }
     
-    public void REVISIONeditProject(String id, int revision, boolean ris_seen, boolean needs_reviewed){
+    public void REVISIONeditProject(String id, int revision, String ris_seen, boolean needs_reviewed){
         try {
             stmt = con.createStatement();
             stmt.execute("UPDATE project SET revision = '" + revision + "', ris_seen = '" + ris_seen + "', needs_reviewed = " + needs_reviewed + " WHERE id = " + id);
