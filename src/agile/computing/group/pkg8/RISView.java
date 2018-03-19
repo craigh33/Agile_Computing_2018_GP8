@@ -113,6 +113,10 @@ public class RISView extends javax.swing.JFrame {
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
         sign_in_details = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        change_password_button = new javax.swing.JMenuItem();
+        change_sig_image_button = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -424,6 +428,18 @@ public class RISView extends javax.swing.JFrame {
         });
 
         sign_in_details.setText("Signed in as: RIS");
+
+        jMenu1.setText("File");
+
+        change_password_button.setText("Change Password");
+        jMenu1.add(change_password_button);
+
+        change_sig_image_button.setText("Change Signature Image");
+        jMenu1.add(change_sig_image_button);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -942,6 +958,8 @@ public class RISView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem change_password_button;
+    private javax.swing.JMenuItem change_sig_image_button;
     private javax.swing.JTextArea comments_field;
     private javax.swing.JTextArea comments_field_update;
     private javax.swing.JList<String> completed_projects_list;
@@ -958,6 +976,8 @@ public class RISView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
