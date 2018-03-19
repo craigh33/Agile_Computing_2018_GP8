@@ -5,12 +5,14 @@
  */
 package agile.computing.group.pkg8;
 
+import java.awt.Color;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -20,7 +22,8 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  */
 public class RISView extends javax.swing.JFrame {
     
-     private String downloadURL;
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
+    private String downloadURL;
     ResultSet rs;
     JOptionPane warningWindow = new JOptionPane();
     DBConnection connection;
@@ -41,6 +44,8 @@ public class RISView extends javax.swing.JFrame {
      */
     public RISView() {
         initComponents();
+        getContentPane().setBackground(new Color(255,255,255));
+        setIconImage(img.getImage());
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         getDataForSignedByResearcherProjectsList();

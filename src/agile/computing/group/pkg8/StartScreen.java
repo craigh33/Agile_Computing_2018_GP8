@@ -6,18 +6,22 @@
 package agile.computing.group.pkg8;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author andreilins
  */
 public class StartScreen extends javax.swing.JFrame {
+    
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
 
     /**
      * Creates new form StartScreen
      */
     public StartScreen() {
         initComponents();
+        setIconImage(img.getImage());
         getContentPane().setBackground(new Color(255,255,255));
     }
 

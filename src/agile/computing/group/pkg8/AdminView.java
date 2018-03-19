@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package agile.computing.group.pkg8;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.TransferHandler;
 /**
  *
@@ -19,6 +21,7 @@ public class AdminView extends javax.swing.JFrame {
     /**
      * Creates new form AdminView
      */
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
     DBConnection connection;
     String host = "silva.computing.dundee.ac.uk";
     String db = "17agileteam8db";
@@ -27,6 +30,8 @@ public class AdminView extends javax.swing.JFrame {
     
     public AdminView() {
         initComponents();
+        setIconImage(img.getImage());
+        getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,newPass);
         getDataForLists();
         getProjectsForList();
@@ -168,6 +173,7 @@ public class AdminView extends javax.swing.JFrame {
         projectLabel = new javax.swing.JLabel();
         deleteProjectID = new javax.swing.JTextField();
         deleteProjectButton = new javax.swing.JButton();
+        logout_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -404,6 +410,13 @@ public class AdminView extends javax.swing.JFrame {
 
         deleteProject.addTab("Delete Project", jPanel5);
 
+        logout_button.setText("Logout");
+        logout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -415,7 +428,8 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(topPane, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(refreshButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logout_button)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -424,7 +438,9 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(topPane, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshButton)
+                    .addComponent(logout_button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteProject)
                 .addContainerGap())
@@ -478,6 +494,13 @@ public class AdminView extends javax.swing.JFrame {
         
         deleteProjectID.setText("");
     }//GEN-LAST:event_deleteProjectButtonActionPerformed
+
+    private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
+       AdminView.this.dispose();
+       StartScreen startScreen = new StartScreen();
+       startScreen.setLocationRelativeTo(null);
+       startScreen.setVisible(true);
+    }//GEN-LAST:event_logout_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -540,6 +563,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jobTypeLabel;
     private javax.swing.JTextField lastName;
     private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JButton logout_button;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel projectLabel;

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -20,6 +21,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
  */
 public class LoginScreen extends javax.swing.JFrame {
     
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
     DBConnection connection;
     String host = "silva.computing.dundee.ac.uk";
     String db = "17agileteam8db";
@@ -33,7 +35,8 @@ public class LoginScreen extends javax.swing.JFrame {
      */
     public LoginScreen() {
         initComponents();
-        
+        setIconImage(img.getImage());
+        LoginScreen.this.getRootPane().setDefaultButton(login_button);
         getContentPane().setBackground(new Color(255,255,255));
     }
 
