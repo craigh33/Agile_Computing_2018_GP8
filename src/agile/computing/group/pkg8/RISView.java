@@ -34,6 +34,7 @@ public class RISView extends javax.swing.JFrame {
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
+    boolean revision_button_clicked = false;
 
     /**
      * Creates new form TestTemplate
