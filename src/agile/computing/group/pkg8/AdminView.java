@@ -60,13 +60,13 @@ public class AdminView extends javax.swing.JFrame {
     
     public void addStaff(){
         
-        addButton.setMnemonic(KeyEvent.VK_A);
+       /*addButton.setMnemonic(KeyEvent.VK_A);
         addButton.setTransferHandler(new TransferHandler("text"));
         addButton.addActionListener((ActionEvent event)
-                -> {
-            
+                -> {*/
+            //System.out.println("this sucks");
             //gets username and password from textboxes.
-            int uname = Integer.parseInt(staffID.getText());
+           /* int uname = Integer.parseInt(staffID.getText());
             char[] pwd = password.getPassword();
             String pass = new String(pwd);
             String firstName = firstname.getText();
@@ -74,8 +74,9 @@ public class AdminView extends javax.swing.JFrame {
             String emailAddress = email.getText();
             String job = jobType.getText();
             
-            connection.addUser(uname,pass,firstName,lastname,emailAddress,job);
-        });
+            connection.addUser(uname,pass,firstName,lastname,emailAddress,job);*/
+           
+        //});
     }
     
     public void deleteStaff(){
@@ -196,19 +197,18 @@ public class AdminView extends javax.swing.JFrame {
 
         jobTypeLabel.setText("Job Type:");
 
-        staffID.setText("jTextField1");
-
-        firstname.setText("jTextField3");
-
-        lastName.setText("jTextField4");
-
-        email.setText("jTextField5");
-
-        jobType.setText("jTextField6");
+        jobType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobTypeActionPerformed(evt);
+            }
+        });
 
         addButton.setText("Add");
-
-        password.setText("jPasswordField1");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -346,6 +346,26 @@ public class AdminView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jobTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jobTypeActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        System.out.println("this sucks");
+        //gets username and password from textboxes.
+            int uname = Integer.parseInt(staffID.getText());
+            char[] pwd = password.getPassword();
+            String pass = new String(pwd);
+            String firstName = firstname.getText();
+            String lastname = lastName.getText();
+            String emailAddress = email.getText();
+            String job = jobType.getText();
+            
+            connection.addUser(uname,pass,firstName,lastname,emailAddress,job);
+            
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
