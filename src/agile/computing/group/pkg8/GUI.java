@@ -192,6 +192,13 @@ public class GUI {
                         //launch view
                         ResearcherView reView = new ResearcherView();
                         reView.setVisible(true);
+                        reView.getStaffID(uname);
+                        try{
+                                reView.getDetailsOnActiveLogin();
+                            } catch(SQLException ex) {
+                                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+                                System.out.println("login details not passed");
+                            }
                         
                     } else if (result.getString("JobType").equals("RIS")) {
                         login.dispose();
@@ -200,6 +207,7 @@ public class GUI {
                         //RISViewLegacy legacy = new RISViewLegacy();
                        RISView risView= new RISView();
                        risView.setVisible(true);
+
                         //legacy.setVisible(true);
                         
                     } else if (result.getString("JobType").equals("Admin")) {
