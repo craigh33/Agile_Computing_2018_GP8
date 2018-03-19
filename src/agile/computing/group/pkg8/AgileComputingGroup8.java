@@ -17,9 +17,9 @@ public class AgileComputingGroup8 {
      */
     public static void main(String[] args) {
        GUI gui;
-        gui = new GUI();
+       gui = new GUI();
         
-        gui.startScreen();
+       gui.startScreen();     
     }
     
 }
