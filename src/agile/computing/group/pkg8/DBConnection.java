@@ -189,4 +189,16 @@ public class DBConnection {
             e.printStackTrace(System.out);
         }
     }
+    
+    public void REVISIONeditProject(String id, int revision, boolean ris_seen, boolean needs_reviewed){
+        try {
+            stmt = con.createStatement();
+            stmt.execute("UPDATE project SET revision = '" + revision + "', ris_seen = '" + ris_seen + "', needs_reviewed = " + needs_reviewed + " WHERE id = " + id);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    
 }
