@@ -79,6 +79,16 @@ public class AdminView extends javax.swing.JFrame {
         //});
     }
     
+    public void clear(){
+         staffID.setText("");
+         email.setText("");
+         password.setText("");
+         firstname.setText("");
+         lastName.setText("");
+         jobType.setText("");
+         
+    }
+    
     public void deleteStaff(){
         
         deleteButton.setMnemonic(KeyEvent.VK_A);
@@ -184,6 +194,11 @@ public class AdminView extends javax.swing.JFrame {
         topPane.addTab("Projects", jPanel2);
 
         refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
 
         idLabel.setText("Staff ID:");
 
@@ -282,9 +297,12 @@ public class AdminView extends javax.swing.JFrame {
 
         deleteStaffIDLabel.setText("Staff ID:");
 
-        deleteStaffID.setText("jTextField1");
-
         deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -364,8 +382,24 @@ public class AdminView extends javax.swing.JFrame {
             String job = jobType.getText();
             
             connection.addUser(uname,pass,firstName,lastname,emailAddress,job);
+            clear();
             
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        int uname = Integer.parseInt(deleteStaffID.getText());
+        connection.removeUserById(uname);
+        
+        deleteStaffID.setText("");
+        
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        staffList.clearSelection();
+        getDataForLists();
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
