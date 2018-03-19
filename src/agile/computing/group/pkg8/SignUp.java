@@ -184,6 +184,10 @@ public class SignUp extends javax.swing.JFrame {
             jTextField4.setText("");
             
             JOptionPane.showMessageDialog(SignUp.this, "An admin has been notified. You will receive an email soon regarding your sign up"); 
+            SignUp.this.dispose();
+            StartScreen startScreen = new StartScreen();
+            startScreen.setLocationRelativeTo(null);
+            startScreen.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
