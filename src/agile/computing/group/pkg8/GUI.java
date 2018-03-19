@@ -119,50 +119,6 @@ public class GUI {
         );
         
     }
-    
-/*    WIP
-    void signUpScreen(){
-        JFrame signupScreen = new JFrame();
-        signupScreen.setSize(400, 500);
-        signupScreen.setLocationRelativeTo(null);
-        signupScreen.setVisible(true);
-        
-        JPanel buttons = new JPanel();
-        JPanel fields = new JPanel();
-        fields.setLayout(new GridLayout(4,2));
-        
-        JLabel firstName = new JLabel("First Name:");
-        JLabel lastName = new JLabel("Last name(s):");
-        JLabel staffID = new JLabel("Staff ID:");
-        JLabel jobType = new JLabel("Job Type:");
-        
-        JTextField firstNameData = new JTextField();
-        JTextField lastNameData = new JTextField();
-        JTextField staffIDData = new JTextField();
-        JTextField jobTypeData = new JTextField();
-        
-        fields.add(firstName);
-        fields.add(firstNameData);
-        fields.add(lastName);
-        fields.add(lastNameData);
-        fields.add(staffID);
-        fields.add(staffIDData);
-        fields.add(jobType);
-        fields.add(jobTypeData);
-        
-        signupScreen.add(fields);
-        
-        
-        
-        //need 4 labels and 4 text fields
-        //
-        //first name
-        //last name
-        //staff id
-        //job type
-        
-    }
-*/
     /**
      * Login Screen GUI
      */
