@@ -56,9 +56,6 @@ public class ResearcherView extends javax.swing.JFrame {
         date_of_creation_field_update.setEditable(false);
         //new_download_link_field.setEditable(false);
         researcher_name_field_update.setEditable(false);
-        new_download_url.setEditable(false);
-        
-        
     }
 
     /**
@@ -112,8 +109,6 @@ public class ResearcherView extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         new_comments_field = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        new_download_url = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         create_project_button = new javax.swing.JButton();
         refresh_button = new javax.swing.JButton();
         help_button = new javax.swing.JButton();
@@ -420,11 +415,12 @@ public class ResearcherView extends javax.swing.JFrame {
 
         jLabel2.setText("Comments");
 
-        new_download_url.setText("Excel Download URL");
-
-        jLabel7.setText("Excel Download URL");
-
         create_project_button.setText("Create Project");
+        create_project_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                create_project_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -435,11 +431,9 @@ public class ResearcherView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(new_download_url, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(new_project_name, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -458,15 +452,12 @@ public class ResearcherView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(create_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(new_download_url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(129, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Create New Project", jPanel3);
@@ -660,6 +651,27 @@ public class ResearcherView extends javax.swing.JFrame {
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
         dispose();
     }//GEN-LAST:event_logout_buttonActionPerformed
+
+    private void create_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_project_buttonActionPerformed
+       File file = fh.uploadSelect();
+       
+       try{
+       String firstname = rs.getString("FirstName");
+       String lastName = rs.getString("LastName");
+        
+       fullName = firstname + " " + lastName;
+
+        int reply = JOptionPane.showConfirmDialog(null, "This action will create new project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+
+        connection.newProject(staffID, new_project_name.getText(), fullName, new_comments_field.getText(), file.getName(), "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
+        fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, staffID);
+        } 
+       }catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("project not created");
+                }
+    }//GEN-LAST:event_create_project_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -981,7 +993,19 @@ public class ResearcherView extends javax.swing.JFrame {
         fh.downloadFile(new File(downloadURL));
     }
      
-     private void getDetailsOnActiveLogin() throws SQLException{
+     /**
+      * 
+      * @param idno
+      * @return 
+      */
+     public int getStaffID(int idno)
+     {
+         staffID = idno;
+         System.out.println(staffID);
+         return idno;
+     }
+     
+     public void getDetailsOnActiveLogin() throws SQLException{
     
         rs = connection.getUserByStaffID(staffID);
         rs.next();
@@ -1013,7 +1037,6 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1031,7 +1054,6 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JButton logout_button;
     private javax.swing.JTextArea new_comments_field;
-    private javax.swing.JTextField new_download_url;
     private javax.swing.JTextField new_project_name;
     private javax.swing.JList<String> notifications_list;
     private javax.swing.JTextField project_name_field;

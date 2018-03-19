@@ -589,11 +589,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="new_download_url" alignment="0" min="-2" pref="425" max="-2" attributes="0"/>
                                   <Component id="new_project_name" alignment="0" min="-2" pref="425" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -618,16 +616,15 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane7" min="-2" pref="109" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="create_project_button" min="-2" pref="54" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <EmptySpace pref="129" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane7" min="-2" pref="109" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="new_download_url" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -663,20 +660,13 @@
                 <Property name="text" type="java.lang.String" value="Comments"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="new_download_url">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Excel Download URL"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Excel Download URL"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="create_project_button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create Project"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="create_project_buttonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
