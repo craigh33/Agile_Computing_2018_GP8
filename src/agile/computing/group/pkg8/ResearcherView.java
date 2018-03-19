@@ -902,10 +902,8 @@ public class ResearcherView extends javax.swing.JFrame {
             
             if (reply == JOptionPane.YES_OPTION) {
                 
-                needs_review = needs_reviewed.equals("1");
-                
-                ris_seen_bool = ris_seen.equals("1");
-                
+               
+                ris_seen = "0";
                 //setting needs review to true to allow it to appear on RIS notification screen
                 needs_review = true;
                 
