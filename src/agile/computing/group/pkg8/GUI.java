@@ -112,7 +112,9 @@ public class GUI {
         signUp.addActionListener((ActionEvent event)
                 -> {
             startScreen.dispose();
-            //signUpScreen();
+            SignUp signupScreen = new SignUp();
+            signupScreen.setLocationRelativeTo(null);
+            signupScreen.setVisible(true);
         }
         );
         
