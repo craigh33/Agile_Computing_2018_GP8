@@ -846,6 +846,7 @@ public class ResearcherView extends javax.swing.JFrame {
         int revision = selectedProjectResultSet.getInt("revision");
         String ris_seen = selectedProjectResultSet.getString("ris_seen");
         String needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
+        String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
         
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
@@ -902,12 +903,13 @@ public class ResearcherView extends javax.swing.JFrame {
             
             if (reply == JOptionPane.YES_OPTION) {
                 
+                //SEND AWAY TO RIS!!!!!!!
                
                 ris_seen = "0";
                 //setting needs review to true to allow it to appear on RIS notification screen
                 needs_review = true;
                 
-                connection.REVISIONeditProject(id, revision, ris_seen, needs_review);
+                connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
                 
                 getDataForUnsignedProjectsList();
                 getDataForSignedByResearcherProjectsList();
