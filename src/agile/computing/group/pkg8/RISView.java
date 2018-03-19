@@ -653,6 +653,7 @@ public class RISView extends javax.swing.JFrame {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
                         listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        
                     
                     } else {
                     
@@ -805,7 +806,7 @@ public class RISView extends javax.swing.JFrame {
         String needs_reviewed; 
                needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
         String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
-        
+        needs_review = needs_reviewed.equals("1");
         
         
         project_name_field.setText(projectName);
@@ -818,11 +819,18 @@ public class RISView extends javax.swing.JFrame {
         comments_field_update.setText(comments);
         comments_field.setText(comments);
         
+        //convert signatures to boolean
+            researcherSig_bool = researcherSig.equals("1");
+            risSig_bool = risSig.equals("1");
+            assoSig_bool = depDeanSig.equals("1");
+            deanSig_bool = deanSig.equals("1");
+            
+        
         if (sign_button_clicked == true){
             
             
             
-            //change associsate dean signature to true
+            //change RIS signature to true
             
             //does some nice validation with a are u sure box
             
@@ -830,17 +838,9 @@ public class RISView extends javax.swing.JFrame {
             
             if (reply == JOptionPane.YES_OPTION) {
                 
-            
-            
-            
-            
-            //convert signatures to boolean
-            researcherSig_bool = researcherSig.equals("1");
-            risSig_bool = risSig.equals("1");
-            assoSig_bool = depDeanSig.equals("1");
-            deanSig_bool = deanSig.equals("1");
-            
+                
             risSig_bool = true;
+            
             
             System.out.println(researcherSig_bool + "   <<<<<<<<<<<< sig");
             System.out.println(risSig_bool + "   <<<<<<<<<<<< sig");
@@ -892,8 +892,8 @@ public class RISView extends javax.swing.JFrame {
         
         //updates RIS SEEN VALUE TO TRUE WHEN IT IS SELECTED 
         
-        ris_seen = "1";
-        needs_review = true;
+        //ris_seen = "1";
+        
         connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
         
         
