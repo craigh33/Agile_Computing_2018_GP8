@@ -31,7 +31,7 @@ public class AdminView extends javax.swing.JFrame {
     public AdminView() {
         initComponents();
         setIconImage(img.getImage());
-        getContentPane().setBackground(new Color(255,255,255));
+        //getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,newPass);
         getDataForLists();
         getProjectsForList();

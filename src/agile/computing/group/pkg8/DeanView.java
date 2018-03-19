@@ -44,7 +44,7 @@ public class DeanView extends javax.swing.JFrame {
     public DeanView() {
         initComponents();
         setIconImage(img.getImage());
-        getContentPane().setBackground(new Color(255,255,255));
+        //getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         project_name_field.setEditable(false);

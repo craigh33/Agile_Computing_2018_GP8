@@ -44,7 +44,7 @@ public class RISView extends javax.swing.JFrame {
      */
     public RISView() {
         initComponents();
-        getContentPane().setBackground(new Color(255,255,255));
+        //getContentPane().setBackground(new Color(255,255,255));
         setIconImage(img.getImage());
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
