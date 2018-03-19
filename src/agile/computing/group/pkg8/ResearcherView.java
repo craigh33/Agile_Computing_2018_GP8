@@ -45,6 +45,7 @@ public class ResearcherView extends javax.swing.JFrame {
         getDataForUnsignedProjectsList();
         getDataForSignedByResearcherProjectsList();
         getDataForCompletedProjectsList();
+        getDataNotificationList();
         project_name_field.setEditable(false);
         researcher_name_field.setEditable(false);
         date_of_creation_field.setEditable(false);
@@ -541,6 +542,7 @@ public class ResearcherView extends javax.swing.JFrame {
         getDataForUnsignedProjectsList();
         getDataForSignedByResearcherProjectsList();
         getDataForCompletedProjectsList();
+        getDataNotificationList();
     }//GEN-LAST:event_refresh_buttonActionPerformed
 
     private void researcher_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_fieldActionPerformed
@@ -778,6 +780,39 @@ public class ResearcherView extends javax.swing.JFrame {
         
     }
     
+     private void getDataNotificationList()
+    {
+        
+        DefaultListModel listProgress = new DefaultListModel();
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                //getting projects to display that only associate dean needs to see.
+                if (rs2.getString("researcher_needs2_review").equals("1"))
+                    {
+                    //add to list in here 
+                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".             <<<<<<<<<< NEEDS REVIEW. " + "REVISION VERSION: "+ rs2.getString("revision") + ".");
+                    
+                    } else {
+                    
+                    //cry
+                    
+                    }
+             
+                }
+            } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+   
+        //setting list model to listProgress
+        notifications_list.setModel(listProgress);
+        
+        
+    }
+     
+     
      private void getDataForCompletedProjectsList()
     {
         
@@ -893,6 +928,7 @@ public class ResearcherView extends javax.swing.JFrame {
             getDataForUnsignedProjectsList();
             getDataForSignedByResearcherProjectsList();
             getDataForCompletedProjectsList();
+            getDataNotificationList();
         }
         
         }
@@ -914,7 +950,7 @@ public class ResearcherView extends javax.swing.JFrame {
                 getDataForUnsignedProjectsList();
                 getDataForSignedByResearcherProjectsList();
                 getDataForCompletedProjectsList();
-                
+                getDataNotificationList();
                 
             
             }
