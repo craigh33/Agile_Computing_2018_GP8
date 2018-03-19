@@ -599,7 +599,11 @@ public class ResearcherView extends javax.swing.JFrame {
     }//GEN-LAST:event_sign_project_buttonActionPerformed
 
     private void send_for_revision_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_for_revision_buttonActionPerformed
-        // TODO add your handling code here:
+        // add sent for revision variable in DB to true and it effectively sends to RIS view
+        
+        
+        
+        
     }//GEN-LAST:event_send_for_revision_buttonActionPerformed
 
     private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
