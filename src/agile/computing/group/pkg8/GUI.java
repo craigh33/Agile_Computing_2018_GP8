@@ -79,47 +79,12 @@ public class GUI {
             e.printStackTrace(System.out);
         }
         
-        JFrame startScreen = new JFrame();
-        startScreen.setSize(400, 500);
+        StartScreen startScreen = new StartScreen();
         startScreen.setLocationRelativeTo(null);
-        
-        JPanel buttons = new JPanel();
-        startScreen.add(buttons);
-        
-        
-        startScreen.setVisible(true);//makes it visible
-        
-        JButton signIn = new JButton("Sign in");//Creates new Button
-        buttons.add(signIn);
-
-        signIn.setBounds(130, 100, 100, 40);//Sets size of button
-        signIn.setMnemonic(KeyEvent.VK_A);
-        signIn.setTransferHandler(new TransferHandler("text"));
-        signIn.addActionListener((ActionEvent event)
-                -> {
-           startScreen.dispose();
-           loginScreen();
-           //FAQScreen();
-           //adminScreen();
-        }
-        );
-        
-        JButton signUp = new JButton("Sign up");//Creates new Button
-        buttons.add(signUp);
-        
-        signUp.setBounds(130, 100, 100, 40);//Sets size of button
-        signUp.setMnemonic(KeyEvent.VK_A);
-        signUp.setTransferHandler(new TransferHandler("text"));
-        signUp.addActionListener((ActionEvent event)
-                -> {
-            startScreen.dispose();
-            SignUp signupScreen = new SignUp();
-            signupScreen.setLocationRelativeTo(null);
-            signupScreen.setVisible(true);
-        }
-        );
+        startScreen.setVisible(true);
         
     }
+   
     
     /**
      * Login Screen GUI

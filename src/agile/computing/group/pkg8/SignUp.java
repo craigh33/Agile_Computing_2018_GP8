@@ -186,8 +186,9 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             SignUp.this.dispose();
-            GUI gui = new GUI();
-            gui.startScreen();
+            StartScreen startScreen = new StartScreen();
+            startScreen.setLocationRelativeTo(null);
+            startScreen.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
