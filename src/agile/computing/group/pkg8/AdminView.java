@@ -37,17 +37,22 @@ public class AdminView extends javax.swing.JFrame {
         
         DefaultListModel listProgress = new DefaultListModel();
         
-        /*ResultSet rs2 = connection.getStaff();
+       ResultSet rs2 = connection.getStaff();
         try{
             while(rs2.next()){
             
-                listProgress.addElement("ID: "+ rs2.getInt("staffID") + " Password: "+ rs2.getString("password") + " Name: "+ rs2.getString("firstName "+ rs2.getString("lastName") + " Email: "+rs2.getString("email") + " Job Type: " + rs2.getString("jobType")));
+              int id = rs2.getInt("staffID");
+              //String idStaff = Integer.toString(id);
+              
+              listProgress.addElement("ID: " + id + " \t Password: " + rs2.getString("password") + " \t Name: " +rs2.getString("firstName") + " " + rs2.getString("lastName") + " \t Email: " + rs2.getString("email") + " \t Job Type: " + rs2.getString("jobType"));
+              
             }
+            
         }
         
         catch (SQLException e) {
             e.printStackTrace(System.out);
-        }*/
+        }
       
       staffList.setModel(listProgress);
       
