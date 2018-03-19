@@ -636,7 +636,7 @@ public class RISView extends javax.swing.JFrame {
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
-                        listProgress.addElement("ID:  "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
                     
                     } else {
                     
@@ -828,6 +828,7 @@ public class RISView extends javax.swing.JFrame {
             getDataForUnsignedProjectsList();
             getDataForSignedByResearcherProjectsList();
             getDataForCompletedProjectsList();
+            getDataForNotificationPList();
         }
         
         }
