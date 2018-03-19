@@ -621,7 +621,15 @@ public class ResearcherView extends javax.swing.JFrame {
     }//GEN-LAST:event_send_for_revision_buttonActionPerformed
 
     private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
-        // TODO add your handling code here:
+        try {
+            ResultSet temp = getSelectedProjectDetails();
+            String idstring = temp.getString("id");
+            int id = Integer.parseInt(idstring);
+            File file =  fh.uploadSelect();
+            Boolean success = fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_update_excel_buttonActionPerformed
 
     private void unsigned_projects_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unsigned_projects_listMouseClicked
@@ -802,7 +810,7 @@ public class ResearcherView extends javax.swing.JFrame {
         
     }
      
-     private void getSelectedProjectDetails() throws SQLException
+     private ResultSet getSelectedProjectDetails() throws SQLException
     {
         boolean researcherSig_bool;
         boolean risSig_bool;
@@ -918,6 +926,8 @@ public class ResearcherView extends javax.swing.JFrame {
         sign_button_clicked = false;
         revision_button_clicked = false;
         
+        
+        return selectedProjectResultSet;
         //refresh the list of valid projects
         
         
