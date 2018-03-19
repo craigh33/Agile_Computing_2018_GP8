@@ -49,7 +49,9 @@ public class DBConnectionTest {
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
+            rs.next();
             assertNotNull(rs.getString("name"));
+            stmt.executeUpdate("DELETE FROM project WHERE name='TESTPROJECT'");
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
