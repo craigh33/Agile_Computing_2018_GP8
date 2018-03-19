@@ -108,7 +108,7 @@ public class AdminView extends javax.swing.JFrame {
          
     }
     
-    public void deleteStaff(){
+   /* public void deleteStaff(){
         
         deleteButton.setMnemonic(KeyEvent.VK_A);
         deleteButton.setTransferHandler(new TransferHandler("text"));
@@ -122,7 +122,7 @@ public class AdminView extends javax.swing.JFrame {
            
         });
     
-    }
+    }*/
         
     
 
@@ -143,7 +143,7 @@ public class AdminView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         projectList = new javax.swing.JList<>();
         refreshButton = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        deleteProject = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         idLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
@@ -163,6 +163,11 @@ public class AdminView extends javax.swing.JFrame {
         deleteStaffIDLabel = new javax.swing.JLabel();
         deleteStaffID = new javax.swing.JTextField();
         deleteButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        deleteLabel = new javax.swing.JLabel();
+        projectLabel = new javax.swing.JLabel();
+        deleteProjectID = new javax.swing.JTextField();
+        deleteProjectButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -310,7 +315,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Add Staff", jPanel3);
+        deleteProject.addTab("Add Staff", jPanel3);
 
         jLabel1.setText("Delete by:");
 
@@ -353,7 +358,51 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap(140, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Delete Staff", jPanel4);
+        deleteProject.addTab("Delete Staff", jPanel4);
+
+        deleteLabel.setText("Delete by:");
+
+        projectLabel.setText("Project ID:");
+
+        deleteProjectButton.setText("Delete");
+        deleteProjectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteProjectButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(deleteProjectButton)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(deleteLabel)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(projectLabel)
+                            .addGap(18, 18, 18)
+                            .addComponent(deleteProjectID, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(440, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(deleteProjectID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(deleteLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(projectLabel)))
+                .addGap(18, 18, 18)
+                .addComponent(deleteProjectButton)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+
+        deleteProject.addTab("Delete Project", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,7 +411,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane2)
+                    .addComponent(deleteProject, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(topPane, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(refreshButton)
@@ -377,7 +426,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2)
+                .addComponent(deleteProject)
                 .addContainerGap())
         );
 
@@ -417,8 +466,18 @@ public class AdminView extends javax.swing.JFrame {
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
         staffList.clearSelection();
+        projectList.clearSelection();
         getDataForLists();
+        getProjectsForList();
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void deleteProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProjectButtonActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(deleteProjectID.getText());
+        connection.removeProjectById(id);
+        
+        deleteProjectID.setText("");
+    }//GEN-LAST:event_deleteProjectButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,6 +517,10 @@ public class AdminView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel deleteLabel;
+    private javax.swing.JTabbedPane deleteProject;
+    private javax.swing.JButton deleteProjectButton;
+    private javax.swing.JTextField deleteProjectID;
     private javax.swing.JTextField deleteStaffID;
     private javax.swing.JLabel deleteStaffIDLabel;
     private javax.swing.JTextField email;
@@ -470,15 +533,16 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jobType;
     private javax.swing.JLabel jobTypeLabel;
     private javax.swing.JTextField lastName;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JLabel projectLabel;
     private javax.swing.JList<String> projectList;
     private javax.swing.JButton refreshButton;
     private javax.swing.JTextField staffID;
