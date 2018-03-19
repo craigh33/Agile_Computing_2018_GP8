@@ -443,19 +443,19 @@ public class DeanView extends javax.swing.JFrame {
     }//GEN-LAST:event_download_excel_buttonActionPerformed
 
     private void export_to_pdf_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_to_pdf_buttonActionPerformed
-        //initilize pdf export
+       //initilize pdf export
         if (SelectedID == null){
             JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before exporting.", "No Selected Project", WARNING_MESSAGE);
         }
         else
         {
 
-            GUI newGUI_PDF = new GUI();
+            PrintHandler newPDF = new PrintHandler();
             try {
 
-                newGUI_PDF.getNewResultSet(SelectedID);
+                newPDF.getNewResultSet(SelectedID);
             } catch (SQLException ex) {
-                Logger.getLogger(DeanView.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RISView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_export_to_pdf_buttonActionPerformed

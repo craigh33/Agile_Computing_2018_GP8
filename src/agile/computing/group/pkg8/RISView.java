@@ -486,10 +486,10 @@ public class RISView extends javax.swing.JFrame {
         else
         {
 
-            GUI newGUI_PDF = new GUI();
+            PrintHandler newPDF = new PrintHandler();
             try {
 
-                newGUI_PDF.getNewResultSet(SelectedID);
+                newPDF.getNewResultSet(SelectedID);
             } catch (SQLException ex) {
                 Logger.getLogger(RISView.class.getName()).log(Level.SEVERE, null, ex);
             }
