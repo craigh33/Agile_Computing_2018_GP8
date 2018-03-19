@@ -158,4 +158,22 @@ public class FileHandler {
 
         return supported;
     }
+    
+    File uploadSelect(){
+        JFrame dialogFrame = new JFrame();
+
+            JFileChooser fc = new JFileChooser();
+            fc.setFileFilter(new FileNameExtensionFilter("Excel file", "xls", "xlsx"));
+            fc.setDialogTitle("Choose file");
+
+            int userSelection = fc.showSaveDialog(dialogFrame);
+            File file = null;
+            switch (userSelection) {
+                case JFileChooser.APPROVE_OPTION:
+                    //File file = new File(fc.getSelectedFile().getName());
+                    file = new File(fc.getSelectedFile().toString());
+                    break;
+            }
+            return file;
+    }
 }
