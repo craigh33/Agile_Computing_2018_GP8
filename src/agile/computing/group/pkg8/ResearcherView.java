@@ -867,7 +867,7 @@ public class ResearcherView extends javax.swing.JFrame {
      
      private ResultSet getSelectedProjectDetails() throws SQLException
     {
-        boolean researcherSig_bool;
+        boolean researcherSig_bool = false;
         boolean risSig_bool;
         boolean assoSig_bool;
         boolean deanSig_bool;
@@ -913,10 +913,18 @@ public class ResearcherView extends javax.swing.JFrame {
         comments_field_update.setText(comments);
         comments_field.setText(comments);
         
+         //convert signatures to boolean
+            researcherSig_bool = researcherSig.equals("1");
+            risSig_bool = risSig.equals("1");
+            assoSig_bool = depDeanSig.equals("1");
+            deanSig_bool = deanSig.equals("1");
+        
+        
         if (sign_button_clicked == true){
             
             
-            
+            //set researcher needs to review to false
+            researcher_needs2_review = "0";
             //change researcher signature to true
             
             //does some nice validation with a are u sure box
@@ -926,16 +934,10 @@ public class ResearcherView extends javax.swing.JFrame {
             if (reply == JOptionPane.YES_OPTION) {
                 
             
+          
+            // set reearcher signature to true
             
-            
-            
-            //convert signatures to boolean
-            researcherSig_bool = researcherSig.equals("1");
-            risSig_bool = risSig.equals("1");
-            assoSig_bool = depDeanSig.equals("1");
-            deanSig_bool = deanSig.equals("1");
-            
-            risSig_bool = true;
+            researcherSig_bool = true;
             
             System.out.println(researcherSig_bool + "   <<<<<<<<<<<< sig");
             System.out.println(risSig_bool + "   <<<<<<<<<<<< sig");
@@ -953,7 +955,7 @@ public class ResearcherView extends javax.swing.JFrame {
         
         }
         
-        if (revision_button_clicked == true)
+        if (revision_button_clicked == true && researcherSig_bool == false)
         {
             int reply = JOptionPane.showConfirmDialog(null, "This action will send the currently selected project for review. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
             
@@ -976,6 +978,10 @@ public class ResearcherView extends javax.swing.JFrame {
             }
             
         
+        }
+        else if (revision_button_clicked == true && researcherSig_bool == true)
+        {
+            JOptionPane.showMessageDialog(warningWindow, "This Project cannot be sent away for revision. it is signed by researcher", "No Selected Project", WARNING_MESSAGE);
         }
         
         
