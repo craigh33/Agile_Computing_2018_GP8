@@ -632,7 +632,7 @@ public class RISView extends javax.swing.JFrame {
             while (rs2.next()) {
                 
                 //getting projects to display that the ris needs to see.
-                if (rs2.getString("needs_reviewed").equals("1"))
+                if (rs2.getString("needs_reviewed").equals("1") && rs2.getString("ris_seen").equals("0"))
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
