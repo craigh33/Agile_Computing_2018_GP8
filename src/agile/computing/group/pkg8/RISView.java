@@ -34,6 +34,7 @@ public class RISView extends javax.swing.JFrame {
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
+    boolean revision_button_clicked = false;
 
     /**
      * Creates new form TestTemplate
@@ -309,7 +310,7 @@ public class RISView extends javax.swing.JFrame {
             }
         });
 
-        send_for_revision_button.setText("Send Project for Evaluation");
+        send_for_revision_button.setText("Send Project Back for Review");
         send_for_revision_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 send_for_revision_buttonActionPerformed(evt);
@@ -417,7 +418,7 @@ public class RISView extends javax.swing.JFrame {
             }
         });
 
-        sign_in_details.setText("Signed in as: Researcher");
+        sign_in_details.setText("Signed in as: RIS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -530,7 +531,22 @@ public class RISView extends javax.swing.JFrame {
     }//GEN-LAST:event_sign_project_buttonActionPerformed
 
     private void send_for_revision_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_for_revision_buttonActionPerformed
-        // TODO add your handling code here:
+        // send project back to researcher to review the cost that RIS has added or changed 
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            revision_button_clicked = true;
+
+            try {
+                getSelectedProjectDetails();
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_send_for_revision_buttonActionPerformed
 
     private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
@@ -759,7 +775,7 @@ public class RISView extends javax.swing.JFrame {
         boolean risSig_bool;
         boolean assoSig_bool;
         boolean deanSig_bool;
-        
+        boolean needs_review;
         //get id of selected list element
         
        
@@ -782,6 +798,12 @@ public class RISView extends javax.swing.JFrame {
         String risSig = selectedProjectResultSet.getString("ris_Sig");
         String depDeanSig = selectedProjectResultSet.getString("depDean_Sig");
         String deanSig = selectedProjectResultSet.getString("dean_Sig");
+        
+         // addtional columns
+        int revision = selectedProjectResultSet.getInt("revision");
+        String ris_seen = selectedProjectResultSet.getString("ris_seen");
+        String needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
+        String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
         
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
@@ -834,8 +856,35 @@ public class RISView extends javax.swing.JFrame {
         }
         
         
-        sign_button_clicked = false;
+        if (revision_button_clicked == true)
+        {
+            int reply = JOptionPane.showConfirmDialog(null, "This action will send the currently selected project back for review to researcher. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+            
+            if (reply == JOptionPane.YES_OPTION) {
+                
+                // set the revision to different value 
+                revision = revision + 1;
+                
+                //set the value of researcher_needs2_review to true so it will display on researcher notifications
+                researcher_needs2_review = "1";
+                
+                ris_seen = "0";
+                //setting needs review to true to allow it to appear on RIS notification screen
+                needs_review = true;
+                
+                connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
+                
+                getDataForUnsignedProjectsList();
+                getDataForSignedByResearcherProjectsList();
+                getDataForCompletedProjectsList();
+                
+                
+            
+            }
+        }
         
+        sign_button_clicked = false;
+        revision_button_clicked = false;
         
         //refresh the list of valid projects
         
