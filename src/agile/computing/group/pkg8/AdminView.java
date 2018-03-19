@@ -180,6 +180,9 @@ public class AdminView extends javax.swing.JFrame {
         change_sig_image_button = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        topPane.setBackground(new java.awt.Color(255, 255, 255));
 
         staffList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -233,6 +236,10 @@ public class AdminView extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
+
+        deleteProject.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         idLabel.setText("Staff ID:");
 
@@ -327,6 +334,8 @@ public class AdminView extends javax.swing.JFrame {
 
         deleteProject.addTab("Add Staff", jPanel3);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Delete by:");
 
         deleteStaffIDLabel.setText("Staff ID:");
@@ -369,6 +378,8 @@ public class AdminView extends javax.swing.JFrame {
         );
 
         deleteProject.addTab("Delete Staff", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         deleteLabel.setText("Delete by:");
 

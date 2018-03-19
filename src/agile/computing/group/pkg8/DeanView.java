@@ -44,7 +44,7 @@ public class DeanView extends javax.swing.JFrame {
     public DeanView() {
         initComponents();
         setIconImage(img.getImage());
-        //getContentPane().setBackground(new Color(255,255,255));
+        getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         project_name_field.setEditable(false);
@@ -112,6 +112,9 @@ public class DeanView extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
 
         notifications_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -142,6 +145,10 @@ public class DeanView extends javax.swing.JFrame {
                 refresh_buttonActionPerformed(evt);
             }
         });
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Project Name");
 
@@ -243,6 +250,8 @@ public class DeanView extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("View Project Data", jPanel2);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setText("Project Name");
 

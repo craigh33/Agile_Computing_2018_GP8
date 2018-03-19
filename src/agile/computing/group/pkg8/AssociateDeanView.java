@@ -112,6 +112,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
+
         notifications_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -141,6 +143,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
                 refresh_buttonActionPerformed(evt);
             }
         });
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Project Name");
 
@@ -242,6 +248,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("View Project Data", jPanel2);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setText("Project Name");
 
