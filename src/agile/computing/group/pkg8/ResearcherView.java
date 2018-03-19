@@ -901,8 +901,11 @@ public class ResearcherView extends javax.swing.JFrame {
                 //setting needs review to true to allow it to appear on RIS notification screen
                 needs_review = true;
                 
-                connection.REVISIONeditProject(id, revision, ris_seen_bool, needs_review);
+                connection.REVISIONeditProject(id, revision, ris_seen, needs_review);
                 
+                getDataForUnsignedProjectsList();
+                getDataForSignedByResearcherProjectsList();
+                getDataForCompletedProjectsList();
                 
                 
             

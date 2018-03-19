@@ -44,6 +44,7 @@ public class RISView extends javax.swing.JFrame {
         getDataForUnsignedProjectsList();
         getDataForSignedByResearcherProjectsList();
         getDataForCompletedProjectsList();
+        getDataForNotificationPList();
         project_name_field.setEditable(false);
         researcher_name_field.setEditable(false);
         date_of_creation_field.setEditable(false);
@@ -113,6 +114,11 @@ public class RISView extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        notifications_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notifications_listMouseClicked(evt);
+            }
         });
         jScrollPane6.setViewportView(notifications_list);
 
@@ -462,6 +468,8 @@ public class RISView extends javax.swing.JFrame {
         getDataForUnsignedProjectsList();
         getDataForSignedByResearcherProjectsList();
         getDataForCompletedProjectsList();
+        getDataForNotificationPList();
+        
     }//GEN-LAST:event_refresh_buttonActionPerformed
 
     private void researcher_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_fieldActionPerformed
@@ -560,6 +568,16 @@ public class RISView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_logout_buttonActionPerformed
 
+    private void notifications_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notifications_listMouseClicked
+        // TODO add your handling code here:
+        try {
+            selected = notifications_list.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(RISView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_notifications_listMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -602,6 +620,42 @@ public class RISView extends javax.swing.JFrame {
             }
         });
     }
+    
+    //gets details of projects not viewed by RIS
+    
+    private void getDataForNotificationPList()
+    {
+        
+        DefaultListModel listProgress = new DefaultListModel();
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                //getting projects to display that only associate dean needs to see.
+                if (rs2.getString("ris_seen").equals("0"))
+                    {
+                    //add to list in here 
+                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                    
+                    } else {
+                    
+                    //cry
+                    
+                    }
+             
+                }
+            } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+   
+        //setting list model to listProgress
+        notifications_list.setModel(listProgress);
+        
+        
+    }
+    
+    
     
     private void getDataForSignedByResearcherProjectsList()
     {
