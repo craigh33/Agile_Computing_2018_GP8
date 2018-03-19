@@ -56,7 +56,6 @@ public class ResearcherView extends javax.swing.JFrame {
         date_of_creation_field_update.setEditable(false);
         //new_download_link_field.setEditable(false);
         researcher_name_field_update.setEditable(false);
-        new_download_url.setEditable(false);
     }
 
     /**
