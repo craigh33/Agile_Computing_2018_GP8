@@ -29,6 +29,7 @@ public class AdminView extends javax.swing.JFrame {
         initComponents();
         connection = new DBConnection(host,db,username,newPass);
         getDataForLists();
+        getProjectsForList();
     }
     
     //will need to do method for getting projects
@@ -57,6 +58,24 @@ public class AdminView extends javax.swing.JFrame {
       staffList.setModel(listProgress);
       
       }
+    
+    public void getProjectsForList(){
+        
+        DefaultListModel projList = new DefaultListModel();
+   
+       ResultSet rs = connection.getProjects();
+      
+        try{
+            while(rs.next()){
+
+                projList.addElement("Project ID: " + rs.getString("id") + " \t Name: " + rs.getString("name") + " \t Researcher: " + rs.getString("researcher") + " \t Date: " + rs.getString("date") + " \t File Name: " + rs.getString("file_name") + " \t File Path: " + rs.getString("file_path"));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        projectList.setModel(projList);
+    }
     
     public void addStaff(){
         
