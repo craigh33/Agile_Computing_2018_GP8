@@ -37,7 +37,7 @@ public class AdminView extends javax.swing.JFrame {
         
         DefaultListModel listProgress = new DefaultListModel();
         
-        ResultSet rs2 = connection.getStaff();
+        /*ResultSet rs2 = connection.getStaff();
         try{
             while(rs2.next()){
             
@@ -47,7 +47,7 @@ public class AdminView extends javax.swing.JFrame {
         
         catch (SQLException e) {
             e.printStackTrace(System.out);
-        }
+        }*/
       
       staffList.setModel(listProgress);
       
