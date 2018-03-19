@@ -648,11 +648,20 @@ public class RISView extends javax.swing.JFrame {
             while (rs2.next()) {
                 
                 //getting projects to display that the ris needs to see.
-                if (rs2.getString("needs_reviewed").equals("1") && rs2.getString("ris_seen").equals("0"))
+                if (rs2.getString("ris_seen").equals("0"))
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
-                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                       // listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        
+                        if (rs2.getString("needs_reviewed").equals("1"))
+                        {
+                            listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".         <<<< PROJECT NEEDS REVIEWED" );
+                        }
+                        else if (rs2.getString("ris_sig").equals("0") && rs2.getString("researcher_sig").equals("1"))
+                        {
+                             listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".        >>>> PROJECT NEEDS SIGNED" );
+                        }
                         
                     
                     } else {
