@@ -866,7 +866,7 @@ public class RISView extends javax.swing.JFrame {
         String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
         needs_review = needs_reviewed.equals("1");
         
-        
+        ris_seen = "1";
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
         researcher_name_field.setText(researcher);
