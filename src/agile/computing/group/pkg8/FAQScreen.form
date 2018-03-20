@@ -62,10 +62,10 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Georgia" size="13" style="0"/>
+              <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Change me now, bitch."/>
+            <Property name="text" type="java.lang.String" value="Q. How can I see my signed projects?&#xa;A. Click on the &apos;signed by researcher&apos; tab, this shows all projects you have signed.&#xa;&#xa;Q. How do I know when my project has been signed by someone else?&#xa;A. All external changes to your projects will be displayed in the notification tab.&#xa;&#xa;Q. How can I create a new project?&#xa;A. Select the &apos;Create project&apos; tab, input the name of your project and any comments you&apos;d like before pressing create. You&apos;ll be prompted to upload the project files, select them and press save.&#xa;&#xa;Q. Can I add updated versions of my project files?&#xa;A. Yes. In the &apos;Sign or update project&apos; tab.&#xa;&#xa;Q. Are projects automatically sent for evalution/signing?&#xa;A. No. You must do this for each project from the &apos;Sign/ update&apos; tab.&#xa;&#xa;&#xa;If you have any further questions please visit our help page.&#xa;&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>

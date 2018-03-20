@@ -80,7 +80,17 @@ public class DBConnectionTest {
     }
     
     @Test
-    public void testDeleteProject() {
+    public void testRemoveProjectByID() {
+        
+    }
+    
+    @Test
+    public void testREVISIONeditProject() {
+        
+    }
+    
+    @Test
+    public void testGetStaff() {
         
     }
     
@@ -95,7 +105,7 @@ public class DBConnectionTest {
     }
     
     @Test
-    public void testGetProjectByID() {
+    public void testGetProject() {
         Connection con = connection.getConnection();
         try {
             Statement stmt = con.createStatement();
@@ -122,17 +132,21 @@ public class DBConnectionTest {
     @Test
     public void testAddUser() {
         connection.addUser(700, "thing", "James", "Bond", "007@mi6.com", "Researcher");
+        Connection con = connection.getConnection();
         ResultSet x = connection.getUserByStaffID(700);
         try {
+            Statement stmt = con.createStatement();
             x.next();
             assertEquals("Bond", x.getString("Lastname"));
+            stmt.executeUpdate("DELETE FROM staff WHERE staffid=700");
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
     }
     
     @Test
-    public void testRemoveUser() {
+    public void testRemoveUserByID() {
         connection.removeUserById(700);
         ResultSet x = connection.getUserByStaffID(700);
         try {
@@ -144,5 +158,6 @@ public class DBConnectionTest {
 
     @After
     public void tearDown() {
+        connection.closeConnection();
     }
 }
