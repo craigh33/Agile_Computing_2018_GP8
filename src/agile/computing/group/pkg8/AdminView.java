@@ -608,14 +608,9 @@ public class AdminView extends javax.swing.JFrame {
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         // TODO add your handling code here:
         //UpdateButton_clicked = true;
-      try{
-          getSelectedStaffDetails();
-          PushUpdated();
-      }
-      catch(SQLException ex) {
-            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-          
-      }
+        PushUpdate();
+     
+     
        // int StaffID = Integer.parseInt(staffIDField.getText());
        // String Password = passwordField.getText();
         //String emailAddress = emailField.getText();
@@ -637,7 +632,7 @@ public class AdminView extends javax.swing.JFrame {
         String updatedEmail;
         String updatedPassword;
         
-        ResultSet selectedStaffResultSet = connection.getUserByStaffID(idselected);
+        //ResultSet selectedStaffResultSet = connection.getUserByStaffID(idselected);
          String s = selected.split(" ")[1];
         
         SelectedID = s;
@@ -645,6 +640,7 @@ public class AdminView extends javax.swing.JFrame {
         
         int idselected;
         idselected = Integer.parseInt(s);
+        ResultSet selectedStaffResultSet = connection.getUserByStaffID(idselected);
         selectedStaffResultSet.next();
         String FirstName = selectedStaffResultSet.getString("FirstName");
         String LastName = selectedStaffResultSet.getString("LastName");
@@ -658,20 +654,19 @@ public class AdminView extends javax.swing.JFrame {
             
             System.out.println(updatedEmail + updatedPassword);
             
-        connection.editStaff(id, updatedPassword, FirstName, LastName, updatedEmail, JobType, sig_path, sig_name);
+        //connection.editStaff(id, updatedPassword, FirstName, LastName, updatedEmail, JobType, sig_path, sig_name);
         }else{
              
          }
-
-        selectedStaffResultSet();
         int id = selectedStaffResultSet.getInt("staffID");
-        //String Sid = Integer.parseInt(id.getText());
+        String ids;
+        ids = Integer.toString(id);
         String Password = selectedStaffResultSet.getString("Password");
 
         String emailAddress = selectedStaffResultSet.getString("email");
        
         
-        //staffIDField.setText(id);
+        staffIDField.setText(ids);
         passwordField.setText(Password);
         emailField.setText(emailAddress);
         
@@ -682,16 +677,17 @@ public class AdminView extends javax.swing.JFrame {
         return selectedStaffResultSet;
     }
    
-    private void PushUpdate(){
+    public void PushUpdate(){
         int id;
         String updatedEmail;
         String updatedPassword;
         
         id = Integer.parseInt(deleteStaffID.getText());
-        passwordField.getText(updatedPassword);
-        emailField.getText(updatedEmail);
+        System.out.println(id);
+       updatedPassword = passwordField.getText();
+        updatedEmail = emailField.getText();
         
-        ResultSet rs = connection.getUserByStaffID(idselected);
+        //ResultSet rs = connection.getUserByStaffID(idselected);
         connection.updateStaffDetails(id, updatedPassword, updatedEmail);
         
     }
