@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.TransferHandler;
@@ -29,6 +31,10 @@ public class AdminView extends javax.swing.JFrame {
     String username = "17agileteam8";
     String newPass = "7632.at8.2367";
     FileHandler fh = new FileHandler();
+    ResultSet rs;
+    String selected;
+    boolean UpdateButton_clicked = false;
+    String SelectedID;
     
     public AdminView() {
         initComponents();
@@ -52,8 +58,8 @@ public class AdminView extends javax.swing.JFrame {
               int id = rs2.getInt("staffID");
               //String idStaff = Integer.toString(id);
               
+              //listProgress.addElement("ID: " + rs2.getInt("staffID") + " \t Password: " + rs2.getString("password") + " \t Name: " +rs2.getString("firstName") + " " + rs2.getString("lastName") + " \t Email: " + rs2.getString("email") + " \t Job Type: " + rs2.getString("jobType") + " \t Signature Path: " + rs2.getString("sig_path") + " \t Signature Name: " + rs2.getString("sig_name"));
               listProgress.addElement("ID: " + id + " \t Password: " + rs2.getString("password") + " \t Name: " +rs2.getString("firstName") + " " + rs2.getString("lastName") + " \t Email: " + rs2.getString("email") + " \t Job Type: " + rs2.getString("jobType") + " \t Signature Path: " + rs2.getString("sig_path") + " \t Signature Name: " + rs2.getString("sig_name"));
-              
             }
             
         }
@@ -111,7 +117,7 @@ public class AdminView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         projectList = new javax.swing.JList<>();
         refreshButton = new javax.swing.JButton();
-        deleteProject = new javax.swing.JTabbedPane();
+        editStaffPanel = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         idLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
@@ -138,6 +144,14 @@ public class AdminView extends javax.swing.JFrame {
         projectLabel = new javax.swing.JLabel();
         deleteProjectID = new javax.swing.JTextField();
         deleteProjectButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        staffIDField = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        UpdateButton = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -153,6 +167,11 @@ public class AdminView extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        staffList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                staffListMouseClicked(evt);
+            }
         });
         jScrollPane2.setViewportView(staffList);
 
@@ -202,7 +221,7 @@ public class AdminView extends javax.swing.JFrame {
             }
         });
 
-        deleteProject.setBackground(new java.awt.Color(255, 255, 255));
+        editStaffPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -317,7 +336,7 @@ public class AdminView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        deleteProject.addTab("Add Staff", jPanel3);
+        editStaffPanel.addTab("Add Staff", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -362,7 +381,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap(141, Short.MAX_VALUE))
         );
 
-        deleteProject.addTab("Delete Staff", jPanel4);
+        editStaffPanel.addTab("Delete Staff", jPanel4);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -408,7 +427,67 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap(147, Short.MAX_VALUE))
         );
 
-        deleteProject.addTab("Delete Project", jPanel5);
+        editStaffPanel.addTab("Delete Project", jPanel5);
+
+        jLabel3.setText("Staff ID :");
+
+        jLabel4.setText("Email :");
+
+        jLabel5.setText("Password:");
+
+        passwordField.setText("jPasswordField1");
+
+        UpdateButton.setText("Update");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(57, 57, 57)
+                            .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3))
+                            .addGap(62, 62, 62)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(staffIDField)
+                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))))
+                    .addComponent(UpdateButton))
+                .addContainerGap(405, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(staffIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(UpdateButton)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        editStaffPanel.addTab("Edit Staff", jPanel6);
 
         logout_button.setText("Logout");
         logout_button.addActionListener(new java.awt.event.ActionListener() {
@@ -436,7 +515,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(deleteProject, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(editStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(topPane, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(refreshButton)
@@ -454,7 +533,7 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(refreshButton)
                     .addComponent(logout_button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteProject)
+                .addComponent(editStaffPanel)
                 .addContainerGap())
         );
 
@@ -526,6 +605,96 @@ public class AdminView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        // TODO add your handling code here:
+        //UpdateButton_clicked = true;
+      try{
+          getSelectedStaffDetails();
+          PushUpdated();
+      }
+      catch(SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+          
+      }
+       // int StaffID = Integer.parseInt(staffIDField.getText());
+       // String Password = passwordField.getText();
+        //String emailAddress = emailField.getText();
+        //connection.editStaff(StaffID, Password, FirstName, LastName, emailAddress, JobType, sig_path, sig_name);
+    }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void staffListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffListMouseClicked
+        // TODO add your handling code here:
+         try {
+            selected = staffList.getSelectedValue();
+            getSelectedStaffDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_staffListMouseClicked
+
+     private ResultSet getSelectedStaffDetails() throws SQLException
+    {
+        String updatedEmail;
+        String updatedPassword;
+        
+        ResultSet selectedStaffResultSet = connection.getUserByStaffID(idselected);
+         String s = selected.split(" ")[1];
+        
+        SelectedID = s;
+        System.out.println(s);
+        
+        int idselected;
+        idselected = Integer.parseInt(s);
+        selectedStaffResultSet.next();
+        String FirstName = selectedStaffResultSet.getString("FirstName");
+        String LastName = selectedStaffResultSet.getString("LastName");
+        String JobType = selectedStaffResultSet.getString("JobType");
+        String sig_path = selectedStaffResultSet.getString("sig_path");
+        String sig_name = selectedStaffResultSet.getString("sig_name");
+        
+         if (UpdateButton_clicked == true){
+            updatedEmail = emailField.getText();
+            updatedPassword = passwordField.getText();
+            
+            System.out.println(updatedEmail + updatedPassword);
+            
+        connection.editStaff(id, updatedPassword, FirstName, LastName, updatedEmail, JobType, sig_path, sig_name);
+        }else{
+             
+         }
+
+        selectedStaffResultSet();
+        int id = selectedStaffResultSet.getInt("staffID");
+        //String Sid = Integer.parseInt(id.getText());
+        String Password = selectedStaffResultSet.getString("Password");
+
+        String emailAddress = selectedStaffResultSet.getString("email");
+       
+        
+        //staffIDField.setText(id);
+        passwordField.setText(Password);
+        emailField.setText(emailAddress);
+        
+        
+        
+        
+        UpdateButton_clicked = false;
+        return selectedStaffResultSet;
+    }
+   
+    private void PushUpdate(){
+        int id;
+        String updatedEmail;
+        String updatedPassword;
+        
+        id = Integer.parseInt(deleteStaffID.getText());
+        passwordField.getText(updatedPassword);
+        emailField.getText(updatedEmail);
+        
+        ResultSet rs = connection.getUserByStaffID(idselected);
+        connection.updateStaffDetails(id, updatedPassword, updatedEmail);
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -562,17 +731,19 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton UpdateButton;
     private javax.swing.JButton addButton;
     private javax.swing.JMenuItem change_password_button;
     private javax.swing.JMenuItem change_sig_image_button;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel deleteLabel;
-    private javax.swing.JTabbedPane deleteProject;
     private javax.swing.JButton deleteProjectButton;
     private javax.swing.JTextField deleteProjectID;
     private javax.swing.JTextField deleteStaffID;
     private javax.swing.JLabel deleteStaffIDLabel;
+    private javax.swing.JTabbedPane editStaffPanel;
     private javax.swing.JTextField email;
+    private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField firstname;
     private javax.swing.JLabel fnameLabel;
@@ -580,6 +751,9 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -587,6 +761,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jobType;
@@ -595,11 +770,13 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JButton logout_button;
     private javax.swing.JPasswordField password;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel projectLabel;
     private javax.swing.JList<String> projectList;
     private javax.swing.JButton refreshButton;
     private javax.swing.JTextField staffID;
+    private javax.swing.JTextField staffIDField;
     private javax.swing.JList<String> staffList;
     private javax.swing.JTabbedPane topPane;
     // End of variables declaration//GEN-END:variables
