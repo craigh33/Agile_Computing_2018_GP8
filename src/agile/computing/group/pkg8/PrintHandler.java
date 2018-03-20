@@ -5,6 +5,7 @@
  */
 package agile.computing.group.pkg8;
 
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -58,7 +59,7 @@ public class PrintHandler {
          
 	throws DocumentException, IOException {
         Image image = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\University of Dundee (logo).png");
-        Image sigTest = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\testSig.png");
+        Image sig = Image.getInstance("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures\\default.png");
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter.getInstance(document, new FileOutputStream(filename));
         document.open();
@@ -70,8 +71,12 @@ public class PrintHandler {
         ListItem date = new ListItem(rs.getDate("date").toString());
         ListItem filePath = new ListItem(rs.getString("file_path"));
         ListItem comments = new ListItem(rs.getString("comments"));
+        int researchSig = Integer.parseInt(rs.getString("signed_researcher_id"));
+        int risSig = Integer.parseInt(rs.getString("signed_ris_id"));
+        int assoDeanSig = Integer.parseInt(rs.getString("signed_assodean_id"));
+        int deanSig = Integer.parseInt(rs.getString("signed_dean_id"));
         image.scaleAbsolute(200, 75);
-        sigTest.scaleAbsolute(50, 25);        
+        sig.scaleAbsolute(50, 25);        
         document.add(image);
         List list = new List(List.UNORDERED);
         iD.setAlignment(Element.ALIGN_JUSTIFIED);
@@ -100,19 +105,27 @@ public class PrintHandler {
         
         if (rs.getInt("researcher_sig") > 0){
             document.add(new Paragraph("Researcher Signature"));
-            document.add(sigTest);
+            sig = getSignature(researchSig);
+            sig.scaleAbsolute(50, 25);
+            document.add(sig);
         }
         if (rs.getInt("ris_sig") > 0){
             document.add(new Paragraph("RIS Signature"));
-            document.add(sigTest);
+            sig = getSignature(risSig);
+            sig.scaleAbsolute(50, 25);
+            document.add(sig);
         }
         if (rs.getInt("depDean_Sig") > 0){
             document.add(new Paragraph("Associate Dean Signature"));
-            document.add(sigTest);
+            sig = getSignature(assoDeanSig);
+            sig.scaleAbsolute(50, 25);
+            document.add(sig);
         }
         if (rs.getInt("dean_Sig") > 0){
             document.add(new Paragraph("Dean Signature"));
-            document.add(sigTest);
+            sig = getSignature(deanSig);
+            sig.scaleAbsolute(50, 25);
+            document.add(sig);
         }
         }
         catch(SQLException e)
@@ -140,6 +153,27 @@ public class PrintHandler {
         
 
         exportPDFLogic(rs);
+    }
+    
+    /**
+     * Used to get signature image
+     * 
+     * @param id
+     * @throws SQLException 
+     */
+    private Image getSignature(int id) throws SQLException, BadElementException, IOException{
+
+        //open new connection
+        
+        DBConnection connection2 = new DBConnection(host, db, username, password);
+        
+        System.out.println(id);
+        ResultSet staffmember;
+        staffmember = connection2.getUserByStaffID(id);
+        staffmember.next();
+        String temp = "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures\\" + staffmember.getString("sig_name");
+        Image temp1 = Image.getInstance(temp);
+        return temp1;
     }
 
     /**
