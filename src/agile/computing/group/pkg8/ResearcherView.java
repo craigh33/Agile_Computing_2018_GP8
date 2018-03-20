@@ -135,6 +135,11 @@ public class ResearcherView extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        notifications_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notifications_listMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(notifications_list);
 
         jTabbedPane5.addTab("Notifications", jScrollPane6);
@@ -726,6 +731,15 @@ public class ResearcherView extends javax.swing.JFrame {
         faq.setLocationRelativeTo(null);
         faq.setVisible(true);
     }//GEN-LAST:event_help_buttonActionPerformed
+
+    private void notifications_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notifications_listMouseClicked
+        try {
+            selected = notifications_list.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_notifications_listMouseClicked
 
     /**
      * @param args the command line arguments
