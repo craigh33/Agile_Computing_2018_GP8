@@ -123,6 +123,11 @@ public class DeanView extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        notifications_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notifications_listMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(notifications_list);
 
         jTabbedPane5.addTab("Notifications", jScrollPane6);
@@ -553,6 +558,16 @@ public class DeanView extends javax.swing.JFrame {
         faq.setVisible(true);
     }//GEN-LAST:event_help_buttonActionPerformed
 
+    private void notifications_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notifications_listMouseClicked
+        // TODO add your handling code here:
+        try {
+            selected = notifications_list.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(DeanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_notifications_listMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -626,22 +641,27 @@ public class DeanView extends javax.swing.JFrame {
     {
         
         DefaultListModel listProgress = new DefaultListModel();
-        listProgress.clear();
+        ResultSet rs3 = connection.getProjects();
         
-        ResultSet rs2 = connection.getProjects();
+             
+        
+        
         try {
-            while (rs2.next()) {
+            while (rs3.next()) {
+                
+                
                 
                 //getting projects to display that only associate dean needs to see.
-                if (rs2.getString("dean_seen").equals("0") && rs2.getString("depDean_Sig").equals("1"))
+                if (rs3.getString("depDean_sig").equals("1") && rs3.getString("dean_seen").equals("0"))
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
-                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        listProgress.addElement("ID: "+ rs3.getString("id") + "       Project Name:   "+ rs3.getString("name") + ".       >>>> NEEDS SIGNED");
                     
                     } else {
                     
-                    //cry
+                    //cry 
+                    System.out.println("IM DEAD - notifications list");
                     
                     }
              
@@ -663,6 +683,9 @@ public class DeanView extends javax.swing.JFrame {
         
         DefaultListModel listProgress = new DefaultListModel();
         ResultSet rs2 = connection.getProjects();
+        
+        
+        
         try {
             while (rs2.next()) {
                 
@@ -760,8 +783,9 @@ public class DeanView extends javax.swing.JFrame {
                dean_seen = selectedProjectResultSet.getString("dean_seen");
         
                
-               //set this to true to allow the notifications to find out if dean has selected a project on notifications tab, used to then trigger it to be deleted from notifications tab
-            dean_seen = "1";
+        //set this to true to allow the notifications to find out if dean has selected a project on notifications tab, used to then trigger it to be deleted from notifications tab
+        dean_seen = "1";
+        System.out.println(">>>dean seen =  " + dean_seen);
         
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
@@ -816,9 +840,11 @@ public class DeanView extends javax.swing.JFrame {
         }
         
         
+        connection.editDean_Seen(id, dean_seen);
+        
         sign_button_clicked = false;
         
-        connection.editDean_Seen(id, dean_seen);
+        
         
         //refresh the list of valid projects
         

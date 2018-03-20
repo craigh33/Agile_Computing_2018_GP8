@@ -48,6 +48,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
        // getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
+        getDataNotificationsList();
         project_name_field.setEditable(false);
         researcher_name_field.setEditable(false);
         date_of_creation_field.setEditable(false);
@@ -117,6 +118,11 @@ public class AssociateDeanView extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        notifications_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notifications_listMouseClicked(evt);
+            }
         });
         jScrollPane6.setViewportView(notifications_list);
 
@@ -436,6 +442,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
 
     private void refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_buttonActionPerformed
         getDataForUnsignedProjectsList();
+        getDataNotificationsList();
 
     }//GEN-LAST:event_refresh_buttonActionPerformed
 
@@ -525,6 +532,15 @@ public class AssociateDeanView extends javax.swing.JFrame {
         faq.setVisible(true);
     }//GEN-LAST:event_help_buttonActionPerformed
 
+    private void notifications_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notifications_listMouseClicked
+       try {
+            selected = notifications_list.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(DeanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_notifications_listMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -575,6 +591,42 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    private void getDataNotificationsList()
+    {
+        
+        DefaultListModel listProgress = new DefaultListModel();
+        listProgress.clear();
+        
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                //getting projects to display that only associate dean needs to see.
+                if (rs2.getString("ris_sig").equals("1") && rs2.getString("depDean_sig").equals("0") && rs2.getString("dean_sig").equals("0") && rs2.getString("assoDean_seen").equals("0"))
+                    {
+                    //add to list in here 
+                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".       >>>> NEEDS SIGNED");
+                    
+                    } else {
+                    
+                    //cry
+                    
+                    }
+             
+                }
+            } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+   
+        //setting list model to listProgress
+        notifications_list.setModel(listProgress);
+        
+        
+    }
+    
     
      private void getDataForUnsignedProjectsList()
     {
@@ -642,7 +694,12 @@ public class AssociateDeanView extends javax.swing.JFrame {
         String signedRis = selectedProjectResultSet.getString("signed_ris_id");
         String signedAssoDean = selectedProjectResultSet.getString("signed_assodean_id");
         String signedDean = selectedProjectResultSet.getString("signed_dean_id");
+        String assoDean_seen;
+               assoDean_seen = selectedProjectResultSet.getString("assoDean_seen");
         
+               
+        assoDean_seen = "1";
+        System.out.println(">>>assoDean_seen =  " + assoDean_seen);
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
         researcher_name_field.setText(researcher);
@@ -690,6 +747,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
             connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool, signedResearcher, signedRis, signedAssoDean, signedDean);
             
             getDataForUnsignedProjectsList();
+            getDataNotificationsList();
         }
             }
             else{
@@ -697,6 +755,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         }
         
+        
+        connection.editAssoDean_Seen(id, assoDean_seen);
         
         sign_button_clicked = false;
         
