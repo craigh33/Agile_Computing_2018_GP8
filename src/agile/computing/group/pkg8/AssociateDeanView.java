@@ -101,8 +101,6 @@ public class AssociateDeanView extends javax.swing.JFrame {
         comments_field_update = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         sign_project_button = new javax.swing.JButton();
-        send_for_revision_button = new javax.swing.JButton();
-        update_excel_button = new javax.swing.JButton();
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
         sign_in_details = new javax.swing.JLabel();
@@ -287,20 +285,6 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         });
 
-        send_for_revision_button.setText("Send Project for Evaluation");
-        send_for_revision_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                send_for_revision_buttonActionPerformed(evt);
-            }
-        });
-
-        update_excel_button.setText("Update Excel File");
-        update_excel_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_excel_buttonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -320,16 +304,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addContainerGap(450, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(update_excel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(send_for_revision_button, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(sign_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5)
+                        .addGap(41, 41, 41)
+                        .addComponent(sign_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,29 +316,21 @@ public class AssociateDeanView extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(project_name_field_Update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(project_name_field_Update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(researcher_name_field_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(date_of_creation_field_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane5)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(update_excel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(send_for_revision_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sign_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(researcher_name_field_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date_of_creation_field_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sign_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -370,9 +340,9 @@ public class AssociateDeanView extends javax.swing.JFrame {
             .addGap(0, 753, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 6, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 7, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +354,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Sign or Update Project", jPanel1);
+        jTabbedPane1.addTab("Sign Project", jPanel1);
 
         help_button.setText("Help");
 
@@ -395,7 +365,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         });
 
-        sign_in_details.setText("Signed in as: Researcher");
+        sign_in_details.setText("Signed in as: Associate Dean");
 
         jMenu1.setText("File");
 
@@ -520,14 +490,6 @@ public class AssociateDeanView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_sign_project_buttonActionPerformed
-
-    private void send_for_revision_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_for_revision_buttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_send_for_revision_buttonActionPerformed
-
-    private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_update_excel_buttonActionPerformed
 
     private void unsigned_projects_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unsigned_projects_listMouseClicked
         try {
@@ -801,10 +763,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
     private javax.swing.JButton refresh_button;
     private javax.swing.JTextField researcher_name_field;
     private javax.swing.JTextField researcher_name_field_update;
-    private javax.swing.JButton send_for_revision_button;
     private javax.swing.JLabel sign_in_details;
     private javax.swing.JButton sign_project_button;
     private javax.swing.JList<String> unsigned_projects_list;
-    private javax.swing.JButton update_excel_button;
     // End of variables declaration//GEN-END:variables
 }
