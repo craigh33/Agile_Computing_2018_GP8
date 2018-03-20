@@ -86,6 +86,7 @@ public class ResearcherView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jScrollPane6 = new javax.swing.JScrollPane();
         notifications_list = new javax.swing.JList<>();
@@ -522,7 +523,12 @@ public class ResearcherView extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        change_password_button.setText("Change Password");
+        change_password_button.setText("Change Email/Password");
+        change_password_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_password_buttonActionPerformed(evt);
+            }
+        });
         jMenu1.add(change_password_button);
 
         change_sig_image_button.setText("Change Signature Image");
@@ -761,6 +767,14 @@ public class ResearcherView extends javax.swing.JFrame {
     private void project_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_project_name_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_project_name_fieldActionPerformed
+
+    private void change_password_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_password_buttonActionPerformed
+        ChangePassword pw;
+        pw = new ChangePassword(staffID);
+        pw.setLocationRelativeTo(null);
+        pw.setVisible(true);
+        
+    }//GEN-LAST:event_change_password_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1174,6 +1188,7 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
