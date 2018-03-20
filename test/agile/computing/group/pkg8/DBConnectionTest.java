@@ -154,5 +154,6 @@ public class DBConnectionTest {
 
     @After
     public void tearDown() {
+        connection.closeConnection();
     }
 }
