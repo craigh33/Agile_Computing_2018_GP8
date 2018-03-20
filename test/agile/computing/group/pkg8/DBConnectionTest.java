@@ -60,15 +60,19 @@ public class DBConnectionTest {
     
     @Test
     public void testEditProject() {
-        connection.newProject(700, "TESTPROJECT", "TESTRESEARCHER", "C:\\TEST", "TEST", "test");
-        connection.editProject("700", "TESTPROJECT", "NEWTESTCOMMENT", true, false, false, false);
+        connection.newProject(700, "TESTPROJECT", "TESTRESEARCHER", "TESTCOMMENT", "TEST.TESTDOC", "C:\\TEST");
         Connection con = connection.getConnection();
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE comment='NEWTESTCOMMENT");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
             rs.next();
-            assertNotNull(rs.getString("comment"));
-            stmt.executeUpdate("DELETE FROM project WHERE name='TESTPROJECT'");
+            String projectID = rs.getString("id");
+            connection.editProject(projectID, "NEWTESTPROJECT", "NEWTESTCOMMENT", true, true, true, true);
+            rs = stmt.executeQuery("SELECT * FROM project WHERE name='NEWTESTPROJECT'");
+            rs.next();
+            assertEquals("NEWTESTPROJECT", rs.getString("name"));
+            //delete test project after use
+            stmt.executeUpdate("DELETE FROM project WHERE id="+projectID);
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
