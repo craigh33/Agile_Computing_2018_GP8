@@ -11,6 +11,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
+import static com.itextpdf.text.FontFactory.getFont;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
@@ -42,16 +43,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class PrintHandler {
     
     JOptionPane SQLError = new JOptionPane();
-    String host = "silva.computing.dundee.ac.uk";
-    String db = "17agileteam8db";
-    String username = "17agileteam8";
-    String password = "7632.at8.2367";
+    private final String host = "silva.computing.dundee.ac.uk";
+    private final String db = "17agileteam8db";
+    private final String username = "17agileteam8";
+    private final String password = "7632.at8.2367";
+    private String staffname;
  
     /**
      * This method creates a pdf file with the details of a project
      * 
-     * @param savePath the path where the file while be saved
-     * @param fname the name of the file to be saved
+     * @param filename - name of the file to be created
+     * @param rs - resultset of project to be used for file
      * @throws DocumentException
      * @throws IOException 
      */
@@ -64,6 +66,7 @@ public class PrintHandler {
         PdfWriter.getInstance(document, new FileOutputStream(filename));
         document.open();
         document.add(new Chunk(""));
+        com.itextpdf.text.Font font = FontFactory.getFont(FontFactory.HELVETICA, 6, new CMYKColor(0, 255, 0, 0));
         try{
         ListItem iD = new ListItem(Integer.toString(rs.getInt("id")));
         ListItem name = new ListItem(rs.getString("name"));
@@ -79,19 +82,26 @@ public class PrintHandler {
         sig.scaleAbsolute(50, 25);        
         document.add(image);
         List list = new List(List.UNORDERED);
+        list.setListSymbol("");
         iD.setAlignment(Element.ALIGN_JUSTIFIED);
-        list.add("Project ID");
+        list.add("Project ID;");
         list.add(iD);
-        list.add("Project Name");
+        list.add(" ");
+        list.add("Project Name;");
         list.add(name);
-        list.add("Researcher Name");
+        list.add(" ");
+        list.add("Researcher Name;");
         list.add(researcher);
-        list.add("Date of Creation");
+        list.add(" ");
+        list.add("Date of Creation;");
         list.add(date);
-        list.add("Excel Filepath");
+        list.add(" ");
+        list.add("Excel Filepath;");
         list.add(filePath);
-        list.add("Comments");
+        list.add(" ");
+        list.add("Comments;");
         list.add(comments);
+        list.add(" ");
         
         Paragraph title2 = new Paragraph("Project Details", 
  
@@ -103,29 +113,34 @@ public class PrintHandler {
         document.add(list);
         document.add(new Paragraph(" "));
         
+        
         if (rs.getInt("researcher_sig") > 0){
-            document.add(new Paragraph("Researcher Signature"));
             sig = getSignature(researchSig);
             sig.scaleAbsolute(50, 25);
             document.add(sig);
+            document.add(new Paragraph(staffname + ", " + "Researcher"));
+            document.add(new Paragraph(" "));
         }
         if (rs.getInt("ris_sig") > 0){
-            document.add(new Paragraph("RIS Signature"));
             sig = getSignature(risSig);
             sig.scaleAbsolute(50, 25);
             document.add(sig);
+            document.add(new Paragraph(staffname + ", " + "Research and Innovation Services"));
+            document.add(new Paragraph(" "));
         }
         if (rs.getInt("depDean_Sig") > 0){
-            document.add(new Paragraph("Associate Dean Signature"));
-            sig = getSignature(assoDeanSig);
+            sig = getSignature(assoDeanSig);          
             sig.scaleAbsolute(50, 25);
             document.add(sig);
+            document.add(new Paragraph(staffname + ", " + "Associate Dean"));
+            document.add(new Paragraph(" "));
         }
         if (rs.getInt("dean_Sig") > 0){
-            document.add(new Paragraph("Dean Signature"));
             sig = getSignature(deanSig);
             sig.scaleAbsolute(50, 25);
             document.add(sig);
+            document.add(new Paragraph(staffname + ", " + "Dean" ));
+            document.add(new Paragraph(" "));
         }
         }
         catch(SQLException e)
@@ -171,6 +186,7 @@ public class PrintHandler {
         ResultSet staffmember;
         staffmember = connection2.getUserByStaffID(id);
         staffmember.next();
+        staffname = staffmember.getString("FirstName") + " " + staffmember.getString("LastName");
         String temp = "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures\\" + staffmember.getString("sig_name");
         Image temp1 = Image.getInstance(temp);
         return temp1;
