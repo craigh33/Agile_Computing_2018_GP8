@@ -86,6 +86,7 @@ public class ResearcherView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jScrollPane6 = new javax.swing.JScrollPane();
         notifications_list = new javax.swing.JList<>();
@@ -129,13 +130,6 @@ public class ResearcherView extends javax.swing.JFrame {
         new_comments_field = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         create_project_button = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        pName = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        label = new javax.swing.JLabel();
         refresh_button = new javax.swing.JButton();
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
@@ -500,55 +494,6 @@ public class ResearcherView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Create New Project", jPanel3);
 
-        jLabel7.setText("Project Name:");
-        jLabel7.setToolTipText("");
-
-        jLabel12.setText("Project ID:");
-
-        searchButton.setText("Search");
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(searchButton)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel7)
-                        .addComponent(pName)
-                        .addComponent(jLabel12)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
-                .addGap(74, 74, 74)
-                .addComponent(label)
-                .addContainerGap(449, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(label))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchButton)
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Search Projects", jPanel5);
-
         refresh_button.setText("Refresh Lists");
         refresh_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -578,7 +523,12 @@ public class ResearcherView extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        change_password_button.setText("Change Password");
+        change_password_button.setText("Change Email/Password");
+        change_password_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_password_buttonActionPerformed(evt);
+            }
+        });
         jMenu1.add(change_password_button);
 
         change_sig_image_button.setText("Change Signature Image");
@@ -634,10 +584,6 @@ public class ResearcherView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void project_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_project_name_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_project_name_fieldActionPerformed
-
     private void refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_buttonActionPerformed
         getDataForUnsignedProjectsList();
         getDataForInProgressProjectsList();
@@ -645,104 +591,6 @@ public class ResearcherView extends javax.swing.JFrame {
         getDataForInProgressProjectsList();
         getDataNotificationList();
     }//GEN-LAST:event_refresh_buttonActionPerformed
-
-    private void researcher_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_researcher_name_fieldActionPerformed
-
-    private void download_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_download_excel_buttonActionPerformed
-       // add ability to download excel file
-        if (SelectedID == null){
-            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
-        }
-        else{
-            downloadExcel();
-        }
-    }//GEN-LAST:event_download_excel_buttonActionPerformed
-
-    private void export_to_pdf_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_to_pdf_buttonActionPerformed
-        //initilize pdf export
-        if (SelectedID == null){
-            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before exporting.", "No Selected Project", WARNING_MESSAGE);
-        }
-        else
-        {
-
-            PrintHandler newPDF = new PrintHandler();
-            try {
-
-                newPDF.getNewResultSet(SelectedID);
-            } catch (SQLException ex) {
-                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_export_to_pdf_buttonActionPerformed
-
-    private void project_name_field_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_project_name_field_UpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_project_name_field_UpdateActionPerformed
-
-    private void researcher_name_field_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_field_updateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_researcher_name_field_updateActionPerformed
-
-    private void sign_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sign_project_buttonActionPerformed
-        ///adding ability to sign document
-
-        if (SelectedID == null){
-            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
-        }
-        else{
-            sign_button_clicked = true;
-
-            try {
-                getSelectedProjectDetails();
-            } catch (SQLException ex) {
-                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_sign_project_buttonActionPerformed
-
-    private void send_for_revision_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_for_revision_buttonActionPerformed
-        // add sent for revision variable in DB to true and it effectively sends to RIS view
-        
-        
-        if (SelectedID == null){
-            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
-        }
-        else{
-            revision_button_clicked = true;
-
-            try {
-                getSelectedProjectDetails();
-            } catch (SQLException ex) {
-                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        
-    }//GEN-LAST:event_send_for_revision_buttonActionPerformed
-
-    private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
-      
-        if (SelectedID == null){
-            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
-        }
-        else
-        {
-        
-            try {
-            
-             ResultSet temp = getSelectedProjectDetails();
-             String idstring = temp.getString("id");
-             int id = Integer.parseInt(idstring);
-             File file =  fh.uploadSelect();
-             Boolean success = fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
-            } catch (SQLException ex) {
-               Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        }
-    }//GEN-LAST:event_update_excel_buttonActionPerformed
 
     private void unsigned_projects_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unsigned_projects_listMouseClicked
         try {
@@ -778,27 +626,6 @@ public class ResearcherView extends javax.swing.JFrame {
         startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
-    private void create_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_project_buttonActionPerformed
-       File file = fh.uploadSelect();
-       
-       try{
-       String firstname = rs.getString("FirstName");
-       String lastName = rs.getString("LastName");
-        
-       fullName = firstname + " " + lastName;
-
-        int reply = JOptionPane.showConfirmDialog(null, "This action will create new project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-
-        connection.newProject(staffID, new_project_name.getText(), fullName, new_comments_field.getText(), file.getName(), "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
-        fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, staffID);
-        } 
-       }catch (SQLException ex) {
-                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("project not created");
-                }
-    }//GEN-LAST:event_create_project_buttonActionPerformed
-
     private void change_sig_image_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_sig_image_buttonActionPerformed
         
         File file =  fh.imageSelect();
@@ -820,10 +647,134 @@ public class ResearcherView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_notifications_listMouseClicked
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+    private void create_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_project_buttonActionPerformed
+        File file = fh.uploadSelect();
+
+        try{
+            String firstname = rs.getString("FirstName");
+            String lastName = rs.getString("LastName");
+
+            fullName = firstname + " " + lastName;
+
+            int reply = JOptionPane.showConfirmDialog(null, "This action will create new project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+
+                connection.newProject(staffID, new_project_name.getText(), fullName, new_comments_field.getText(), file.getName(), "\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files");
+                fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, staffID);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("project not created");
+        }
+    }//GEN-LAST:event_create_project_buttonActionPerformed
+
+    private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
+
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else
+        {
+
+            try {
+
+                ResultSet temp = getSelectedProjectDetails();
+                String idstring = temp.getString("id");
+                int id = Integer.parseInt(idstring);
+                File file =  fh.uploadSelect();
+                Boolean success = fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_update_excel_buttonActionPerformed
+
+    private void send_for_revision_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_for_revision_buttonActionPerformed
+        // add sent for revision variable in DB to true and it effectively sends to RIS view
+
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            revision_button_clicked = true;
+
+            try {
+                getSelectedProjectDetails();
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_send_for_revision_buttonActionPerformed
+
+    private void sign_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sign_project_buttonActionPerformed
+        ///adding ability to sign document
+
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            sign_button_clicked = true;
+
+            try {
+                getSelectedProjectDetails();
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_sign_project_buttonActionPerformed
+
+    private void researcher_name_field_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_field_updateActionPerformed
         // TODO add your handling code here:
-        search();
-    }//GEN-LAST:event_searchButtonActionPerformed
+    }//GEN-LAST:event_researcher_name_field_updateActionPerformed
+
+    private void project_name_field_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_project_name_field_UpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_project_name_field_UpdateActionPerformed
+
+    private void export_to_pdf_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_to_pdf_buttonActionPerformed
+        //initilize pdf export
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before exporting.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else
+        {
+
+            PrintHandler newPDF = new PrintHandler();
+            try {
+
+                newPDF.getNewResultSet(SelectedID);
+            } catch (SQLException ex) {
+                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_export_to_pdf_buttonActionPerformed
+
+    private void download_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_download_excel_buttonActionPerformed
+        // add ability to download excel file
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else{
+            downloadExcel();
+        }
+    }//GEN-LAST:event_download_excel_buttonActionPerformed
+
+    private void researcher_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_researcher_name_fieldActionPerformed
+
+    private void project_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_project_name_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_project_name_fieldActionPerformed
+
+    private void change_password_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_password_buttonActionPerformed
+        ChangePassword pw;
+        pw = new ChangePassword(staffID);
+        pw.setLocationRelativeTo(null);
+        pw.setVisible(true);
+        
+    }//GEN-LAST:event_change_password_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1172,42 +1123,7 @@ public class ResearcherView extends javax.swing.JFrame {
         
     };
      
-     
-    private void search()
-    {
-        getDataForUnsignedProjectsList();
-        getDataForInProgressProjectsList();
-        getDataForCompletedProjectsList();
-        getDataNotificationList();
-        
-        String projName = pName.getText();
-        
-        
-        DefaultListModel model = (DefaultListModel)unsigned_projects_list.getModel();
-        DefaultListModel model1 = (DefaultListModel)completed_projects_list.getModel();
-        
-        //Case-sensitive
-        if(model.contains(projName))
-        {
-            int index = model.indexOf(projName);
-            unsigned_projects_list.setSelectedIndex(index);
-            label.setText(projName + " found at index " + index + ".");
-        }else{
-            unsigned_projects_list.clearSelection();
-            label.setText(projName + " not found.");
-        }
-        
-        if(model1.contains(projName))
-        {
-            int index = model1.indexOf(projName);
-            completed_projects_list.setSelectedIndex(index);
-            label.setText(projName + " found at index " + index + ".");
-        }else{
-            completed_projects_list.clearSelection();
-            label.setText(projName + " not found.");
-        }
-    }
-     
+  
      private void downloadExcel(){
         
         fh.downloadFile(new File(downloadURL));
@@ -1259,13 +1175,11 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -1274,7 +1188,7 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1284,19 +1198,15 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel label;
     private javax.swing.JButton logout_button;
     private javax.swing.JTextArea new_comments_field;
     private javax.swing.JTextField new_project_name;
     private javax.swing.JList<String> notifications_list;
-    private javax.swing.JTextField pName;
     private javax.swing.JTextField project_name_field;
     private javax.swing.JTextField project_name_field_Update;
     private javax.swing.JButton refresh_button;
     private javax.swing.JTextField researcher_name_field;
     private javax.swing.JTextField researcher_name_field_update;
-    private javax.swing.JButton searchButton;
     private javax.swing.JButton send_for_revision_button;
     private javax.swing.JLabel sign_in_details;
     private javax.swing.JButton sign_project_button;

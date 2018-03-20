@@ -398,7 +398,12 @@ public class DeanView extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        change_password_button.setText("Change Password");
+        change_password_button.setText("Change Email/Password");
+        change_password_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_password_buttonActionPerformed(evt);
+            }
+        });
         jMenu1.add(change_password_button);
 
         change_sig_image_button.setText("Change Signature Image");
@@ -567,6 +572,13 @@ public class DeanView extends javax.swing.JFrame {
             Logger.getLogger(DeanView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_notifications_listMouseClicked
+
+    private void change_password_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_password_buttonActionPerformed
+        ChangePassword pw;
+        pw = new ChangePassword(staffID);
+        pw.setLocationRelativeTo(null);
+        pw.setVisible(true);
+    }//GEN-LAST:event_change_password_buttonActionPerformed
 
     /**
      * @param args the command line arguments
