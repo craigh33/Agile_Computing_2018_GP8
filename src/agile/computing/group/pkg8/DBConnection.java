@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
- *
+ * Constructor
+ * 
  * @author vincentnieutin
  */
 public class DBConnection {
@@ -30,7 +31,14 @@ public class DBConnection {
     String host, db, username, password;
     Statement stmt;
 
-    //set up for database connection
+    /**
+     * Creates DB Connection
+     * 
+     * @param host
+     * @param db
+     * @param username
+     * @param password 
+     */
     public DBConnection(String host, String db, String username, String password) {
         this.host = host;
         this.db = db;
@@ -45,12 +53,18 @@ public class DBConnection {
         }
     }
 
-    //connects to the database
+    /**
+     * Gets Connection
+     * 
+     * @return con
+     */
     public Connection getConnection() {
         return this.con;
     }
 
-    //closes the connection to the database
+    /**
+     * Closes Connection
+     */
     public void closeConnection() {
         try {
             con.close();
@@ -60,15 +74,21 @@ public class DBConnection {
         }
     }
 
-    
+    /**
+     * Returns Database
+     * 
+     * @return db
+     */
     public String getDatabase() {
         return this.db;
     }
 
-    /*
-        refactored code from hashtable to resultset
-        looks up staff by staffID
-    */
+    /**
+     * Searches for user bY ID
+     * 
+     * @param staffID
+     * @return ResultSet containing staff members details
+     */
     public ResultSet getUserByStaffID(int staffID) {
        
         ResultSet rs = null;
@@ -84,6 +104,12 @@ public class DBConnection {
 
     }
     
+    /**
+     * Searcher Users by email
+     * 
+     * @param email
+     * @return ResultSet of User
+     */
     public ResultSet getUserByStaffEmail(String email) {
        
         ResultSet rs = null;
@@ -135,7 +161,11 @@ public class DBConnection {
         }
     }
 
-    //gets all the projects from the database
+    /**
+     * Used to return all resultsets
+     * 
+     * @return ResultSet of Projects
+     */
     public ResultSet getProjects() {
         ResultSet rs = null;
 
@@ -150,6 +180,16 @@ public class DBConnection {
         return rs;
     }
 
+    /**
+     * Creates new project on database
+     * 
+     * @param Staffid
+     * @param projectName
+     * @param researcher
+     * @param comments
+     * @param fileName
+     * @param filePath 
+     */
     public void newProject(int Staffid, String projectName, String researcher, String comments, String fileName, String filePath) {
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         try {
@@ -169,7 +209,12 @@ public class DBConnection {
         }
     }
     
-    //gets a project in the database by projectID
+    /**
+     * Searches for project by id
+     * 
+     * @param id
+     * @return ResultSet containing project
+     */
     public ResultSet getProject(String  id){
         ResultSet rs = null;
         
@@ -183,17 +228,41 @@ public class DBConnection {
         return rs;
     }
     
-    //Updates values within the database if changes to projects have been made e.g if RIS has signed the document
+    /**
+     * Method for editing existing project
+     * Searches by ID
+     * 
+     * @param id
+     * @param name
+     * @param comments
+     * @param researcher_sig
+     * @param ris_sig
+     * @param depDean_sig
+     * @param dean_sig
+     * @param signed_researcher_id
+     * @param signed_ris_id
+     * @param signed_assodean_id
+     * @param signed_dean_id 
+     */
     public void editProject(String id, String name, String comments, boolean researcher_sig, boolean ris_sig, boolean depDean_sig, boolean dean_sig, String signed_researcher_id, String signed_ris_id, String signed_assodean_id, String signed_dean_id){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', researcher_sig = " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + ", signed_researcher_id = " + signed_researcher_id + ", signed_ris_id = " + signed_ris_id + ", signed_assodean_id = " + signed_assodean_id + ", signed_dean_id = " + signed_dean_id + " WHERE id = " + id);
+            stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', rearcher_sig =se " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + ", signed_researcher_id = " + signed_researcher_id + ", signed_ris_id = " + signed_ris_id + ", signed_assodean_id = " + signed_assodean_id + ", signed_dean_id = " + signed_dean_id + " WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
     }
    
+    /**
+     * Only Updates Revision Types for notifications
+     * 
+     * @param id
+     * @param revision
+     * @param ris_seen
+     * @param needs_reviewed
+     * @param researcher_needs2_review 
+     */
     public void REVISIONeditProject(String id, int revision, String ris_seen, boolean needs_reviewed, String researcher_needs2_review){
         try {
             stmt = con.createStatement();
@@ -204,6 +273,12 @@ public class DBConnection {
         }
     }
     
+    /**
+     * Used for notifications
+     * 
+     * @param id
+     * @param assoDean_seen 
+     */
     public void editAssoDean_Seen(String id, String assoDean_seen){
         try {
             stmt = con.createStatement();
@@ -214,6 +289,12 @@ public class DBConnection {
         }
     }
     
+    /**
+     * Used for Notifications
+     * 
+     * @param id
+     * @param dean_seen 
+     */
     public void editDean_Seen(String id, String dean_seen){
         try {
             stmt = con.createStatement();
@@ -224,7 +305,11 @@ public class DBConnection {
         }
     }
     
-    
+    /**
+     * Used to get entire staff table
+     * 
+     * @return ResultSet of all staff
+     */
     public ResultSet getStaff() {
         ResultSet rs = null;
 
@@ -239,6 +324,11 @@ public class DBConnection {
         return rs;
     }
     
+    /**
+     * Used to remove project
+     * 
+     * @param id 
+     */
     public void removeProjectById(int id) {
         try {
             //sets up a connection object with the createStatement method from sql library
@@ -252,6 +342,16 @@ public class DBConnection {
         }
     }
     
+    /**
+     * Used to add staff member
+     * 
+     * @param StaffID
+     * @param Password
+     * @param FirstName
+     * @param LastName
+     * @param email
+     * @param jobType 
+     */
     public void addStaff(int StaffID, String Password, String FirstName, String LastName, String email, String jobType) {
        try{
         stmt = con.createStatement();
