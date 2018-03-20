@@ -35,6 +35,8 @@ public class ResearcherView extends javax.swing.JFrame {
     String SelectedID;
     int staffID;
     String staffIDString;
+    String lastName;
+    String firstname;
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
@@ -45,13 +47,22 @@ public class ResearcherView extends javax.swing.JFrame {
      */
     public ResearcherView() {
         initComponents();
+        
         getContentPane().setBackground(new Color(255,255,255));
         setIconImage(img.getImage());
         connection = new DBConnection(host,db,username,password);
+        
+        try {
+            getDetailsOnActiveLogin();
+        } catch (SQLException ex) {
+            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         getDataForUnsignedProjectsList();
         getDataForInProgressProjectsList();
-        getDataForCompletedProjectsList();
+        getDataForCompletedProjectsList(); 
         getDataNotificationList();
+        
         project_name_field.setEditable(false);
         researcher_name_field.setEditable(false);
         date_of_creation_field.setEditable(false);
@@ -573,6 +584,7 @@ public class ResearcherView extends javax.swing.JFrame {
         getDataForUnsignedProjectsList();
         getDataForInProgressProjectsList();
         getDataForCompletedProjectsList();
+        getDataForInProgressProjectsList();
         getDataNotificationList();
     }//GEN-LAST:event_refresh_buttonActionPerformed
 
@@ -801,20 +813,28 @@ public class ResearcherView extends javax.swing.JFrame {
         });
     }
     
+    
+   /**
+    * method to get data to display in the in progress list
+    * 
+    * @param none
+    * @return none
+    */
     private void getDataForInProgressProjectsList()
     {
         
         DefaultListModel listProgress = new DefaultListModel();
         ResultSet rs2 = connection.getProjects();
+       
+        
         try {
             while (rs2.next()) {
                 
-                //getting projects to display that only associate dean needs to see.
-                if (rs2.getString("researcher_sig").equals("1"))
+                //getting projects to display that only researcher needs to see.
+                if (rs2.getString("researcher_sig").equals("1") && rs2.getString("researcher").equals(fullName))
                     {
-                    //add to list in here 
-                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
-                       // listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        //add to list in here 
+                        
                         listProgress.addElement("ID: "+rs2.getString("id")+" " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
                     
                     } else {
@@ -1103,13 +1123,17 @@ public class ResearcherView extends javax.swing.JFrame {
          return idno;
      }
      
-     public void getDetailsOnActiveLogin() throws SQLException{
+    /**
+     *
+     * @throws SQLException
+     */
+    public void getDetailsOnActiveLogin() throws SQLException{
     
-        rs = connection.getUserByStaffID(staffID);
-        rs.next();
+        ResultSet rs5 = connection.getUserByStaffID(staffID);
+        rs5.next();
         
-        String firstname = rs.getString("FirstName");
-        String lastName = rs.getString("LastName");
+         firstname = rs5.getString("FirstName");
+         lastName = rs5.getString("LastName");
         
         fullName = firstname + " " + lastName;
         
