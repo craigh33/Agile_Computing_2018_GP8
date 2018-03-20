@@ -363,4 +363,14 @@ public class DBConnection {
         }
     }
     
+        public void editStaff(int StaffID, String Password, String FirstName, String LastName, String email, String jobType, String sig_path, String sig_name){
+        try {
+            stmt = con.createStatement();
+            stmt.execute("UPDATE staff SET Password = '" + Password + "', FirstName = '" + FirstName + "', LastName " + LastName + ", email = " + email + ", JobType = " + jobType + ", sig_path = " + sig_path + ", sig_name = " + sig_name + " WHERE StaffID = " + StaffID);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+    }
+    
 }
