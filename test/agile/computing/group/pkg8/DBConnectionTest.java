@@ -81,7 +81,21 @@ public class DBConnectionTest {
     
     @Test
     public void testRemoveProjectByID() {
-        
+        connection.newProject(700, "TESTPROJECT", "TESTRESEARCHER", "TESTCOMMENT", "TEST.TEST", "C:\\TEST");
+        Connection con = connection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            // get project id
+            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
+            rs.next();
+            int id = rs.getInt("id");
+            connection.removeProjectById(id);
+            rs = stmt.executeQuery("SELECT * FROM project WHERE id=" + id);
+            assertNull(rs.getInt("id"));
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
     }
     
     @Test
