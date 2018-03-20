@@ -165,8 +165,19 @@ public class DBConnectionTest {
     }
     
     @Test
+    public void testGetUserByStaffEmail() {
+        ResultSet x = connection.getUserByStaffEmail("admin@dundee.ac.uk");
+        try {
+        x.next();
+        assertEquals("admin", x.getString("Password"));
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    @Test
     public void testAddUser() {
-        connection.addUser(700, "thing", "James", "Bond", "007@mi6.gov.uk", "Researcher");
+        connection.addStaff(700, "thing", "James", "Bond", "007@mi6.gov.uk", "Researcher");
         Connection con = connection.getConnection();
         ResultSet x = connection.getUserByStaffID(700);
         try {
@@ -182,7 +193,7 @@ public class DBConnectionTest {
     
     @Test
     public void testRemoveUserByID() {
-        connection.addUser(700, "thing", "james", "bond", "007@mi6.gov.uk", "Researcher");
+        connection.addStaff(700, "thing", "james", "bond", "007@mi6.gov.uk", "Researcher");
         connection.removeUserById(700);
         ResultSet x = connection.getUserByStaffID(700);
         try {

@@ -168,17 +168,21 @@ public class LoginScreen extends javax.swing.JFrame {
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         connection = new DBConnection(host, db, username, password);
         //gets username and password from textboxes.
-            int uname = Integer.parseInt(login_field.getText());
+            int uname;
+            String email = login_field.getText();
+            System.out.println(email);
             char[] pwd = password_field.getPassword();
             String pass = new String(pwd);
 
+            
             //calls the getUserByStaffID method in the DBConnection class
-            ResultSet result = connection.getUserByStaffID(uname);
+            ResultSet result = connection.getUserByStaffEmail(email);
 
             try {
                 result.next();
+                uname = Integer.parseInt(result.getString("StaffID"));
                 //input validation 
-                if (uname == 0 || pwd == null) {
+                if (email == null || pwd == null) {
                     JOptionPane.showMessageDialog(frame, "Please enter valid username or password", "Login Error", ERROR_MESSAGE);
                 } else if (result.getString("Password") == null) {
                     JOptionPane.showMessageDialog(frame, "Username not found. Please try again.");

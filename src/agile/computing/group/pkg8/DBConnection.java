@@ -84,6 +84,21 @@ public class DBConnection {
 
     }
     
+    public ResultSet getUserByStaffEmail(String email) {
+       
+        ResultSet rs = null;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Staff WHERE email = '" + email + "'");
+            //return rs;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+        return rs;
+
+    }
+    
     //adds a new user to the database
    /* public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
         try {
