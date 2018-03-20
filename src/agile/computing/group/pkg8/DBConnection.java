@@ -214,4 +214,17 @@ public class DBConnection {
         return rs;
     }
     
+    public void removeProjectById(int id) {
+        try {
+            //sets up a connection object with the createStatement method from sql library
+            stmt = con.createStatement();
+            //executes delete query and removes staff member from the database
+            stmt.execute("DELETE FROM project WHERE id =" + id);
+            stmt.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+    }
+    
 }
