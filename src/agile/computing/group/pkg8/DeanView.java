@@ -49,6 +49,7 @@ public class DeanView extends javax.swing.JFrame {
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         getDataForSignedProjectsList();
+        getDataNotificationsList();
         project_name_field.setEditable(false);
         researcher_name_field.setEditable(false);
         date_of_creation_field.setEditable(false);
@@ -606,6 +607,42 @@ public class DeanView extends javax.swing.JFrame {
         });
     }
     
+    
+    
+    private void getDataNotificationsList()
+    {
+        
+        DefaultListModel listProgress = new DefaultListModel();
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                //getting projects to display that only associate dean needs to see.
+                if (rs2.getString("dean_seen").equals("0") && rs2.getString("depDean_Sig").equals("1"))
+                    {
+                    //add to list in here 
+                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                    
+                    } else {
+                    
+                    //cry
+                    
+                    }
+             
+                }
+            } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+   
+        //setting list model to listProgress
+        notifications_list.setModel(listProgress);
+        
+        
+    }
+    
+    
+    
     private void getDataForSignedProjectsList()
     {
         
@@ -646,7 +683,7 @@ public class DeanView extends javax.swing.JFrame {
         try {
             while (rs2.next()) {
                 
-                //getting projects to display that only associate dean needs to see.
+                //getting projects to display that only dean needs to see.
                 if (rs2.getString("depDean_sig").equals("1") && rs2.getString("dean_sig").equals("0"))
                     {
                     //add to list in here 
@@ -704,6 +741,12 @@ public class DeanView extends javax.swing.JFrame {
         String signedRis = selectedProjectResultSet.getString("signed_ris_id");
         String signedAssoDean = selectedProjectResultSet.getString("signed_assodean_id");
         String signedDean = selectedProjectResultSet.getString("signed_dean_id");
+        String dean_seen;
+               dean_seen = selectedProjectResultSet.getString("dean_seen");
+        
+               
+               //set this to true to allow the notifications to find out if dean has selected a project on notifications tab, used to then trigger it to be deleted from notifications tab
+            dean_seen = "1";
         
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
@@ -748,6 +791,7 @@ public class DeanView extends javax.swing.JFrame {
             
             getDataForUnsignedProjectsList();
             getDataForSignedProjectsList();
+            getDataNotificationsList();
         }
             }
             else
@@ -759,6 +803,7 @@ public class DeanView extends javax.swing.JFrame {
         
         sign_button_clicked = false;
         
+        connection.editDean_Seen(id, dean_seen);
         
         //refresh the list of valid projects
         
