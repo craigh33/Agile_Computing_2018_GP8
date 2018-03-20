@@ -131,7 +131,7 @@ public class DBConnectionTest {
     
     @Test
     public void testAddUser() {
-        connection.addUser(700, "thing", "James", "Bond", "007@mi6.com", "Researcher");
+        connection.addUser(700, "thing", "James", "Bond", "007@mi6.gov.uk", "Researcher");
         Connection con = connection.getConnection();
         ResultSet x = connection.getUserByStaffID(700);
         try {
@@ -147,6 +147,7 @@ public class DBConnectionTest {
     
     @Test
     public void testRemoveUserByID() {
+        connection.addUser(700, "thing", "james", "bond", "007@mi6.gov.uk", "Researcher");
         connection.removeUserById(700);
         ResultSet x = connection.getUserByStaffID(700);
         try {
