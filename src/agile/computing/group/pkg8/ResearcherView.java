@@ -1170,10 +1170,16 @@ public class ResearcherView extends javax.swing.JFrame {
         //refresh the list of valid projects
         
         
-    }
+    };
+     
      
     private void search()
     {
+        getDataForUnsignedProjectsList();
+        getDataForInProgressProjectsList();
+        getDataForCompletedProjectsList();
+        getDataNotificationList();
+        
         String projName = pName.getText();
         
         
