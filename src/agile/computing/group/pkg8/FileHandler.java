@@ -92,7 +92,7 @@ public class FileHandler {
                 e.printStackTrace(System.out);
             }
 
-            query = "UPDATE " + con.getDatabase() + ".Staff SET sig_name = '" + newName + "." + format + "' , sig_path = '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "' WHERE id = " + id ;
+            query = "UPDATE " + con.getDatabase() + ".staff SET sig_name = '" + newName + "." + format + "' , sig_path = '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "' WHERE StaffID = " + id ;
             System.out.println(query);
             try {
                 con.getConnection().prepareStatement(query).execute();
@@ -225,8 +225,8 @@ public class FileHandler {
         JFrame dialogFrame = new JFrame();
 
             JFileChooser fc = new JFileChooser();
-            fc.setFileFilter(new FileNameExtensionFilter("jpg", "png", "JPEG"));
-            fc.setDialogTitle("Choose file");
+            fc.setFileFilter(new FileNameExtensionFilter("Image files", "jpg", "png"));
+            fc.setDialogTitle("Choose Signature Image");
 
             int userSelection = fc.showSaveDialog(dialogFrame);
             File file = null;
