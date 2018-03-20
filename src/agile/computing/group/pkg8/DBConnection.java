@@ -85,7 +85,7 @@ public class DBConnection {
     }
     
     //adds a new user to the database
-    public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
+   /* public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
         try {
             //SQL statement for the insertion of a user
             String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?,?,?);";
@@ -104,7 +104,7 @@ public class DBConnection {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
         }
-    }
+    }*/
     
     //Deletes a user from the database by staffID
     public void removeUserById(int staffID) {
@@ -231,6 +231,17 @@ public class DBConnection {
             //executes delete query and removes project from the database
             stmt.execute("DELETE FROM project WHERE id =" + id);
             stmt.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    public void addStaff(int StaffID, String Password, String FirstName, String LastName, String email, String jobType) {
+       try{
+        stmt = con.createStatement();
+        stmt.execute("INSERT INTO Staff (StaffID, Password, FirstName, LastName, email, JobType) VALUES ('" + StaffID + "','" + Password + "','" + FirstName + "','" + LastName + "','" + email + "','" + jobType + "')" );
+        
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
