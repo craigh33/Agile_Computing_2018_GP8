@@ -132,10 +132,14 @@ public class DBConnectionTest {
     @Test
     public void testAddUser() {
         connection.addUser(700, "thing", "James", "Bond", "007@mi6.com", "Researcher");
+        Connection con = connection.getConnection();
         ResultSet x = connection.getUserByStaffID(700);
         try {
+            Statement stmt = con.createStatement();
             x.next();
             assertEquals("Bond", x.getString("Lastname"));
+            stmt.executeUpdate("DELETE FROM staff WHERE staffid=700");
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
