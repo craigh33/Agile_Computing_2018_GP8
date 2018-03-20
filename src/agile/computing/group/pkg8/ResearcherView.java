@@ -654,14 +654,23 @@ public class ResearcherView extends javax.swing.JFrame {
     }//GEN-LAST:event_send_for_revision_buttonActionPerformed
 
     private void update_excel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_excel_buttonActionPerformed
-        try {
-            ResultSet temp = getSelectedProjectDetails();
-            String idstring = temp.getString("id");
-            int id = Integer.parseInt(idstring);
-            File file =  fh.uploadSelect();
-            Boolean success = fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
-        } catch (SQLException ex) {
-            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+      
+        if (SelectedID == null){
+            JOptionPane.showMessageDialog(warningWindow, "No project selected, select one before signing.", "No Selected Project", WARNING_MESSAGE);
+        }
+        else
+        {
+        
+            try {
+            
+             ResultSet temp = getSelectedProjectDetails();
+             String idstring = temp.getString("id");
+             int id = Integer.parseInt(idstring);
+             File file =  fh.uploadSelect();
+             Boolean success = fh.uploadFile(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\files"), file, id);
+            } catch (SQLException ex) {
+               Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+             }
         }
     }//GEN-LAST:event_update_excel_buttonActionPerformed
 
