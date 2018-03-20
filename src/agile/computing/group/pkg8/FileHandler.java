@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FileHandler {
 
     String[] supportedFormats = {"xls", "xlsx"};
+    String[] supportedImages = {"JPEG", "jpg", "png"};
 
     DBConnection con = new DBConnection("silva.computing.dundee.ac.uk", "17agileteam8db", "17agileteam8", "7632.at8.2367");
 
@@ -54,6 +55,44 @@ public class FileHandler {
             }
 
             query = "UPDATE " + con.getDatabase() + ".Project SET file_name = '" + newName + "." + format + "' , file_path = '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "' WHERE id = " + id ;
+            System.out.println(query);
+            try {
+                con.getConnection().prepareStatement(query).execute();
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
+            }
+            uploaded = true;
+        }
+
+        return uploaded;
+    }
+    
+    /**
+     * This method uploads a file to the web server and then stores the file's
+     * URL in a MySQL table
+     *
+     * @param uploadPath the path at which the file will be uploaded
+     * @param file the file that will be uploaded
+     * @param id the is of the user that is uploading the file
+     * @return true if the file was successfully uploaded, false if not
+     */
+    public boolean uploadSignature(File uploadPath, File file, int id) {
+        boolean uploaded = false;
+        File destination;
+        String newName = id + "" + new SimpleDateFormat("ddMMyyhhmmss").format(new Date()) + "" + "signature";
+        String format = file.getName().split("\\.")[1];
+
+        if (!fileExists(uploadPath, new File(newName)) && imageIsSupported(format)) {
+            
+            
+            destination = new File(uploadPath.toString() + "\\" + newName + "." + format);
+            try {
+                Files.copy(file.toPath(), destination.toPath());
+            } catch (IOException e) {
+                e.printStackTrace(System.out);
+            }
+
+            query = "UPDATE " + con.getDatabase() + ".Staff SET sig_name = '" + newName + "." + format + "' , sig_path = '" + uploadPath.toString().replace("\\", "\\\\") + "\\\\" + newName + "." + format + "' WHERE id = " + id ;
             System.out.println(query);
             try {
                 con.getConnection().prepareStatement(query).execute();
@@ -159,6 +198,52 @@ public class FileHandler {
         return supported;
     }
     
+    /**
+     * This method checks if the specified file is supported
+     *
+     * @param format the name of the file that will be checked
+     * @return true if the file is supported, false if not
+     */
+    public boolean imageIsSupported(String format) {
+        boolean supported = false;
+        for (String s : supportedImages) {
+            if (s.equals(format)) {
+                supported = true;
+                break;
+            }
+        }
+
+        return supported;
+    }
+    
+    /**
+     * This method creates a dialog for image selection
+     * 
+     * @return The image selected
+     */
+    File imageSelect(){
+        JFrame dialogFrame = new JFrame();
+
+            JFileChooser fc = new JFileChooser();
+            fc.setFileFilter(new FileNameExtensionFilter("jpg", "png", "JPEG"));
+            fc.setDialogTitle("Choose file");
+
+            int userSelection = fc.showSaveDialog(dialogFrame);
+            File file = null;
+            switch (userSelection) {
+                case JFileChooser.APPROVE_OPTION:
+                    //File file = new File(fc.getSelectedFile().getName());
+                    file = new File(fc.getSelectedFile().toString());
+                    break;
+            }
+            return file;
+    }
+    
+    /**
+     * This method creates a dialog for excel file selection
+     * 
+     * @return The file selected
+     */
     File uploadSelect(){
         JFrame dialogFrame = new JFrame();
 
