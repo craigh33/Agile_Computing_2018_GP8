@@ -44,20 +44,21 @@ public class ResearcherView extends javax.swing.JFrame {
 
     /**
      * Creates new form TestTemplate
+     * @param uname
+     * @throws java.sql.SQLException
      */
-    public ResearcherView() {
-        connection = new DBConnection(host,db,username,password);
-        initComponents();
+    public ResearcherView(int uname) throws SQLException {
         
+        staffID = uname;
+        initComponents();
+        connection = new DBConnection(host,db,username,password);
         getContentPane().setBackground(new Color(255,255,255));
         setIconImage(img.getImage());
         
         
-        try {
-            getDetailsOnActiveLogin();
-        } catch (SQLException ex) {
-            Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        getDetailsOnActiveLogin();
+       
         
         getDataForUnsignedProjectsList();
         getDataForInProgressProjectsList();
@@ -870,7 +871,11 @@ public class ResearcherView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ResearcherView().setVisible(true);
+                try {
+                    new ResearcherView(-1).setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -1211,7 +1216,7 @@ public class ResearcherView extends javax.swing.JFrame {
      {
          staffID = idno;
          staffIDString = Integer.toString(staffID);
-         System.out.println(staffID);
+         System.out.println(staffID + "<<<<<" );
          return idno;
      }
      
@@ -1219,7 +1224,7 @@ public class ResearcherView extends javax.swing.JFrame {
      *
      * @throws SQLException
      */
-    public void getDetailsOnActiveLogin() throws SQLException{
+   public void getDetailsOnActiveLogin() throws SQLException{
     
         ResultSet rs5 = connection.getUserByStaffID(staffID);
         rs5.next();

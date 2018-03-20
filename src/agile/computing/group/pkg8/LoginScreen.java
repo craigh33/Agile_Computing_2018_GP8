@@ -189,7 +189,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 } else if (result.getString("Password").equals(pass)) {
                     //These if statements will be for when we implement views. Right now they all go to the same place.
                     if (result.getString("JobType").equals("Researcher")) {
-                        ResearcherView reView = new ResearcherView(); 
+                        ResearcherView reView = new ResearcherView(uname); 
                         reView.getStaffID(uname);
                         reView.getDetailsOnActiveLogin();
                         LoginScreen.this.dispose();
