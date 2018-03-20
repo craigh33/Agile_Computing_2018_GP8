@@ -116,6 +116,13 @@ public class ResearcherView extends javax.swing.JFrame {
         new_comments_field = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         create_project_button = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        pName = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+        label = new javax.swing.JLabel();
         refresh_button = new javax.swing.JButton();
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
@@ -480,6 +487,55 @@ public class ResearcherView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Create New Project", jPanel3);
 
+        jLabel7.setText("Project Name:");
+        jLabel7.setToolTipText("");
+
+        jLabel12.setText("Project ID:");
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(searchButton)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel7)
+                        .addComponent(pName)
+                        .addComponent(jLabel12)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                .addGap(74, 74, 74)
+                .addComponent(label)
+                .addContainerGap(449, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(label))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(searchButton)
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Search Projects", jPanel5);
+
         refresh_button.setText("Refresh Lists");
         refresh_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -749,6 +805,11 @@ public class ResearcherView extends javax.swing.JFrame {
             Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_notifications_listMouseClicked
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        search();
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1085,6 +1146,36 @@ public class ResearcherView extends javax.swing.JFrame {
         
     }
      
+    private void search()
+    {
+        String projName = pName.getText();
+        
+        
+        DefaultListModel model = (DefaultListModel)unsigned_projects_list.getModel();
+        DefaultListModel model1 = (DefaultListModel)completed_projects_list.getModel();
+        
+        //Case-sensitive
+        if(model.contains(projName))
+        {
+            int index = model.indexOf(projName);
+            unsigned_projects_list.setSelectedIndex(index);
+            label.setText(projName + " found at index " + index + ".");
+        }else{
+            unsigned_projects_list.clearSelection();
+            label.setText(projName + " not found.");
+        }
+        
+        if(model1.contains(projName))
+        {
+            int index = model1.indexOf(projName);
+            completed_projects_list.setSelectedIndex(index);
+            label.setText(projName + " found at index " + index + ".");
+        }else{
+            completed_projects_list.clearSelection();
+            label.setText(projName + " not found.");
+        }
+    }
+     
      private void downloadExcel(){
         
         fh.downloadFile(new File(downloadURL));
@@ -1132,11 +1223,13 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -1145,6 +1238,7 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1154,15 +1248,19 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane5;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel label;
     private javax.swing.JButton logout_button;
     private javax.swing.JTextArea new_comments_field;
     private javax.swing.JTextField new_project_name;
     private javax.swing.JList<String> notifications_list;
+    private javax.swing.JTextField pName;
     private javax.swing.JTextField project_name_field;
     private javax.swing.JTextField project_name_field_Update;
     private javax.swing.JButton refresh_button;
     private javax.swing.JTextField researcher_name_field;
     private javax.swing.JTextField researcher_name_field_update;
+    private javax.swing.JButton searchButton;
     private javax.swing.JButton send_for_revision_button;
     private javax.swing.JLabel sign_in_details;
     private javax.swing.JButton sign_project_button;
