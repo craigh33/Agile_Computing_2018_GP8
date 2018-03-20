@@ -924,6 +924,7 @@ public class RISView extends javax.swing.JFrame {
         
         if (revision_button_clicked == true)
         {
+            if (researcherSig_bool == false){
             int reply = JOptionPane.showConfirmDialog(null, "This action will send the currently selected project back for review to researcher. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
             
             if (reply == JOptionPane.YES_OPTION) {
@@ -947,6 +948,11 @@ public class RISView extends javax.swing.JFrame {
                 
                 
             
+            }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be sent for review as it is signed by researcher.", "ALREADY SIGNED", WARNING_MESSAGE);
             }
             
         }
