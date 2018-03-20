@@ -46,11 +46,12 @@ public class ResearcherView extends javax.swing.JFrame {
      * Creates new form TestTemplate
      */
     public ResearcherView() {
+        connection = new DBConnection(host,db,username,password);
         initComponents();
         
         getContentPane().setBackground(new Color(255,255,255));
         setIconImage(img.getImage());
-        connection = new DBConnection(host,db,username,password);
+        
         
         try {
             getDetailsOnActiveLogin();
