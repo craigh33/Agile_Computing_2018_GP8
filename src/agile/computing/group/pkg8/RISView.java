@@ -34,6 +34,7 @@ public class RISView extends javax.swing.JFrame {
     String password = "7632.at8.2367";
     String SelectedID;
     int staffID;
+    String staffIDString;
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
@@ -841,6 +842,10 @@ public class RISView extends javax.swing.JFrame {
         String risSig = selectedProjectResultSet.getString("ris_Sig");
         String depDeanSig = selectedProjectResultSet.getString("depDean_Sig");
         String deanSig = selectedProjectResultSet.getString("dean_Sig");
+        String signedResearcher = selectedProjectResultSet.getString("signed_researcher_id");
+        String signedRis = selectedProjectResultSet.getString("signed_ris_id");
+        String signedAssoDean = selectedProjectResultSet.getString("signed_assodean_id");
+        String signedDean = selectedProjectResultSet.getString("signed_dean_id");
         
          // addtional columns
         int revision = selectedProjectResultSet.getInt("revision");
@@ -882,6 +887,7 @@ public class RISView extends javax.swing.JFrame {
                 
                 
             risSig_bool = true;
+            signedRis = staffIDString;
             
             
             System.out.println(researcherSig_bool + "   <<<<<<<<<<<< sig");
@@ -952,7 +958,7 @@ public class RISView extends javax.swing.JFrame {
         fh.downloadFile(new File(downloadURL));
     }
      
-     private void getDetailsOnActiveLogin() throws SQLException{
+     public void getDetailsOnActiveLogin() throws SQLException{
     
         rs = connection.getUserByStaffID(staffID);
         rs.next();
@@ -965,6 +971,19 @@ public class RISView extends javax.swing.JFrame {
         System.out.println(fullName + " <<>>");   
         //getDataForList();
     }
+     
+     /**
+      * 
+      * @param idno
+      * @return 
+      */
+     public int getStaffID(int idno)
+     {
+         staffID = idno;
+         staffIDString = Integer.toString(staffID);
+         System.out.println(staffID);
+         return idno;
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem change_password_button;

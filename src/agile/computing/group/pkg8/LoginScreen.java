@@ -185,21 +185,15 @@ public class LoginScreen extends javax.swing.JFrame {
                 } else if (result.getString("Password").equals(pass)) {
                     //These if statements will be for when we implement views. Right now they all go to the same place.
                     if (result.getString("JobType").equals("Researcher")) {
-                        ResearcherView reView = new ResearcherView();
-                        
+                        ResearcherView reView = new ResearcherView(); 
                         reView.getStaffID(uname);
-                        try{
-                                reView.getDetailsOnActiveLogin();
-                            } catch(SQLException ex) {
-                                Logger.getLogger(ResearcherView.class.getName()).log(Level.SEVERE, null, ex);
-                                System.out.println("login details not passed");
-                            }
                         LoginScreen.this.dispose();
                         reView.setLocationRelativeTo(null);
                         reView.setVisible(true);                       
-                    } else if (result.getString("JobType").equals("RIS")) {
+                    } else if (result.getString("JobType").equals("RIS")) {                     
+                       RISView risView = new RISView();
+                       risView.getStaffID(uname);
                        LoginScreen.this.dispose();
-                       RISView risView= new RISView();
                        risView.setLocationRelativeTo(null);
                        risView.setVisible(true);                      
                     } else if (result.getString("JobType").equals("Admin")) {
@@ -208,13 +202,15 @@ public class LoginScreen extends javax.swing.JFrame {
                         adminView.setLocationRelativeTo(null);
                         adminView.setVisible(true);
                     } else if (result.getString("JobType").equals("Associate Dean")) {
-                        LoginScreen.this.dispose();
                         AssociateDeanView assoView = new AssociateDeanView();
+                        assoView.getStaffID(uname);
+                        LoginScreen.this.dispose();
                         assoView.setLocationRelativeTo(null);
                         assoView.setVisible(true);
                     } else if (result.getString("JobType").equals("Dean")) {
-                        LoginScreen.this.dispose();
                         DeanView deanView = new DeanView();
+                        deanView.getStaffID(uname);
+                        LoginScreen.this.dispose();
                         deanView.setLocationRelativeTo(null);
                         deanView.setVisible(true);
                     }

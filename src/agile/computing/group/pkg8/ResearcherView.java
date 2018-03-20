@@ -34,6 +34,7 @@ public class ResearcherView extends javax.swing.JFrame {
     String password = "7632.at8.2367";
     String SelectedID;
     int staffID;
+    String staffIDString;
     String fullName;
     boolean sign_button_clicked = false;
     FileHandler fh = new FileHandler();
@@ -926,6 +927,10 @@ public class ResearcherView extends javax.swing.JFrame {
         String risSig = selectedProjectResultSet.getString("ris_Sig");
         String depDeanSig = selectedProjectResultSet.getString("depDean_Sig");
         String deanSig = selectedProjectResultSet.getString("dean_Sig");
+        String signedResearcher = selectedProjectResultSet.getString("signed_researcher_id");
+        String signedRis = selectedProjectResultSet.getString("signed_ris_id");
+        String signedAssoDean = selectedProjectResultSet.getString("signed_assodean_id");
+        String signedDean = selectedProjectResultSet.getString("signed_dean_id");
         
         // addtional columns
         int revision = selectedProjectResultSet.getInt("revision");
@@ -971,6 +976,7 @@ public class ResearcherView extends javax.swing.JFrame {
             // set reearcher signature to true
             
             researcherSig_bool = true;
+            signedResearcher = staffIDString;
             
             System.out.println(researcherSig_bool + "   <<<<<<<<<<<< sig");
             System.out.println(risSig_bool + "   <<<<<<<<<<<< sig");
@@ -1043,6 +1049,7 @@ public class ResearcherView extends javax.swing.JFrame {
      public int getStaffID(int idno)
      {
          staffID = idno;
+         staffIDString = Integer.toString(staffID);
          System.out.println(staffID);
          return idno;
      }
