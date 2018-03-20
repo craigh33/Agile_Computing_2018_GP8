@@ -84,7 +84,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Staff ID:");
+        jLabel2.setText("Email Address:");
 
         jLabel3.setText("Password:");
 
