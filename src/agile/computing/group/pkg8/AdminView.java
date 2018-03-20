@@ -682,7 +682,7 @@ public class AdminView extends javax.swing.JFrame {
         String updatedEmail;
         String updatedPassword;
         
-        id = Integer.parseInt(deleteStaffID.getText());
+        id = Integer.parseInt(staffIDField.getText());
         System.out.println(id);
        updatedPassword = passwordField.getText();
         updatedEmail = emailField.getText();
