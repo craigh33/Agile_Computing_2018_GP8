@@ -247,7 +247,7 @@ public class DBConnection {
     public void editProject(String id, String name, String comments, boolean researcher_sig, boolean ris_sig, boolean depDean_sig, boolean dean_sig, String signed_researcher_id, String signed_ris_id, String signed_assodean_id, String signed_dean_id){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', rearcher_sig =se " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + ", signed_researcher_id = " + signed_researcher_id + ", signed_ris_id = " + signed_ris_id + ", signed_assodean_id = " + signed_assodean_id + ", signed_dean_id = " + signed_dean_id + " WHERE id = " + id);
+            stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', researcher_sig = " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + ", signed_researcher_id = " + signed_researcher_id + ", signed_ris_id = " + signed_ris_id + ", signed_assodean_id = " + signed_assodean_id + ", signed_dean_id = " + signed_dean_id + " WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
