@@ -941,6 +941,10 @@ public class ResearcherView extends javax.swing.JFrame {
         String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
         needs_review = needs_reviewed.equals("1");
         
+        // this is meant to allow the notifications tab to detect that the researcher has clicked on the project
+        //and once it does this it deletes the project from notifications
+        // seems to only update when switching from one tab to the other and not on refresh button click
+        // hard to tell whats happening
         researcher_needs2_review = "0";
         
         project_name_field.setText(projectName);
