@@ -91,7 +91,12 @@ public class DBConnectionTest {
     
     @Test
     public void testGetStaff() {
-        
+        ResultSet rs = connection.getStaff();
+        try {
+            assertNotNull(rs.getArray(0));
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
     }
     
     @Test
