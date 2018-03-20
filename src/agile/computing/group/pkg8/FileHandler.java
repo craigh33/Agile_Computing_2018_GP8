@@ -68,7 +68,7 @@ public class FileHandler {
     }
     
     /**
-     * This method uploads a file to the web server and then stores the file's
+     * This method uploads a Signature Image to the web server and then stores the file's
      * URL in a MySQL table
      *
      * @param uploadPath the path at which the file will be uploaded
@@ -199,7 +199,7 @@ public class FileHandler {
     }
     
     /**
-     * This method checks if the specified file is supported
+     * This method checks if the specified Image is supported
      *
      * @param format the name of the file that will be checked
      * @return true if the file is supported, false if not

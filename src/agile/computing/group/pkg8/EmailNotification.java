@@ -10,16 +10,28 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
-
+/**
+ *
+ * @author craig
+ */
 public class EmailNotification
 {
   private static final String USER_NAME = "agilecomputing@mail.com";
   private static final String PASSWORD = "Agilegroup:8";
   
-  public EmailNotification() {}
+    /**
+     *Constructor
+     */
+    public EmailNotification() {}
   
-  public void sendEmail(String subject, String body, String recipient)
+    /**
+     * Used to Send Email
+     *
+     * @param subject
+     * @param body
+     * @param recipient
+     */
+    public void sendEmail(String subject, String body, String recipient)
   {
     String from = USER_NAME;
     String pass = PASSWORD;

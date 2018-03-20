@@ -151,6 +151,7 @@ public class PrintHandler {
     }
     
     /**
+     * Used to get ResultSet for project details displayed in pdf
      * 
      * @param id
      * @throws SQLException 
@@ -193,6 +194,9 @@ public class PrintHandler {
     }
 
     /**
+     * Used to choose where to store PDF
+     * 
+     * Creates Dialog so user can choose
      * 
      * @param rs 
      */
