@@ -207,7 +207,7 @@ public class DBConnection {
         try {
             //sets up a connection object with the createStatement method from sql library
             stmt = con.createStatement();
-            //executes delete query and removes staff member from the database
+            //executes delete query and removes project from the database
             stmt.execute("DELETE FROM project WHERE id =" + id);
             stmt.close();
         } catch (SQLException e) {

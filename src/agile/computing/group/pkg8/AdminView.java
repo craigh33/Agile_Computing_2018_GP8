@@ -7,6 +7,7 @@ package agile.computing.group.pkg8;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
@@ -27,6 +28,7 @@ public class AdminView extends javax.swing.JFrame {
     String db = "17agileteam8db";
     String username = "17agileteam8";
     String newPass = "7632.at8.2367";
+    FileHandler fh = new FileHandler();
     
     public AdminView() {
         initComponents();
@@ -50,7 +52,7 @@ public class AdminView extends javax.swing.JFrame {
               int id = rs2.getInt("staffID");
               //String idStaff = Integer.toString(id);
               
-              listProgress.addElement("ID: " + id + " \t Password: " + rs2.getString("password") + " \t Name: " +rs2.getString("firstName") + " " + rs2.getString("lastName") + " \t Email: " + rs2.getString("email") + " \t Job Type: " + rs2.getString("jobType"));
+              listProgress.addElement("ID: " + id + " \t Password: " + rs2.getString("password") + " \t Name: " +rs2.getString("firstName") + " " + rs2.getString("lastName") + " \t Email: " + rs2.getString("email") + " \t Job Type: " + rs2.getString("jobType") + " \t Signature Path: " + rs2.getString("sig_path") + " \t Signature Name: " + rs2.getString("sig_name"));
               
             }
             
@@ -124,6 +126,7 @@ public class AdminView extends javax.swing.JFrame {
         jobType = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
+        UploadSigButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         deleteStaffIDLabel = new javax.swing.JLabel();
@@ -227,6 +230,13 @@ public class AdminView extends javax.swing.JFrame {
             }
         });
 
+        UploadSigButton.setText("Upload Signature");
+        UploadSigButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UploadSigButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -259,8 +269,10 @@ public class AdminView extends javax.swing.JFrame {
                                     .addComponent(email)
                                     .addComponent(lastName))))
                         .addGap(54, 54, 54)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(314, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(UploadSigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,23 +286,30 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(passwordLabel)
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fnameLabel)
-                    .addComponent(firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lastNameLabel)
-                    .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fnameLabel)
+                            .addComponent(firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lastNameLabel)
+                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(UploadSigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLabel)
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jobTypeLabel)
-                    .addComponent(jobType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jobTypeLabel)
+                            .addComponent(jobType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(addButton)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Add Staff", jPanel3);
@@ -454,7 +473,7 @@ public class AdminView extends javax.swing.JFrame {
             String job = jobType.getText();
             
             connection.addUser(uname,pass,firstName,lastname,emailAddress,job);
-            clear();
+            
             
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -489,6 +508,15 @@ public class AdminView extends javax.swing.JFrame {
        startScreen.setLocationRelativeTo(null);
        startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
+
+    private void UploadSigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadSigButtonActionPerformed
+        // TODO add your handling code here:
+        int uname = Integer.parseInt(staffID.getText());
+        File file =  fh.imageSelect();
+        //uploads the image 
+        Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, uname);
+        clear();
+    }//GEN-LAST:event_UploadSigButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,6 +554,7 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton UploadSigButton;
     private javax.swing.JButton addButton;
     private javax.swing.JMenuItem change_password_button;
     private javax.swing.JMenuItem change_sig_image_button;

@@ -48,6 +48,7 @@ public class DeanView extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
+        getDataForSignedProjectsList();
         project_name_field.setEditable(false);
         researcher_name_field.setEditable(false);
         date_of_creation_field.setEditable(false);
@@ -75,6 +76,8 @@ public class DeanView extends javax.swing.JFrame {
         notifications_list = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         unsigned_projects_list = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        signed_project_List = new javax.swing.JList<>();
         refresh_button = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -136,6 +139,20 @@ public class DeanView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(unsigned_projects_list);
 
         jTabbedPane5.addTab("Unsigned Projects", jScrollPane1);
+
+        signed_project_List.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        signed_project_List.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signed_project_ListMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(signed_project_List);
+
+        jTabbedPane5.addTab("Signed Projects", jScrollPane2);
 
         refresh_button.setText("Refresh Lists");
         refresh_button.addActionListener(new java.awt.event.ActionListener() {
@@ -513,6 +530,15 @@ public class DeanView extends javax.swing.JFrame {
         Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
     }//GEN-LAST:event_change_sig_image_buttonActionPerformed
 
+    private void signed_project_ListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signed_project_ListMouseClicked
+        try {
+            selected = signed_project_List.getSelectedValue();
+            getSelectedProjectDetails();
+        } catch (SQLException ex) {
+            Logger.getLogger(DeanView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_signed_project_ListMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -580,6 +606,37 @@ public class DeanView extends javax.swing.JFrame {
         });
     }
     
+    private void getDataForSignedProjectsList()
+    {
+        
+        DefaultListModel listProgress = new DefaultListModel();
+        ResultSet rs2 = connection.getProjects();
+        try {
+            while (rs2.next()) {
+                
+                //getting projects to display that only associate dean needs to see.
+                if (rs2.getString("dean_sig").equals("1"))
+                    {
+                    //add to list in here 
+                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                    
+                    } else {
+                    
+                    //cry
+                    
+                    }
+             
+                }
+            } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+   
+        //setting list model to listProgress
+        signed_project_List.setModel(listProgress);
+        
+        
+    }
     
      private void getDataForUnsignedProjectsList()
     {
@@ -632,6 +689,7 @@ public class DeanView extends javax.swing.JFrame {
         ResultSet selectedProjectResultSet = connection.getProject(s); 
         
         selectedProjectResultSet.next();
+        
         String id = selectedProjectResultSet.getString("id");
         String projectName = selectedProjectResultSet.getString("name");
         String researcher = selectedProjectResultSet.getString("researcher");
@@ -689,6 +747,7 @@ public class DeanView extends javax.swing.JFrame {
             connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool, signedResearcher, signedRis, signedAssoDean, signedDean);
             
             getDataForUnsignedProjectsList();
+            getDataForSignedProjectsList();
         }
             }
             else
@@ -762,6 +821,7 @@ public class DeanView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
@@ -776,6 +836,7 @@ public class DeanView extends javax.swing.JFrame {
     private javax.swing.JTextField researcher_name_field_update;
     private javax.swing.JLabel sign_in_details;
     private javax.swing.JButton sign_project_button;
+    private javax.swing.JList<String> signed_project_List;
     private javax.swing.JList<String> unsigned_projects_list;
     // End of variables declaration//GEN-END:variables
 }

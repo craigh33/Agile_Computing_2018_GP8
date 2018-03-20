@@ -49,7 +49,7 @@ public class RISView extends javax.swing.JFrame {
         setIconImage(img.getImage());
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
-        getDataForSignedByResearcherProjectsList();
+        getDataForInProgressProjectsList();
         getDataForCompletedProjectsList();
         getDataForNotificationPList();
         project_name_field.setEditable(false);
@@ -164,7 +164,7 @@ public class RISView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(signed_by_researcher_list);
 
-        jTabbedPane5.addTab("Signed by Researcher", jScrollPane2);
+        jTabbedPane5.addTab("In Progress Projects", jScrollPane2);
 
         completed_projects_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -503,7 +503,7 @@ public class RISView extends javax.swing.JFrame {
 
     private void refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_buttonActionPerformed
         getDataForUnsignedProjectsList();
-        getDataForSignedByResearcherProjectsList();
+        getDataForInProgressProjectsList();
         getDataForCompletedProjectsList();
         getDataForNotificationPList();
         
@@ -634,8 +634,9 @@ public class RISView extends javax.swing.JFrame {
     }//GEN-LAST:event_notifications_listMouseClicked
 
     private void change_sig_image_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_sig_image_buttonActionPerformed
-        
+        //selects the image
         File file =  fh.imageSelect();
+        //uploads the image 
         Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
     }//GEN-LAST:event_change_sig_image_buttonActionPerformed
 
@@ -728,7 +729,7 @@ public class RISView extends javax.swing.JFrame {
     
     
     
-    private void getDataForSignedByResearcherProjectsList()
+    private void getDataForInProgressProjectsList()
     {
         
         DefaultListModel listProgress = new DefaultListModel();
@@ -737,11 +738,11 @@ public class RISView extends javax.swing.JFrame {
             while (rs2.next()) {
                 
                 //getting projects to display that only associate dean needs to see.
-                if (rs2.getString("researcher_sig").equals("1") && rs2.getString("depDean_sig").equals("0"))
+                if (rs2.getString("ris_sig").equals("1"))
                     {
                     //add to list in here 
-                   // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
-                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        listProgress.addElement("ID: "+rs2.getString("id")+" " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
+                       // listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
                     
                     } else {
                     
@@ -910,7 +911,7 @@ public class RISView extends javax.swing.JFrame {
             connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool, signedResearcher, signedRis, signedAssoDean, signedDean);
             
             getDataForUnsignedProjectsList();
-            getDataForSignedByResearcherProjectsList();
+            getDataForInProgressProjectsList();
             getDataForCompletedProjectsList();
             getDataForNotificationPList();
         }
@@ -942,7 +943,7 @@ public class RISView extends javax.swing.JFrame {
                 connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
                 
                 getDataForUnsignedProjectsList();
-                getDataForSignedByResearcherProjectsList();
+                getDataForInProgressProjectsList();
                 getDataForCompletedProjectsList();
                 getDataForCompletedProjectsList();
                 
@@ -958,19 +959,14 @@ public class RISView extends javax.swing.JFrame {
         }
         
         
-        
-        
-        //updates RIS SEEN VALUE TO TRUE WHEN IT IS SELECTED 
-        
-        //ris_seen = "1";
-        
+   
         connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
         
         
         sign_button_clicked = false;
         revision_button_clicked = false;
         
-        //refresh the list of valid projects
+ 
         
         
     }
