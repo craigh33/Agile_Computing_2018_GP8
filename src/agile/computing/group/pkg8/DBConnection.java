@@ -372,5 +372,14 @@ public class DBConnection {
             e.printStackTrace(System.out);
         }
     }
+      public void updateStaffDetails(int StaffID, String Password, String email){
+        try {
+            stmt = con.createStatement();
+            stmt.execute("UPDATE staff SET Password = '" + Password +  "', email = " + email + " WHERE StaffID = " + StaffID);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
+            e.printStackTrace(System.out);
+        }
+      }
     
 }
