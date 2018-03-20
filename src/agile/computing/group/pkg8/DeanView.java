@@ -455,6 +455,8 @@ public class DeanView extends javax.swing.JFrame {
 
     private void refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_buttonActionPerformed
         getDataForUnsignedProjectsList();
+        getDataForSignedProjectsList();
+        getDataNotificationsList();
     }//GEN-LAST:event_refresh_buttonActionPerformed
 
     private void researcher_name_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_researcher_name_fieldActionPerformed
@@ -624,6 +626,8 @@ public class DeanView extends javax.swing.JFrame {
     {
         
         DefaultListModel listProgress = new DefaultListModel();
+        listProgress.clear();
+        
         ResultSet rs2 = connection.getProjects();
         try {
             while (rs2.next()) {
