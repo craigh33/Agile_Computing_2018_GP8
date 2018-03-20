@@ -192,7 +192,7 @@ public class DBConnection {
     public void editAssoDean_Seen(String id, String assoDean_seen){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET assoDean_seen = '" + assoDean_seen +"  WHERE id = " + id);
+            stmt.execute("UPDATE project SET assoDean_seen = '" + assoDean_seen +"'  WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
@@ -202,7 +202,7 @@ public class DBConnection {
     public void editDean_Seen(String id, String dean_seen){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET dean_seen = '" + dean_seen +"  WHERE id = " + id);
+            stmt.execute("UPDATE project SET dean_seen = '" + dean_seen +"'  WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
