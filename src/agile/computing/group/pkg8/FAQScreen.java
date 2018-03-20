@@ -47,9 +47,9 @@ public class FAQScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         text.setColumns(20);
-        text.setFont(new java.awt.Font("Georgia", 0, 13)); // NOI18N
+        text.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         text.setRows(5);
-        text.setText("Change me now, bitch.");
+        text.setText("Q. How can I see my signed projects?\nA. Click on the 'signed by researcher' tab, this shows all projects you have signed.\n\nQ. How do I know when my project has been signed by someone else?\nA. All external changes to your projects will be displayed in the notification tab.\n\nQ. How can I create a new project?\nA. Select the 'Create project' tab, input the name of your project and any comments you'd like before pressing create. You'll be prompted to upload the project files, select them and press save.\n\nQ. Can I add updated versions of my project files?\nA. Yes. In the 'Sign or update project' tab.\n\nQ. Are projects automatically sent for evalution/signing?\nA. No. You must do this for each project from the 'Sign/ update' tab.\n\n\nIf you have any further questions please visit our help page.\n\n");
         jScrollPane1.setViewportView(text);
 
         jPanel1.setBackground(new java.awt.Color(67, 101, 226));
