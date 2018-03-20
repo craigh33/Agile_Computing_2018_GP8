@@ -5,12 +5,14 @@
  */
 package agile.computing.group.pkg8;
 
+import java.awt.Color;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -20,7 +22,8 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  */
 public class ResearcherView extends javax.swing.JFrame {
     
-     private String downloadURL;
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");   
+    private String downloadURL;
     ResultSet rs;
     JOptionPane warningWindow = new JOptionPane();
     DBConnection connection;
@@ -41,6 +44,8 @@ public class ResearcherView extends javax.swing.JFrame {
      */
     public ResearcherView() {
         initComponents();
+        getContentPane().setBackground(new Color(255,255,255));
+        setIconImage(img.getImage());
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         getDataForSignedByResearcherProjectsList();
@@ -51,7 +56,7 @@ public class ResearcherView extends javax.swing.JFrame {
         date_of_creation_field.setEditable(false);
         //download_txtbox.setText(downloadURL);
         comments_field.setEditable(false);
-        comments_field_update.setEditable(false);
+        //comments_field_update.setEditable(false);
         project_name_field_Update.setEditable(false);
         date_of_creation_field_update.setEditable(false);
         //new_download_link_field.setEditable(false);
@@ -114,8 +119,15 @@ public class ResearcherView extends javax.swing.JFrame {
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
         sign_in_details = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        change_password_button = new javax.swing.JMenuItem();
+        change_sig_image_button = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
 
         notifications_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -167,6 +179,8 @@ public class ResearcherView extends javax.swing.JFrame {
         jScrollPane3.setViewportView(completed_projects_list);
 
         jTabbedPane5.addTab("Completed Projects", jScrollPane3);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Project Name");
 
@@ -223,53 +237,52 @@ public class ResearcherView extends javax.swing.JFrame {
                     .addComponent(researcher_name_field)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date_of_creation_field))
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(212, 212, 212))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(export_to_pdf_button, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(download_excel_button)
-                                .addGap(26, 26, 26))))))
+                                .addGap(26, 26, 26))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6))
+                        .addComponent(project_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(project_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(researcher_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(date_of_creation_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(download_excel_button)
-                                .addGap(29, 29, 29)
-                                .addComponent(export_to_pdf_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(researcher_name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date_of_creation_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(download_excel_button)
+                        .addGap(29, 29, 29)
+                        .addComponent(export_to_pdf_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("View Project Data", jPanel2);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setText("Project Name");
 
@@ -395,7 +408,7 @@ public class ResearcherView extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGap(0, 256, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -404,6 +417,8 @@ public class ResearcherView extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Sign or Update Project", jPanel1);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         new_project_name.setText("New Project Name");
 
@@ -452,12 +467,9 @@ public class ResearcherView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(create_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(129, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(create_project_button, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Create New Project", jPanel3);
@@ -471,6 +483,7 @@ public class ResearcherView extends javax.swing.JFrame {
 
         help_button.setText("Help");
 
+        logout_button.setBackground(new java.awt.Color(255, 255, 255));
         logout_button.setText("Logout");
         logout_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,6 +492,26 @@ public class ResearcherView extends javax.swing.JFrame {
         });
 
         sign_in_details.setText("Signed in as: Researcher");
+
+        jMenuBar1.setBackground(new java.awt.Color(65, 98, 231));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jMenu1.setText("File");
+
+        change_password_button.setText("Change Password");
+        jMenu1.add(change_password_button);
+
+        change_sig_image_button.setText("Change Signature Image");
+        change_sig_image_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_sig_image_buttonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(change_sig_image_button);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -649,7 +682,10 @@ public class ResearcherView extends javax.swing.JFrame {
     }//GEN-LAST:event_completed_projects_listMouseClicked
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
-        dispose();
+        ResearcherView.this.dispose();
+        StartScreen startScreen = new StartScreen();
+        startScreen.setLocationRelativeTo(null);
+        startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     private void create_project_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_project_buttonActionPerformed
@@ -672,6 +708,12 @@ public class ResearcherView extends javax.swing.JFrame {
                 System.out.println("project not created");
                 }
     }//GEN-LAST:event_create_project_buttonActionPerformed
+
+    private void change_sig_image_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_sig_image_buttonActionPerformed
+        System.out.println("debug");
+        File file =  fh.imageSelect();
+        Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
+    }//GEN-LAST:event_change_sig_image_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1020,6 +1062,8 @@ public class ResearcherView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem change_password_button;
+    private javax.swing.JMenuItem change_sig_image_button;
     private javax.swing.JTextArea comments_field;
     private javax.swing.JTextArea comments_field_update;
     private javax.swing.JList<String> completed_projects_list;
@@ -1039,6 +1083,8 @@ public class ResearcherView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

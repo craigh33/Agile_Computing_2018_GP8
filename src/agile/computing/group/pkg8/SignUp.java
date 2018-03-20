@@ -6,6 +6,7 @@
 package agile.computing.group.pkg8;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,14 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class SignUp extends javax.swing.JFrame {
 
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
+    
     /**
      * Creates new form SignUp
      */
     public SignUp() {
         initComponents();
         getContentPane().setBackground(new Color(255,255,255));
-        
-        
+        setIconImage(img.getImage());   
     }
 
     /**
@@ -95,7 +97,7 @@ public class SignUp extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,6 +184,10 @@ public class SignUp extends javax.swing.JFrame {
             jTextField4.setText("");
             
             JOptionPane.showMessageDialog(SignUp.this, "An admin has been notified. You will receive an email soon regarding your sign up"); 
+            SignUp.this.dispose();
+            StartScreen startScreen = new StartScreen();
+            startScreen.setLocationRelativeTo(null);
+            startScreen.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

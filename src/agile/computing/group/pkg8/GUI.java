@@ -46,7 +46,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class GUI {
 
     EmailNotification email = new EmailNotification();
-    Node test = new Node(); // used for manipulating variables see craig for info
+    //Node test = new Node(); // used for manipulating variables see craig for info
     FileHandler fh = new FileHandler();
     PrintHandler print = new PrintHandler();
     DBConnection connection;

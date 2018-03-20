@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package agile.computing.group.pkg8;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.TransferHandler;
 /**
  *
@@ -19,6 +21,7 @@ public class AdminView extends javax.swing.JFrame {
     /**
      * Creates new form AdminView
      */
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
     DBConnection connection;
     String host = "silva.computing.dundee.ac.uk";
     String db = "17agileteam8db";
@@ -27,6 +30,8 @@ public class AdminView extends javax.swing.JFrame {
     
     public AdminView() {
         initComponents();
+        setIconImage(img.getImage());
+        //getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,newPass);
         getDataForLists();
         getProjectsForList();
@@ -129,8 +134,16 @@ public class AdminView extends javax.swing.JFrame {
         projectLabel = new javax.swing.JLabel();
         deleteProjectID = new javax.swing.JTextField();
         deleteProjectButton = new javax.swing.JButton();
+        logout_button = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        change_password_button = new javax.swing.JMenuItem();
+        change_sig_image_button = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        topPane.setBackground(new java.awt.Color(255, 255, 255));
 
         staffList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -184,6 +197,10 @@ public class AdminView extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
+
+        deleteProject.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         idLabel.setText("Staff ID:");
 
@@ -273,10 +290,12 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(jobTypeLabel)
                     .addComponent(jobType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Add Staff", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Delete by:");
 
@@ -316,10 +335,12 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(deleteStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(deleteButton)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Delete Staff", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         deleteLabel.setText("Delete by:");
 
@@ -360,10 +381,29 @@ public class AdminView extends javax.swing.JFrame {
                         .addComponent(projectLabel)))
                 .addGap(18, 18, 18)
                 .addComponent(deleteProjectButton)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         deleteProject.addTab("Delete Project", jPanel5);
+
+        logout_button.setText("Logout");
+        logout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_buttonActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("File");
+
+        change_password_button.setText("Change Password");
+        jMenu1.add(change_password_button);
+
+        change_sig_image_button.setText("Change Signature Image");
+        jMenu1.add(change_sig_image_button);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -376,7 +416,8 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(topPane, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(refreshButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logout_button)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -385,7 +426,9 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(topPane, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshButton)
+                    .addComponent(logout_button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteProject)
                 .addContainerGap())
@@ -435,10 +478,17 @@ public class AdminView extends javax.swing.JFrame {
     private void deleteProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProjectButtonActionPerformed
         
         int id = Integer.parseInt(deleteProjectID.getText());
-        connection.removeProjectById(id);
+       // connection.removeProjectById(id);
         
         deleteProjectID.setText("");
     }//GEN-LAST:event_deleteProjectButtonActionPerformed
+
+    private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
+       AdminView.this.dispose();
+       StartScreen startScreen = new StartScreen();
+       startScreen.setLocationRelativeTo(null);
+       startScreen.setVisible(true);
+    }//GEN-LAST:event_logout_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,6 +527,8 @@ public class AdminView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JMenuItem change_password_button;
+    private javax.swing.JMenuItem change_sig_image_button;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel deleteLabel;
     private javax.swing.JTabbedPane deleteProject;
@@ -490,6 +542,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel fnameLabel;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -501,6 +555,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jobTypeLabel;
     private javax.swing.JTextField lastName;
     private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JButton logout_button;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel projectLabel;

@@ -5,12 +5,14 @@
  */
 package agile.computing.group.pkg8;
 
+import java.awt.Color;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -20,6 +22,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  */
 public class AssociateDeanView extends javax.swing.JFrame {
     
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
     private String downloadURL;
     ResultSet rs;
     JOptionPane warningWindow = new JOptionPane();
@@ -40,6 +43,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
      */
     public AssociateDeanView() {
         initComponents();
+        setIconImage(img.getImage());
+       // getContentPane().setBackground(new Color(255,255,255));
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
         project_name_field.setEditable(false);
@@ -100,8 +105,14 @@ public class AssociateDeanView extends javax.swing.JFrame {
         help_button = new javax.swing.JButton();
         logout_button = new javax.swing.JButton();
         sign_in_details = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        change_password_button = new javax.swing.JMenuItem();
+        change_sig_image_button = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane5.setBackground(new java.awt.Color(255, 255, 255));
 
         notifications_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -132,6 +143,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
                 refresh_buttonActionPerformed(evt);
             }
         });
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Project Name");
 
@@ -233,6 +248,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("View Project Data", jPanel2);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setText("Project Name");
 
@@ -379,6 +396,18 @@ public class AssociateDeanView extends javax.swing.JFrame {
 
         sign_in_details.setText("Signed in as: Researcher");
 
+        jMenu1.setText("File");
+
+        change_password_button.setText("Change Password");
+        jMenu1.add(change_password_button);
+
+        change_sig_image_button.setText("Change Signature Image");
+        jMenu1.add(change_sig_image_button);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -504,7 +533,11 @@ public class AssociateDeanView extends javax.swing.JFrame {
     }//GEN-LAST:event_unsigned_projects_listMouseClicked
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
-        dispose();
+        AssociateDeanView.this.dispose();
+        LoginScreen login = new LoginScreen();
+        StartScreen startScreen = new StartScreen();
+        startScreen.setLocationRelativeTo(null);
+        startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
     /**
@@ -697,6 +730,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem change_password_button;
+    private javax.swing.JMenuItem change_sig_image_button;
     private javax.swing.JTextArea comments_field;
     private javax.swing.JTextArea comments_field_update;
     private javax.swing.JTextField date_of_creation_field;
@@ -712,6 +747,8 @@ public class AssociateDeanView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

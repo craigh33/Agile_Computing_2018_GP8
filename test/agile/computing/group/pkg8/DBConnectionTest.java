@@ -49,7 +49,9 @@ public class DBConnectionTest {
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
+            rs.next();
             assertNotNull(rs.getString("name"));
+            stmt.executeUpdate("DELETE FROM project WHERE name='TESTPROJECT'");
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -58,12 +60,15 @@ public class DBConnectionTest {
     
     @Test
     public void testEditProject() {
+        connection.newProject(700, "TESTPROJECT", "TESTRESEARCHER", "C:\\TEST", "TEST", "test");
         connection.editProject("700", "TESTPROJECT", "NEWTESTCOMMENT", true, false, false, false);
         Connection con = connection.getConnection();
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE comment='NEWTESTCOMMENT");
+            rs.next();
             assertNotNull(rs.getString("comment"));
+            stmt.executeUpdate("DELETE FROM project WHERE name='TESTPROJECT'");
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);

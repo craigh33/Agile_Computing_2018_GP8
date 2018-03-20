@@ -6,18 +6,22 @@
 package agile.computing.group.pkg8;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author andreilins
  */
 public class StartScreen extends javax.swing.JFrame {
+    
+    ImageIcon img = new ImageIcon("src/agile/computing/group/pkg8/uod_logo_small.jpg");
 
     /**
      * Creates new form StartScreen
      */
     public StartScreen() {
         initComponents();
+        setIconImage(img.getImage());
         getContentPane().setBackground(new Color(255,255,255));
     }
 
@@ -36,6 +40,7 @@ public class StartScreen extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(67, 101, 226));
         jPanel1.setPreferredSize(new java.awt.Dimension(418, 116));
@@ -58,7 +63,7 @@ public class StartScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButton1.setText("Sign in");
@@ -83,11 +88,11 @@ public class StartScreen extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
                 .addComponent(jButton2)
-                .addGap(95, 95, 95))
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +110,9 @@ public class StartScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         StartScreen.this.dispose();
-        GUI gui = new GUI();
-        gui.loginScreen();
+        LoginScreen login = new LoginScreen();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
