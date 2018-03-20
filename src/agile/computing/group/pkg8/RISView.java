@@ -959,19 +959,14 @@ public class RISView extends javax.swing.JFrame {
         }
         
         
-        
-        
-        //updates RIS SEEN VALUE TO TRUE WHEN IT IS SELECTED 
-        
-        //ris_seen = "1";
-        
+   
         connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
         
         
         sign_button_clicked = false;
         revision_button_clicked = false;
         
-        //refresh the list of valid projects
+ 
         
         
     }
