@@ -441,7 +441,7 @@ public class GUI {
                 -> {
             int reply = JOptionPane.showConfirmDialog(null, "This action will edit the project. Are you sure?", "warning", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                connection.editProject(projectID.getText(), projectName.getText(), comments.getText(), researcherSig.isSelected(), risSig.isSelected(), depDeanSig.isSelected(), deanSig.isSelected());
+               // connection.editProject(projectID.getText(), projectName.getText(), comments.getText(), researcherSig.isSelected(), risSig.isSelected(), depDeanSig.isSelected(), deanSig.isSelected());
                 edit.dispose();
                 mainScreen(); //New Instance of edit screen
             }

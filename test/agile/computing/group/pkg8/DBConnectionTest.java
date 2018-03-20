@@ -67,7 +67,7 @@ public class DBConnectionTest {
             ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
             rs.next();
             String projectID = rs.getString("id");
-            connection.editProject(projectID, "NEWTESTPROJECT", "NEWTESTCOMMENT", true, true, true, true);
+            connection.editProject(projectID, "NEWTESTPROJECT", "NEWTESTCOMMENT", true, true, true, true, "TEST ID", "TEST ID", "TEST ID", "TEST ID");
             rs = stmt.executeQuery("SELECT * FROM project WHERE name='NEWTESTPROJECT'");
             rs.next();
             assertEquals("NEWTESTPROJECT", rs.getString("name"));

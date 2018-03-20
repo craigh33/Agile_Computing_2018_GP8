@@ -984,7 +984,7 @@ public class ResearcherView extends javax.swing.JFrame {
             System.out.println(deanSig_bool + "   <<<<<<<<<<<< sig");
             
             
-            connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool);
+            connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool, signedResearcher, signedRis, signedAssoDean, signedDean);
             connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
             
             getDataForUnsignedProjectsList();

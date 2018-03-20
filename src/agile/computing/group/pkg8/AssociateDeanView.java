@@ -700,7 +700,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
             System.out.println(deanSig_bool + "   <<<<<<<<<<<< sig");
             
             
-            connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool);
+            connection.editProject(id, projectName, comments, researcherSig_bool, risSig_bool, assoSig_bool, deanSig_bool, signedResearcher, signedRis, signedAssoDean, signedDean);
             
             getDataForUnsignedProjectsList();
         }
