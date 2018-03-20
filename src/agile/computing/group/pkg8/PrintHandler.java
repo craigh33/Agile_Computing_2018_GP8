@@ -222,10 +222,8 @@ public class PrintHandler {
                         createPdf(savePath,rs);
                     } catch (DocumentException ex) {
                         JOptionPane.showMessageDialog(SQLError, "PDF Writer Error", "PDF Writer Error", ERROR_MESSAGE);
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(SQLError, "PDF Writer Error", "PDF Writer Error", ERROR_MESSAGE);
-                        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
