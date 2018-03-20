@@ -935,8 +935,12 @@ public class ResearcherView extends javax.swing.JFrame {
         // addtional columns
         int revision = selectedProjectResultSet.getInt("revision");
         String ris_seen = selectedProjectResultSet.getString("ris_seen");
-        String needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
+        String needs_reviewed;
+               needs_reviewed = selectedProjectResultSet.getString("needs_reviewed");
         String researcher_needs2_review = selectedProjectResultSet.getString("researcher_needs2_review");
+        needs_review = needs_reviewed.equals("1");
+        
+        researcher_needs2_review = "0";
         
         project_name_field.setText(projectName);
         project_name_field_Update.setText(projectName);
@@ -1035,7 +1039,7 @@ public class ResearcherView extends javax.swing.JFrame {
         sign_button_clicked = false;
         revision_button_clicked = false;
         
-        
+        connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
         return selectedProjectResultSet;
         //refresh the list of valid projects
         
