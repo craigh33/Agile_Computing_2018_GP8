@@ -82,27 +82,6 @@ public class AdminView extends javax.swing.JFrame {
         projectList.setModel(projList);
     }
     
-    public void addStaff(){
-        
-       /*addButton.setMnemonic(KeyEvent.VK_A);
-        addButton.setTransferHandler(new TransferHandler("text"));
-        addButton.addActionListener((ActionEvent event)
-                -> {*/
-            //System.out.println("this sucks");
-            //gets username and password from textboxes.
-           /* int uname = Integer.parseInt(staffID.getText());
-            char[] pwd = password.getPassword();
-            String pass = new String(pwd);
-            String firstName = firstname.getText();
-            String lastname = lastName.getText();
-            String emailAddress = email.getText();
-            String job = jobType.getText();
-            
-            connection.addUser(uname,pass,firstName,lastname,emailAddress,job);*/
-           
-        //});
-    }
-    
     public void clear(){
          staffID.setText("");
          email.setText("");
@@ -113,24 +92,6 @@ public class AdminView extends javax.swing.JFrame {
          
     }
     
-   /* public void deleteStaff(){
-        
-        deleteButton.setMnemonic(KeyEvent.VK_A);
-        deleteButton.setTransferHandler(new TransferHandler("text"));
-        deleteButton.addActionListener((ActionEvent event)
-                -> {
-            
-            //gets username and password from textboxes.
-            int uname = Integer.parseInt(staffID.getText());
-            
-            connection.removeUserById(uname);
-           
-        });
-    
-    }*/
-        
-    
-
     /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -481,8 +442,8 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jobTypeActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-        System.out.println("this sucks");
+
+        
         //gets username and password from textboxes.
             int uname = Integer.parseInt(staffID.getText());
             char[] pwd = password.getPassword();
@@ -498,7 +459,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        
         int uname = Integer.parseInt(deleteStaffID.getText());
         connection.removeUserById(uname);
         
@@ -507,7 +468,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        // TODO add your handling code here:
+        
         staffList.clearSelection();
         projectList.clearSelection();
         getDataForLists();
@@ -515,7 +476,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProjectButtonActionPerformed
-        // TODO add your handling code here:
+        
         int id = Integer.parseInt(deleteProjectID.getText());
        // connection.removeProjectById(id);
         
