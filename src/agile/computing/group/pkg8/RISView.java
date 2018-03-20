@@ -56,7 +56,7 @@ public class RISView extends javax.swing.JFrame {
         date_of_creation_field.setEditable(false);
         //download_txtbox.setText(downloadURL);
         comments_field.setEditable(false);
-        comments_field_update.setEditable(false);
+        //comments_field_update.setEditable(false);
         project_name_field_Update.setEditable(false);
         date_of_creation_field_update.setEditable(false);
         //new_download_link_field.setEditable(false);
