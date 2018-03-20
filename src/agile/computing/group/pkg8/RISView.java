@@ -875,7 +875,7 @@ public class RISView extends javax.swing.JFrame {
         
         if (sign_button_clicked == true){
             
-            
+            if (risSig_bool == false){
             
             //change RIS signature to true
             
@@ -903,6 +903,10 @@ public class RISView extends javax.swing.JFrame {
             getDataForCompletedProjectsList();
             getDataForNotificationPList();
         }
+            }
+            else {
+                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be signed. it is signed by RIS", "ALREADY SIGNED", WARNING_MESSAGE);
+            }
         
         }
         
@@ -933,6 +937,7 @@ public class RISView extends javax.swing.JFrame {
                 
             
             }
+            
         }
         
         
