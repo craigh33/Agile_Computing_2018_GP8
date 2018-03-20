@@ -957,6 +957,7 @@ public class ResearcherView extends javax.swing.JFrame {
         
         if (sign_button_clicked == true){
             
+            if (researcherSig_bool ==  false){
             
             //set researcher needs to review to false
             //cleaning up values so it can be passed to asso dean with most of these things set to values that make sense
@@ -991,8 +992,13 @@ public class ResearcherView extends javax.swing.JFrame {
             getDataForSignedByResearcherProjectsList();
             getDataForCompletedProjectsList();
             getDataNotificationList();
-        }
-        
+            
+             }
+            }
+            else {
+                
+                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be SIGNED. it is signed by researcher already ", "Already Signed", WARNING_MESSAGE);
+            }
         }
         
         if (revision_button_clicked == true && researcherSig_bool == false)
