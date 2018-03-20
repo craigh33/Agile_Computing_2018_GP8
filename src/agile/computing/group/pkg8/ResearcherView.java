@@ -711,7 +711,7 @@ public class ResearcherView extends javax.swing.JFrame {
     }//GEN-LAST:event_create_project_buttonActionPerformed
 
     private void change_sig_image_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_sig_image_buttonActionPerformed
-        System.out.println("debug");
+        
         File file =  fh.imageSelect();
         Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
     }//GEN-LAST:event_change_sig_image_buttonActionPerformed

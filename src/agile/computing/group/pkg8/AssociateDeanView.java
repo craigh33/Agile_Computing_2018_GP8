@@ -403,6 +403,11 @@ public class AssociateDeanView extends javax.swing.JFrame {
         jMenu1.add(change_password_button);
 
         change_sig_image_button.setText("Change Signature Image");
+        change_sig_image_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_sig_image_buttonActionPerformed(evt);
+            }
+        });
         jMenu1.add(change_sig_image_button);
 
         jMenuBar1.add(jMenu1);
@@ -541,6 +546,12 @@ public class AssociateDeanView extends javax.swing.JFrame {
         startScreen.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
+    private void change_sig_image_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_sig_image_buttonActionPerformed
+        // TODO add your handling code here:
+        File file =  fh.imageSelect();
+        Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
+    }//GEN-LAST:event_change_sig_image_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -669,10 +680,17 @@ public class AssociateDeanView extends javax.swing.JFrame {
         comments_field_update.setText(comments);
         comments_field.setText(comments);
         
+        //convert signatures to boolean
+            researcherSig_bool = researcherSig.equals("1");
+            risSig_bool = risSig.equals("1");
+            assoSig_bool = depDeanSig.equals("1");
+            deanSig_bool = deanSig.equals("1");
+        
+        
         if (sign_button_clicked == true){
             
             
-            
+            if (assoSig_bool == false) {
             //change associsate dean signature to true
             
             //does some nice validation with a are u sure box
@@ -685,11 +703,7 @@ public class AssociateDeanView extends javax.swing.JFrame {
             
             
             
-            //convert signatures to boolean
-            researcherSig_bool = researcherSig.equals("1");
-            risSig_bool = risSig.equals("1");
-            assoSig_bool = depDeanSig.equals("1");
-            deanSig_bool = deanSig.equals("1");
+            
             
             assoSig_bool = true;
             signedAssoDean = staffIDString;
@@ -704,7 +718,10 @@ public class AssociateDeanView extends javax.swing.JFrame {
             
             getDataForUnsignedProjectsList();
         }
-        
+            }
+            else{
+                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be signed. it is signed by Associate Dean already", "ALREADY SIGNED", WARNING_MESSAGE);
+            }
         }
         
         

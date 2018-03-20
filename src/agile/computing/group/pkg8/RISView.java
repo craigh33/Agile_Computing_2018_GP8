@@ -445,6 +445,11 @@ public class RISView extends javax.swing.JFrame {
         jMenu1.add(change_password_button);
 
         change_sig_image_button.setText("Change Signature Image");
+        change_sig_image_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_sig_image_buttonActionPerformed(evt);
+            }
+        });
         jMenu1.add(change_sig_image_button);
 
         jMenuBar1.add(jMenu1);
@@ -627,6 +632,12 @@ public class RISView extends javax.swing.JFrame {
             Logger.getLogger(RISView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_notifications_listMouseClicked
+
+    private void change_sig_image_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_sig_image_buttonActionPerformed
+        
+        File file =  fh.imageSelect();
+        Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
+    }//GEN-LAST:event_change_sig_image_buttonActionPerformed
 
     /**
      * @param args the command line arguments
