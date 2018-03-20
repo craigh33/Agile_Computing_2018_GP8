@@ -178,18 +178,7 @@ public class DBConnection {
             e.printStackTrace(System.out);
         }
     }
-    
-    
-    public void FULLeditProject(String id, String name, String comments, boolean researcher_sig, boolean ris_sig, boolean depDean_sig, boolean dean_sig, int revision, boolean ris_seen, boolean needs_reviewed){
-        try {
-            stmt = con.createStatement();
-            stmt.execute("UPDATE project SET name = '" + name + "', comments = '" + comments + "', researcher_sig = " + researcher_sig + ", ris_sig = " + ris_sig + ", depDean_sig = " + depDean_sig + ", dean_sig = " + dean_sig + ", revision = " + revision + ", ris_seen = " + ris_seen +", needs_reviewed = " + needs_reviewed + " WHERE id = " + id);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
-            e.printStackTrace(System.out);
-        }
-    }
-    
+   
     public void REVISIONeditProject(String id, int revision, String ris_seen, boolean needs_reviewed, String researcher_needs2_review){
         try {
             stmt = con.createStatement();
