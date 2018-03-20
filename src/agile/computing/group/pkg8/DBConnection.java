@@ -88,7 +88,7 @@ public class DBConnection {
     public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
         try {
             //SQL statement for the insertion of a user
-            String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?);";
+            String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
             //sets the values to the corresponding columns in the database
             pstmt.setInt(1, staffID);
