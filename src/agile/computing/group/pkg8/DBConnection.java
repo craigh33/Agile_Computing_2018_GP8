@@ -88,7 +88,7 @@ public class DBConnection {
    /* public void addUser(int staffID, String password, String firstName, String lastName, String email, String jobType) {
         try {
             //SQL statement for the insertion of a user
-            String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?);";
+            String sqlStatement = "INSERT INTO Staff VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
             //sets the values to the corresponding columns in the database
             pstmt.setInt(1, staffID);
@@ -192,7 +192,7 @@ public class DBConnection {
     public void editAssoDean_Seen(String id, String assoDean_seen){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET assoDean_seen = '" + assoDean_seen +"  WHERE id = " + id);
+            stmt.execute("UPDATE project SET assoDean_seen = '" + assoDean_seen +"'  WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);
@@ -202,7 +202,7 @@ public class DBConnection {
     public void editDean_Seen(String id, String dean_seen){
         try {
             stmt = con.createStatement();
-            stmt.execute("UPDATE project SET dean_seen = '" + dean_seen +"  WHERE id = " + id);
+            stmt.execute("UPDATE project SET dean_seen = '" + dean_seen +"'  WHERE id = " + id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(SQLError, "No Connection to server.", "MySQL Error", ERROR_MESSAGE);
             e.printStackTrace(System.out);

@@ -5,6 +5,9 @@
  */
 package agile.computing.group.pkg8;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 
 /**
  *
@@ -14,12 +17,19 @@ public class AgileComputingGroup8 {
     
     /**
      * @param args the command line arguments
+     * @throws javax.swing.UnsupportedLookAndFeelException
      */
-    public static void main(String[] args) {
-       GUI gui;
-       gui = new GUI();
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
+       StartScreen start;
+       start = new StartScreen();
+       try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace(System.out);
+        }
         
-       gui.startScreen();     
+       start.setLocationRelativeTo(null); 
+       start.setVisible(true);
     }
     
 }

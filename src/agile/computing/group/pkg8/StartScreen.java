@@ -138,8 +138,6 @@ public class StartScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void faqButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_faqButtonActionPerformed
-        // TODO add your handling code here:
-        StartScreen.this.dispose();
         FAQScreen faq = new FAQScreen();
         faq.setLocationRelativeTo(null);
         faq.setVisible(true);

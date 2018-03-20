@@ -429,6 +429,11 @@ public class RISView extends javax.swing.JFrame {
         jTabbedPane1.addTab("Sign or Update Project", jPanel1);
 
         help_button.setText("Help");
+        help_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                help_buttonActionPerformed(evt);
+            }
+        });
 
         logout_button.setText("Logout");
         logout_button.addActionListener(new java.awt.event.ActionListener() {
@@ -640,6 +645,12 @@ public class RISView extends javax.swing.JFrame {
         Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
     }//GEN-LAST:event_change_sig_image_buttonActionPerformed
 
+    private void help_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_help_buttonActionPerformed
+        FAQScreen faq = new FAQScreen();
+        faq.setLocationRelativeTo(null);
+        faq.setVisible(true);
+    }//GEN-LAST:event_help_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -770,7 +781,7 @@ public class RISView extends javax.swing.JFrame {
             while (rs2.next()) {
                 
                 //getting projects to display that only associate dean needs to see.
-                if (rs2.getString("researcher_sig").equals("0") && rs2.getString("depDean_sig").equals("0"))
+                if (rs2.getString("depDean_sig").equals("0"))
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
@@ -887,7 +898,7 @@ public class RISView extends javax.swing.JFrame {
         
         if (sign_button_clicked == true){
             
-            if (risSig_bool == false){
+            if (risSig_bool == false && researcherSig_bool == true){
             
             //change RIS signature to true
             
@@ -916,8 +927,12 @@ public class RISView extends javax.swing.JFrame {
             getDataForNotificationPList();
         }
             }
+            else if (researcherSig_bool == false){
+                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be signed. it is not signed by researcher", "NOT SIGNED", WARNING_MESSAGE);
+                
+            }
             else {
-                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be signed. it is signed by RIS", "ALREADY SIGNED", WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(warningWindow, "This Project cannot be signed. it is signed by RIS already", "ALREADY SIGNED", WARNING_MESSAGE);
             }
         
         }
