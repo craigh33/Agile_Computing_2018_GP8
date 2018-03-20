@@ -80,7 +80,17 @@ public class DBConnectionTest {
     }
     
     @Test
-    public void testDeleteProject() {
+    public void testRemoveProjectByID() {
+        
+    }
+    
+    @Test
+    public void testREVISIONeditProject() {
+        
+    }
+    
+    @Test
+    public void testGetStaff() {
         
     }
     
@@ -95,7 +105,7 @@ public class DBConnectionTest {
     }
     
     @Test
-    public void testGetProjectByID() {
+    public void testGetProject() {
         Connection con = connection.getConnection();
         try {
             Statement stmt = con.createStatement();
@@ -132,7 +142,7 @@ public class DBConnectionTest {
     }
     
     @Test
-    public void testRemoveUser() {
+    public void testRemoveUserByID() {
         connection.removeUserById(700);
         ResultSet x = connection.getUserByStaffID(700);
         try {
