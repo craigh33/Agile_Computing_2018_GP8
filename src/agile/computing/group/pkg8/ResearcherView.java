@@ -483,6 +483,11 @@ public class ResearcherView extends javax.swing.JFrame {
         });
 
         help_button.setText("Help");
+        help_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                help_buttonActionPerformed(evt);
+            }
+        });
 
         logout_button.setBackground(new java.awt.Color(255, 255, 255));
         logout_button.setText("Logout");
@@ -715,6 +720,12 @@ public class ResearcherView extends javax.swing.JFrame {
         File file =  fh.imageSelect();
         Boolean success = fh.uploadSignature(new File("\\\\silva.computing.dundee.ac.uk\\webapps\\2017-agileteam8\\Signatures"), file, staffID);
     }//GEN-LAST:event_change_sig_image_buttonActionPerformed
+
+    private void help_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_help_buttonActionPerformed
+        FAQScreen faq = new FAQScreen();
+        faq.setLocationRelativeTo(null);
+        faq.setVisible(true);
+    }//GEN-LAST:event_help_buttonActionPerformed
 
     /**
      * @param args the command line arguments
