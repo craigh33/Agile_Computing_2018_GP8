@@ -91,7 +91,7 @@ public class DBConnectionTest {
             int id = rs.getInt("id");
             connection.removeProjectById(id);
             rs = stmt.executeQuery("SELECT * FROM project WHERE id=" + id);
-            assertNull(rs.getInt("id"));
+            assertFalse(rs.next());
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -100,7 +100,23 @@ public class DBConnectionTest {
     
     @Test
     public void testREVISIONeditProject() {
-        
+        connection.newProject(700, "TESTPROJECT", "TESTRESEARCHER", "TESTCOMMENT", "TEST.TESTDOC", "C:\\TEST");
+        Connection con = connection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM project WHERE name='TESTPROJECT'");
+            rs.next();
+            String projectID = rs.getString("id");
+            connection.REVISIONeditProject(projectID, 999, "1", true, "1");
+            rs = stmt.executeQuery("SELECT * FROM project WHERE revision=999");
+            rs.next();
+            assertEquals("TESTPROJECT", rs.getString("name"));
+            //delete test project after use
+            stmt.executeUpdate("DELETE FROM project WHERE id="+projectID);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
     }
     
     @Test
