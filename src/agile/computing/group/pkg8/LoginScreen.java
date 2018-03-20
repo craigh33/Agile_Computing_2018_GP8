@@ -187,6 +187,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     if (result.getString("JobType").equals("Researcher")) {
                         ResearcherView reView = new ResearcherView(); 
                         reView.getStaffID(uname);
+                        reView.getDetailsOnActiveLogin();
                         LoginScreen.this.dispose();
                         reView.setLocationRelativeTo(null);
                         reView.setVisible(true);                       
