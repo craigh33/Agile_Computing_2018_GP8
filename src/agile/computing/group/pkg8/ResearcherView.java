@@ -49,7 +49,7 @@ public class ResearcherView extends javax.swing.JFrame {
         setIconImage(img.getImage());
         connection = new DBConnection(host,db,username,password);
         getDataForUnsignedProjectsList();
-        getDataForSignedByResearcherProjectsList();
+        getDataForInProgressProjectsList();
         getDataForCompletedProjectsList();
         getDataNotificationList();
         project_name_field.setEditable(false);
@@ -165,7 +165,7 @@ public class ResearcherView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(signed_by_researcher_list);
 
-        jTabbedPane5.addTab("Signed by Researcher", jScrollPane2);
+        jTabbedPane5.addTab("In Progress Projects", jScrollPane2);
 
         completed_projects_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -561,7 +561,7 @@ public class ResearcherView extends javax.swing.JFrame {
 
     private void refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_buttonActionPerformed
         getDataForUnsignedProjectsList();
-        getDataForSignedByResearcherProjectsList();
+        getDataForInProgressProjectsList();
         getDataForCompletedProjectsList();
         getDataNotificationList();
     }//GEN-LAST:event_refresh_buttonActionPerformed
@@ -767,7 +767,7 @@ public class ResearcherView extends javax.swing.JFrame {
         });
     }
     
-    private void getDataForSignedByResearcherProjectsList()
+    private void getDataForInProgressProjectsList()
     {
         
         DefaultListModel listProgress = new DefaultListModel();
@@ -776,11 +776,12 @@ public class ResearcherView extends javax.swing.JFrame {
             while (rs2.next()) {
                 
                 //getting projects to display that only associate dean needs to see.
-                if (rs2.getString("researcher_sig").equals("1") && rs2.getString("depDean_sig").equals("0"))
+                if (rs2.getString("researcher_sig").equals("1"))
                     {
                     //add to list in here 
                    // listProgress.addElement(rs2.getString("id") + "\n\n " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
-                        listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                       // listProgress.addElement("ID: "+ rs2.getString("id") + "       Project Name:   "+ rs2.getString("name") + ".");
+                        listProgress.addElement("ID: "+rs2.getString("id")+" " + rs2.getString("name") + " .--->      Signed by:  Researcher: " + rs2.getString("researcher_sig") + " RIS: " +rs2.getString("ris_sig") + " Associate Dean: " + rs2.getString("depDean_sig") + " Dean: " + rs2.getString("dean_sig"));
                     
                     } else {
                     
@@ -993,7 +994,7 @@ public class ResearcherView extends javax.swing.JFrame {
             connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
             
             getDataForUnsignedProjectsList();
-            getDataForSignedByResearcherProjectsList();
+            getDataForInProgressProjectsList();
             getDataForCompletedProjectsList();
             getDataNotificationList();
             
@@ -1020,7 +1021,7 @@ public class ResearcherView extends javax.swing.JFrame {
                 connection.REVISIONeditProject(id, revision, ris_seen, needs_review, researcher_needs2_review);
                 
                 getDataForUnsignedProjectsList();
-                getDataForSignedByResearcherProjectsList();
+                getDataForInProgressProjectsList();
                 getDataForCompletedProjectsList();
                 getDataNotificationList();
                 
